@@ -1,87 +1,55 @@
-const UserModel = require('../models/user');
+const UserModel = require("../models/user");
 
-class UserController  {
-  static async getAllUsers(req, res) {
+class UserController {
+  static async handleResponse(promise, res, successStatus = 200) {
     try {
-      const users = await UserModel.getAllUsers();
-      res.status(200).json(users);
+      const result = await promise;
+      res.status(successStatus).json(result);
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
   }
 
-  static async getUserById(req, res) {
-    try {
-      const { id } = req.params;
-      const user = await UserModel.getUserById(id);
-      if (!user) return res.status(404).json({ message: 'User not found' });
-      res.json(user);
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
+  static getAllUsers(req, res) {
+    UserController.handleResponse(UserModel.getAllUsers(), res);
   }
 
-  static async createUser(req, res) {
-    try {
-      const {fullName } = req.body;
-      const userId = await UserModel.createUser(fullName);
-      res.status(201).json({ id: userId });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
+  static getUserById(req, res) {
+    const { id } = req.params;
+    UserController.handleResponse(UserModel.getUserById(id), res);
   }
 
-  static async registerUser(req, res) {
-    try {
-      const { email, password, fullName } = req.body;
-      const userId = await UserModel.registerUser(email, password, fullName);
-      res.status(201).json({ id: userId });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
+  static registerUser(req, res) {
+    const { email, password, fullName } = req.body;
+    UserController.handleResponse(
+      UserModel.registerUser(email, password, fullName),
+      res,
+      201
+    );
   }
 
-  static async loginUser(req, res) {
-    try {
-      const { email, password } = req.body;
-      const user = await UserModel.loginUser(email, password);
-      if (!user) return res.status(401).json({ message: 'Invalid email or password' });
-      res.json({ user });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
+  static loginUser(req, res) {
+    const { email, password } = req.body;
+    UserController.handleResponse(UserModel.loginUser(email, password), res);
   }
 
-  static async updateUser(req, res) {
-    try {
-      const { id } = req.params;
-      const { email, password, fullName } = req.body;
-      await UserModel.updateUser(id, email, password, fullName);
-      res.json({ message: 'User updated' });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
+  static updateUser(req, res) {
+    const { id } = req.params;
+    UserController.handleResponse(UserModel.updateUser(id, req.body), res);
   }
 
-  static async uploadProfilePhoto(req, res) {
-    try {
-      const { id } = req.params;
-      await UserModel
-    } catch (error) {
-      console.error('Error updating profile photo:', error);
-      res.status(500).json({ error: 'Failed to update profile photo' });
-    }
+  static uploadProfilePhoto(req, res) {
+    const { id } = req.params;
+    UserController.handleResponse(
+      UserModel.uploadProfilePhoto(id, req.file, req.body.profilePhoto),
+      res
+    );
   }
 
-  static async deleteUser(req, res) {
-    try {
-      const { id } = req.params;
-      await UserModel.deleteUser(id);
-      res.json({ message: 'User deleted' });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
+  static deleteUser(req, res) {
+    const { id } = req.params;
+    UserController.handleResponse(UserModel.deleteUser(id), res);
   }
-};
+}
 
 module.exports = UserController;
