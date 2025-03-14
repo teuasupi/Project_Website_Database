@@ -1,15 +1,15 @@
 const pool = require("../config/config");
 
-class User {
+class UserModel {
   static async getAllUsers(req, res, next) {
     try {
-      const [rows] = await pool.query(`
+      const rows = await pool.query(`
               SELECT id, email, fullName, graduationYear, nim, major, 
               phoneNumber, address, profilePhoto, role, currentCompany, position 
               FROM Users
             `);
 
-      res.status(200).json(rows);
+            return rows
     } catch (error) {
       console.error("Error fetching users:", error);
       res.status(500).json({ error: "Failed to fetch users" });
@@ -154,7 +154,6 @@ class User {
         graduationYear,
         nim,
         major,
-        phoneNumber,
         address,
         role,
         currentCompany,
@@ -200,7 +199,6 @@ class User {
         updateData.graduationYear = graduationYear;
       if (nim) updateData.nim = nim;
       if (major) updateData.major = major;
-      if (phoneNumber) updateData.phoneNumber = phoneNumber;
       if (address) updateData.address = address;
       if (role) updateData.role = role;
       if (currentCompany) updateData.currentCompany = currentCompany;
@@ -231,97 +229,69 @@ class User {
     } catch (error) {
       console.error("Error updating user:", error);
       res.status(500).json({ error: "Failed to update user" });
+    }
+  }
+
+  static async uploadProfilePhoto(req, res, next) {
+    try {
+      // Check if user exists and get current photo
+      const [existingUser] = await pool.query('SELECT profilePhoto FROM Users WHERE id = ?', [req.params.id]);
+      if (existingUser.length === 0) {
+        // Hapus file baru jika user tidak ditemukan
+        if (req.file) {
+          const filePath = path.join(__dirname, '../../public', req.body.profilePhoto);
+          fs.unlink(filePath, (err) => {
+            if (err) console.error('Error deleting file:', err);
+          });
+        }
+        return res.status(404).json({ error: 'User not found' });
+      }
+      
+      // Make sure a file was uploaded
+      if (!req.file || !req.body.profilePhoto) {
+        return res.status(400).json({ error: 'No profile photo uploaded' });
+      }
+      
+      // Update profile photo
+      await pool.query('UPDATE Users SET profilePhoto = ? WHERE id = ?', [req.body.profilePhoto, req.params.id]);
+      
+      // Delete old profile photo if exists
+      if (existingUser[0].profilePhoto) {
+        const oldFilePath = path.join(__dirname, '../../public', existingUser[0].profilePhoto);
+        fs.unlink(oldFilePath, (err) => {
+          if (err && err.code !== 'ENOENT') {
+            console.error('Error deleting old profile photo:', err);
+          }
+        });
+      }
+      
+      res.status(200).json({
+        id: req.params.id,
+        message: 'Profile photo updated successfully',
+        profilePhoto: req.body.profilePhoto
+      });
+    } catch (error) {
+      console.error('Error updating profile photo:', error);
+      res.status(500).json({ error: 'Failed to update profile photo' });
     }
   }
 
   static async deleteUser(req, res, next) {
     try {
-      const {
-        email,
-        password,
-        fullName,
-        graduationYear,
-        nim,
-        major,
-        phoneNumber,
-        address,
-        profilePhoto,
-        role,
-        currentCompany,
-        position,
-      } = req.body;
-
-      // Check if user exists
-      const [existingUser] = await pool.query(
-        "SELECT id FROM Users WHERE id = ?",
-        [req.params.id]
-      );
+      const [existingUser] = await pool.query('SELECT id FROM Users WHERE id = ?', [req.params.id]);
       if (existingUser.length === 0) {
-        return res.status(404).json({ error: "User not found" });
+        return res.status(404).json({ error: 'User not found' });
       }
-
-      // If email is being updated, check if the new email is already in use
-      if (email) {
-        const [emailCheck] = await pool.query(
-          "SELECT id FROM Users WHERE email = ? AND id != ?",
-          [email, req.params.id]
-        );
-
-        if (emailCheck.length > 0) {
-          return res.status(409).json({ error: "Email already in use" });
-        }
-      }
-
-      // Prepare update data
-      let updateData = {};
-      let params = [];
-      let query = "UPDATE Users SET ";
-
-      // Only update fields that are provided
-      if (email) {
-        updateData.email = email;
-      }
-      if (password) {
-        const saltRounds = 10;
-        updateData.password = await bcrypt.hash(password, saltRounds);
-      }
-      if (fullName) updateData.fullName = fullName;
-      if (graduationYear !== undefined)
-        updateData.graduationYear = graduationYear;
-      if (nim) updateData.nim = nim;
-      if (major) updateData.major = major;
-      if (phoneNumber) updateData.phoneNumber = phoneNumber;
-      if (address) updateData.address = address;
-      if (profilePhoto) updateData.profilePhoto = profilePhoto;
-      if (role) updateData.role = role;
-      if (currentCompany) updateData.currentCompany = currentCompany;
-      if (position) updateData.position = position;
-
-      // Build query dynamically
-      const entries = Object.entries(updateData);
-      if (entries.length === 0) {
-        return res.status(400).json({ error: "No fields to update" });
-      }
-
-      entries.forEach(([key, value], index) => {
-        query += `${key} = ?`;
-        params.push(value);
-        if (index < entries.length - 1) query += ", ";
-      });
-
-      query += " WHERE id = ?";
-      params.push(req.params.id);
-
-      // Execute update
-      await pool.query(query, params);
-
-      res.status(200).json({
-        id: req.params.id,
-        message: "User updated successfully",
-      });
+      
+      // Delete user
+      await pool.query('DELETE FROM Users WHERE id = ?', [req.params.id]);
+      
+      res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
-      console.error("Error updating user:", error);
-      res.status(500).json({ error: "Failed to update user" });
+      console.error('Error deleting user:', error);
+      res.status(500).json({ error: 'Failed to delete user' });
     }
   }
 }
+
+module.exports = UserModel;
