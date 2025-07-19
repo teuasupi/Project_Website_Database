@@ -73,7 +73,7 @@ export function ContactForm() {
     {
       icon: MapPin,
       label: 'Address',
-      value: 'Jl. Dr. Setiabudhi No. 229, Bandung',
+      value: 'Jl. Dr. Setiabudhi No. 207, Bandung',
     },
   ];
 
