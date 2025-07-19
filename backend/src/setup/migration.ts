@@ -1,36 +1,33 @@
-require('dotenv').config();
-const mariadb = require('mariadb');
+import * as dotenv from "dotenv";
+dotenv.config();
+import * as mariadb from "mariadb";
 
-// const pool = require("../config/config");
+async function migrate(): Promise<void> {
+  const pool: mariadb.Pool = mariadb.createPool({
+    host: "127.0.0.1",
+    user: "root",
+    password: "root",
+    port: 3306,
+    database: "TEUAS",
+    connectionLimit: 5,
+    acquireTimeout: 10000,
+  });
 
-async function migrate() {
-
-  
-const pool = mariadb.createPool({
-  host: '127.0.0.1',
-  user: 'root',
-  password: 'root',
-  port: 3306,
-  database: 'TEUAS',
-  connectionLimit: 5,
-  acquireTimeout: 10000,
-});
-
-  let conn;
+  let conn: mariadb.PoolConnection | undefined;
   try {
     conn = await pool.getConnection();
     console.log("Connected to MariaDB!");
 
-    await pool.query('DROP TABLE IF EXISTS `Users`');
-    await pool.query('DROP TABLE IF EXISTS `Articles`');
-    await pool.query('DROP TABLE IF EXISTS `ArticleComments`');
-    await pool.query('DROP TABLE IF EXISTS `Forums`');
-    await pool.query('DROP TABLE IF EXISTS `ForumTopics`');
-    await pool.query('DROP TABLE IF EXISTS `ForumReplies`');
-    await pool.query('DROP TABLE IF EXISTS `JobPostings`');
-    await pool.query('DROP TABLE IF EXISTS `Applications`');
-    await pool.query('DROP TABLE IF EXISTS `Events`');
-    await pool.query('DROP TABLE IF EXISTS `EventRegistrations`');
+    await pool.query("DROP TABLE IF EXISTS `Users`");
+    await pool.query("DROP TABLE IF EXISTS `Articles`");
+    await pool.query("DROP TABLE IF EXISTS `ArticleComments`");
+    await pool.query("DROP TABLE IF EXISTS `Forums`");
+    await pool.query("DROP TABLE IF EXISTS `ForumTopics`");
+    await pool.query("DROP TABLE IF EXISTS `ForumReplies`");
+    await pool.query("DROP TABLE IF EXISTS `JobPostings`");
+    await pool.query("DROP TABLE IF EXISTS `Applications`");
+    await pool.query("DROP TABLE IF EXISTS `Events`");
+    await pool.query("DROP TABLE IF EXISTS `EventRegistrations`");
 
     // Users Table
     await conn.query(`
@@ -204,9 +201,9 @@ const pool = mariadb.createPool({
       );
     `);
 
-    console.log('Migration completed successfully.');
+    console.log("Migration completed successfully.");
   } catch (err) {
-    console.error('Migration failed:', err);
+    console.error("Migration failed:", err);
   } finally {
     if (conn) conn.end();
   }

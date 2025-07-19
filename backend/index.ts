@@ -1,16 +1,19 @@
-require("dotenv").config();
+import * as dotenv from "dotenv";
+dotenv.config();
 
-const express = require("express");
-const port = 3000;
-const cors = require("cors");
-const router = require("./src/routes");
-const app = express();
+import express from "express";
+import cors from "cors";
+import router from "./src/routes";
+import pool from "./src/config/config";
+
+const port: number = 3000;
+const app: express.Application = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-app.get("/api/test", async (req, res) => {
+app.get("/api/test", async (req: express.Request, res: express.Response) => {
   try {
     const connection = await pool.getConnection();
     connection.release();
