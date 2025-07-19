@@ -10,8 +10,20 @@ export const MAIN_NAVIGATION: NavItem[] = [
     href: ROUTES.HOME,
   },
   {
-    title: 'About TEUAS',
+    title: 'About',
     href: ROUTES.ABOUT,
+    children: [
+      {
+        title: 'About TEUAS',
+        href: ROUTES.ABOUT,
+        description: 'Learn about our organization',
+      },
+      {
+        title: 'Contact Us',
+        href: ROUTES.CONTACT,
+        description: 'Get in touch with us',
+      },
+    ],
   },
   {
     title: 'Alumni',
@@ -100,10 +112,6 @@ export const MAIN_NAVIGATION: NavItem[] = [
         description: 'Support our endowment fund',
       },
     ],
-  },
-  {
-    title: 'Contact',
-    href: ROUTES.CONTACT,
   },
 ];
 
