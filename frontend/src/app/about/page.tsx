@@ -1,8 +1,10 @@
 import { RootLayout } from '@/components/layout/RootLayout';
 import { MissionVision } from '@/components/features/about/MissionVision';
+import { LeadershipTeam } from '@/components/features/about/LeadershipTeam';
+import { PageHeader } from '@/components/common/PageHeader';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+
 import {
   GraduationCap,
   Users,
@@ -21,6 +23,11 @@ export const metadata = {
 };
 
 export default function AboutPage() {
+  const breadcrumbs = [
+    { label: 'Home', href: '/' },
+    { label: 'About TEUAS', current: true },
+  ];
+
   const stats = [
     {
       icon: Users,
@@ -125,20 +132,12 @@ export default function AboutPage() {
 
   return (
     <RootLayout>
-      {/* Page Header */}
-      <section className="from-primary/5 via-background to-secondary/5 bg-gradient-to-br py-16">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-3xl text-center">
-            <h1 className="text-foreground mb-4 text-4xl font-bold md:text-5xl">
-              About IKA TEUAS UPI
-            </h1>
-            <p className="text-muted-foreground text-xl">
-              Connecting generations of electrical engineering excellence since
-              1963
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Page Header with Breadcrumbs */}
+      <PageHeader
+        title="About IKA TEUAS UPI"
+        subtitle="Connecting generations of electrical engineering excellence since 1963"
+        breadcrumbs={breadcrumbs}
+      />
 
       {/* Organization Overview */}
       <section className="py-16">
@@ -215,6 +214,9 @@ export default function AboutPage() {
 
       {/* Mission & Vision */}
       <MissionVision />
+
+      {/* Leadership Team */}
+      <LeadershipTeam className="bg-muted/30" />
 
       {/* History & Milestones */}
       <section className="bg-muted/50 py-16">
