@@ -1,5 +1,5 @@
 {
-  "name": "teuas",
+  "name": "@teuas/backend",
   "version": "1.0.0",
   "description": "website teuas",
   "license": "ISC",
@@ -7,9 +7,13 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node index.ts",
+    "dev": "nodemon",
     "build": "tsc",
-    "typecheck": "tsc --noEmit",
+    "type-check": "tsc --noEmit",
+    "lint": "npx --prefix ../.. eslint . --ext .ts,.js",
+    "lint:fix": "npx --prefix ../.. eslint . --ext .ts,.js --fix",
+    "format": "npx --prefix ../.. prettier --write .",
+    "format:check": "npx --prefix ../.. prettier --check .",
     "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

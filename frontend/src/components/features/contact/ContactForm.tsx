@@ -138,7 +138,7 @@ export function ContactForm() {
             message and we'll get back to you as soon as possible.
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Contact Form */}
           <div className="lg:col-span-2">
@@ -156,7 +156,9 @@ export function ContactForm() {
                         id="name"
                         type="text"
                         value={formData.name}
-                        onChange={(e) => handleInputChange('name', e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange('name', e.target.value)
+                        }
                         placeholder="Enter your full name"
                         required
                       />
@@ -167,7 +169,9 @@ export function ContactForm() {
                         id="email"
                         type="email"
                         value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange('email', e.target.value)
+                        }
                         placeholder="Enter your email address"
                         required
                       />
@@ -188,7 +192,10 @@ export function ContactForm() {
                       </SelectTrigger>
                       <SelectContent>
                         {categories.map((category) => (
-                          <SelectItem key={category.value} value={category.value}>
+                          <SelectItem
+                            key={category.value}
+                            value={category.value}
+                          >
                             {category.label}
                           </SelectItem>
                         ))}
@@ -203,7 +210,9 @@ export function ContactForm() {
                       id="subject"
                       type="text"
                       value={formData.subject}
-                      onChange={(e) => handleInputChange('subject', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange('subject', e.target.value)
+                      }
                       placeholder="Enter the subject of your message"
                       required
                     />
@@ -215,7 +224,9 @@ export function ContactForm() {
                     <Textarea
                       id="message"
                       value={formData.message}
-                      onChange={(e) => handleInputChange('message', e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange('message', e.target.value)
+                      }
                       placeholder="Enter your message here..."
                       rows={10}
                       className="h-[160px]"
@@ -358,13 +369,13 @@ export function ContactForm() {
                         </Link>
                       </Button>
                     );
-                   })}
-                 </div>
-               </CardContent>
-             </Card>
-           </div>
-         </div>
-       </div>
-     </section>
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "@teuas/frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "type-check": "tsc --noEmit",
-    "format": "prettier --write .",
+    "format": "npx prettier --write .",
     "format:check": "prettier --check .",
     "clean": "rm -rf .next out dist",
     "analyze": "ANALYZE=true npm run build"

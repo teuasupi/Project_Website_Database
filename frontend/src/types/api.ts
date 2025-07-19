@@ -106,10 +106,10 @@ export interface MediaFilter extends BaseFilter {
 }
 
 // API endpoint response types
-export interface UsersApiResponse extends PaginatedApiResponse<User> {}
-export interface ArticlesApiResponse extends PaginatedApiResponse<Article> {}
-export interface EventsApiResponse extends PaginatedApiResponse<Event> {}
-export interface MediaApiResponse extends PaginatedApiResponse<MediaItem> {}
+export type UsersApiResponse = PaginatedApiResponse<User>;
+export type ArticlesApiResponse = PaginatedApiResponse<Article>;
+export type EventsApiResponse = PaginatedApiResponse<Event>;
+export type MediaApiResponse = PaginatedApiResponse<MediaItem>;
 
 // File upload types
 export interface FileUploadResponse {

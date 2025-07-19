@@ -211,6 +211,7 @@ export function NotFound({
                 Return Home
               </Link>
             </Button>
+
             <Button
               variant="outline"
               onClick={() => window.history.back()}

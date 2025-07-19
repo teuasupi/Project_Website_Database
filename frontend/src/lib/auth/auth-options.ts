@@ -107,15 +107,15 @@ export const authOptions: NextAuthOptions = {
   debug: process.env.NODE_ENV === 'development',
 
   events: {
-    async signIn({ user, account, profile, isNewUser }) {
+    async signIn({ user }) {
       console.log('User signed in:', { userId: user.id, email: user.email });
     },
 
-    async signOut({ token }) {
-      console.log('User signed out:', { userId: token?.sub });
+    async signOut() {
+      console.log('User signed out');
     },
 
-    async session({ session, token }) {
+    async session({ session }) {
       // Optional: Log session access for security monitoring
       if (process.env.NODE_ENV === 'development') {
         console.log('Session accessed:', { userId: session.user.id });

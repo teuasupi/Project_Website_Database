@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 
 interface AuthenticatedRequest extends Request {
   user?: {
@@ -9,7 +9,11 @@ interface AuthenticatedRequest extends Request {
 }
 
 const authorization = (allowedRoles: string[]) => {
-  return (req: AuthenticatedRequest, res: Response, next: NextFunction): Response | void => {
+  return (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Response | void => {
     if (!req.user) {
       return res.status(401).json({ error: 'Authentication required' });
     }

@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { RootLayout } from '@/components/layout/RootLayout';
 import { PageHeader } from '@/components/common/PageHeader';
 import { ContactForm } from '@/components/features/contact/ContactForm';

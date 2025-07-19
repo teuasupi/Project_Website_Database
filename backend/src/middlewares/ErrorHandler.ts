@@ -1,10 +1,15 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 
 interface ErrorWithStatus extends Error {
   status?: number;
 }
 
-const errorHandler = (err: ErrorWithStatus, req: Request, res: Response, next: NextFunction): Response | void => {
+const errorHandler = (
+  err: ErrorWithStatus,
+  req: Request,
+  res: Response,
+  _next: NextFunction
+): Response | void => {
   console.error('Error:', err);
 
   const status = err.status || 500;
@@ -12,7 +17,7 @@ const errorHandler = (err: ErrorWithStatus, req: Request, res: Response, next: N
 
   return res.status(status).json({
     error: message,
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
   });
 };
 
