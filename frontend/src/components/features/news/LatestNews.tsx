@@ -108,7 +108,7 @@ export function LatestNews({
         {/* News Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {newsItems.slice(0, maxItems).map((item, index) => (
-            <Card key={item.id} className="group overflow-hidden transition-transform hover:scale-[1.02]">
+            <Card key={item.id} className="group overflow-hidden transition-transform hover:scale-[1.02] p-0">
               {/* Featured Image */}
               {item.featuredImage && (
                 <div className="relative aspect-video overflow-hidden">
@@ -133,7 +133,7 @@ export function LatestNews({
                 </div>
               )}
 
-              <CardHeader className="pb-2">
+              <CardHeader className="pb-2 px-6 pt-6">
                 <h3 className="line-clamp-2 text-lg font-semibold leading-tight group-hover:text-primary">
                   <Link href={ROUTES.NEWS.ARTICLE(item.slug)}>
                     {item.title}
@@ -141,7 +141,7 @@ export function LatestNews({
                 </h3>
               </CardHeader>
 
-              <CardContent>
+              <CardContent className="px-6 pb-6">
                 <p className="mb-4 line-clamp-3 text-sm text-muted-foreground">
                   {item.excerpt}
                 </p>

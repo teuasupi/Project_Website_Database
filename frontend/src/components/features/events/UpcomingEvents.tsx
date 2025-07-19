@@ -159,7 +159,7 @@ export function UpcomingEvents({
             const availabilityStatus = getAvailabilityStatus(event);
             
             return (
-              <Card key={event.id} className="group overflow-hidden transition-transform hover:scale-[1.02]">
+              <Card key={event.id} className="group overflow-hidden transition-transform hover:scale-[1.02] p-0">
                 {/* Featured Image */}
                 {event.featuredImage && (
                   <div className="relative aspect-video overflow-hidden">
@@ -199,7 +199,7 @@ export function UpcomingEvents({
                   </div>
                 )}
 
-                <CardHeader className="pb-2">
+                <CardHeader className="pb-2 px-6 pt-6">
                   <h3 className="line-clamp-2 text-lg font-semibold leading-tight group-hover:text-primary">
                     <Link href={ROUTES.EVENTS.DETAIL(event.slug)}>
                       {event.title}
@@ -207,7 +207,7 @@ export function UpcomingEvents({
                   </h3>
                 </CardHeader>
 
-                <CardContent>
+                <CardContent className="px-6 pb-6">
                   <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">
                     {event.description}
                   </p>
