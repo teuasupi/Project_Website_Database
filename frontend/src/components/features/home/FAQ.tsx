@@ -46,8 +46,8 @@ export function FAQ() {
           {faqItems.map((item, index) => (
             <Card key={index}>
               <CardHeader>
-                <CardTitle className="flex items-start space-x-3">
-                  <HelpCircle className="text-primary mt-1 h-5 w-5 flex-shrink-0" />
+                <CardTitle className="flex items-center space-x-3">
+                  <HelpCircle className="text-primary h-5 w-5 flex-shrink-0" />
                   <span>{item.question}</span>
                 </CardTitle>
               </CardHeader>
