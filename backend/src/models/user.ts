@@ -38,10 +38,14 @@ class UserModel {
     );
   }
 
-  static async registerUser(email: string, password: string, fullName: string): Promise<{ message: string }> {
+  static async registerUser(
+    email: string,
+    password: string,
+    fullName: string
+  ): Promise<{ message: string }> {
     if (!email || !password || !fullName)
       throw new Error("Email, password, and fullName are required");
-    
+
     const existingUser: User[] = await this.query<User[]>(
       "SELECT id FROM Users WHERE email = ?",
       [email]
@@ -63,40 +67,59 @@ class UserModel {
     return { message: "User registered successfully" };
   }
 
-  static async loginUser(email: string, password: string): Promise<AuthResponse> {
+  static async loginUser(
+    email: string,
+    password: string
+  ): Promise<AuthResponse> {
     if (!email || !password) throw new Error("Email and password are required");
-    
-    const users: User[] = await this.query<User[]>("SELECT * FROM Users WHERE email = ?", [email]);
+
+    const users: User[] = await this.query<User[]>(
+      "SELECT * FROM Users WHERE email = ?",
+      [email]
+    );
     if (users.length === 0) throw new Error("Invalid email or password");
 
     const user: User = users[0];
-    const isPasswordValid: boolean = await bcryptjs.compare(password, user.password!);
+    const isPasswordValid: boolean = await bcryptjs.compare(
+      password,
+      user.password!
+    );
     if (!isPasswordValid) throw new Error("Invalid email or password");
 
     const token: string = jwt.sign(
       { userId: user.id, email: user.email, role: user.role },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET!,
       { expiresIn: "24h" }
     );
-    
+
     const { password: _, ...userWithoutPassword } = user;
     return { message: "Login successful", token, user: userWithoutPassword };
   }
 
-  static async updateUser(id: number, updateData: Partial<Omit<User, "id">>): Promise<{ message: string }> {
+  static async updateUser(
+    id: number,
+    updateData: Partial<Omit<User, "id">>
+  ): Promise<{ message: string }> {
     const fields: string[] = Object.keys(updateData);
     if (fields.length === 0) throw new Error("No fields to update");
 
     const query: string = `UPDATE Users SET ${fields
       .map((f) => `${f} = ?`)
       .join(", ")} WHERE id = ?`;
-    const values: unknown[] = [...fields.map((f) => updateData[f as keyof typeof updateData]), id];
+    const values: unknown[] = [
+      ...fields.map((f) => updateData[f as keyof typeof updateData]),
+      id,
+    ];
     await this.query(query, values);
 
     return { message: "User updated successfully" };
   }
 
-  static async uploadProfilePhoto(id: number, file: Express.Multer.File, profilePhoto: string): Promise<{ message: string }> {
+  static async uploadProfilePhoto(
+    id: number,
+    file: Express.Multer.File,
+    profilePhoto: string
+  ): Promise<{ message: string }> {
     const user: Omit<User, "password">[] = await this.getUserById(id);
     if (!user || user.length === 0) throw new Error("User not found");
 
@@ -122,7 +145,7 @@ class UserModel {
   static async deleteUser(id: number): Promise<{ message: string }> {
     const user: Omit<User, "password">[] = await this.getUserById(id);
     if (!user || user.length === 0) throw new Error("User not found");
-    
+
     await this.query("DELETE FROM Users WHERE id = ?", [id]);
     return { message: "User deleted successfully" };
   }
