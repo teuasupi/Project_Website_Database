@@ -1,0 +1,370 @@
+'use client';
+
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  Send,
+  CheckCircle,
+  AlertCircle,
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Youtube,
+} from 'lucide-react';
+import Link from 'next/link';
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  category: 'general' | 'alumni-services' | 'technical' | 'partnerships';
+}
+
+export function ContactForm() {
+  const [formData, setFormData] = useState<ContactFormData>({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    category: 'general',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    'idle' | 'success' | 'error'
+  >('idle');
+
+  const categories = [
+    { value: 'general', label: 'General Inquiry' },
+    { value: 'alumni-services', label: 'Alumni Services' },
+    { value: 'technical', label: 'Technical Support' },
+    { value: 'partnerships', label: 'Partnerships & Collaboration' },
+  ];
+
+  const contactMethods = [
+    {
+      icon: Mail,
+      label: 'Email',
+      value: 'info@ikateuas.upi.edu',
+      href: 'mailto:info@ikateuas.upi.edu',
+    },
+    {
+      icon: Phone,
+      label: 'Phone',
+      value: '+62 22 2013163',
+      href: 'tel:+622220131163',
+    },
+    {
+      icon: MapPin,
+      label: 'Address',
+      value: 'Jl. Dr. Setiabudhi No. 207, Bandung',
+    },
+  ];
+
+  const socialLinks = [
+    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/ikateuas' },
+    {
+      name: 'Instagram',
+      icon: Instagram,
+      href: 'https://instagram.com/ikateuas',
+    },
+    {
+      name: 'LinkedIn',
+      icon: Linkedin,
+      href: 'https://linkedin.com/company/ikateuas',
+    },
+    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/ikateuas' },
+    { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/@ikateuas' },
+  ];
+
+  const handleInputChange = (field: keyof ContactFormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // Here you would typically send the data to your backend
+      console.log('Form submitted:', formData);
+
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+        category: 'general',
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const isFormValid =
+    formData.name && formData.email && formData.subject && formData.message;
+
+  return (
+    <section className="py-16">
+      <div className="container mx-auto px-4">
+        <div className="mb-8 text-center">
+          <h2 className="mb-4 text-3xl font-bold">Get in Touch</h2>
+          <p className="text-muted-foreground mx-auto max-w-2xl">
+            Have a question or need assistance? We're here to help. Send us a
+            message and we'll get back to you as soon as possible.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          {/* Contact Form */}
+          <div className="lg:col-span-2">
+            <Card className="flex h-full flex-col">
+              <CardHeader>
+                <CardTitle>Send us a Message</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-1">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Name & Email Row */}
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Full Name *</Label>
+                      <Input
+                        id="name"
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => handleInputChange('name', e.target.value)}
+                        placeholder="Enter your full name"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        placeholder="Enter your email address"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  {/* Category */}
+                  <div className="space-y-2">
+                    <Label htmlFor="category">Category</Label>
+                    <Select
+                      value={formData.category}
+                      onValueChange={(value) =>
+                        handleInputChange('category', value)
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {categories.map((category) => (
+                          <SelectItem key={category.value} value={category.value}>
+                            {category.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Subject */}
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Subject *</Label>
+                    <Input
+                      id="subject"
+                      type="text"
+                      value={formData.subject}
+                      onChange={(e) => handleInputChange('subject', e.target.value)}
+                      placeholder="Enter the subject of your message"
+                      required
+                    />
+                  </div>
+
+                  {/* Message */}
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message *</Label>
+                    <Textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={(e) => handleInputChange('message', e.target.value)}
+                      placeholder="Enter your message here..."
+                      rows={10}
+                      className="h-[160px]"
+                      required
+                    />
+                  </div>
+
+                  {/* Submit Status */}
+                  {submitStatus === 'success' && (
+                    <div className="flex items-center space-x-2 text-green-600">
+                      <CheckCircle className="h-5 w-5" />
+                      <span>
+                        Message sent successfully! We'll get back to you soon.
+                      </span>
+                    </div>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <div className="flex items-center space-x-2 text-red-600">
+                      <AlertCircle className="h-5 w-5" />
+                      <span>Failed to send message. Please try again.</span>
+                    </div>
+                  )}
+
+                  {/* Submit Button */}
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={!isFormValid || isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center space-x-2">
+                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                        <span>Sending...</span>
+                      </span>
+                    ) : (
+                      <span className="flex items-center space-x-2">
+                        <Send className="h-4 w-4" />
+                        <span>Send Message</span>
+                      </span>
+                    )}
+                  </Button>
+
+                  <p className="text-muted-foreground text-sm">
+                    * Required fields. We'll respond within 24-48 hours.
+                  </p>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Contact Information Sidebar */}
+          <div className="space-y-6">
+            {/* Contact Methods */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Contact Information</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {contactMethods.map((method, index) => {
+                  const IconComponent = method.icon;
+                  return (
+                    <div key={index} className="flex items-start space-x-3">
+                      <div className="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg">
+                        <IconComponent className="text-primary h-4 w-4" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-foreground text-sm font-medium">
+                          {method.label}
+                        </p>
+                        {method.href ? (
+                          <Link
+                            href={method.href}
+                            className="text-muted-foreground hover:text-primary text-sm break-words transition-colors"
+                          >
+                            {method.value}
+                          </Link>
+                        ) : (
+                          <p className="text-muted-foreground text-sm break-words">
+                            {method.value}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </CardContent>
+            </Card>
+
+            {/* Office Hours */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2 text-lg">
+                  <Clock className="h-5 w-5" />
+                  <span>Office Hours</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="font-medium">Mon - Fri</span>
+                    <span className="text-muted-foreground">08:00 - 16:00</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="font-medium">Saturday</span>
+                    <span className="text-muted-foreground">08:00 - 12:00</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="font-medium">Sunday</span>
+                    <span className="text-muted-foreground">Closed</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Social Media */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Follow Us</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  {socialLinks.map((social, index) => {
+                    const IconComponent = social.icon;
+                    return (
+                      <Button
+                        key={index}
+                        variant="outline"
+                        size="sm"
+                        asChild
+                        className="min-w-0 flex-1"
+                      >
+                        <Link
+                          href={social.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Follow us on ${social.name}`}
+                        >
+                          <IconComponent className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    );
+                   })}
+                 </div>
+               </CardContent>
+             </Card>
+           </div>
+         </div>
+       </div>
+     </section>
+  );
+}
