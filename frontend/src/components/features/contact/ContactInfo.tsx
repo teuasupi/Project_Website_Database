@@ -40,7 +40,7 @@ export function ContactInfo() {
     {
       type: 'address',
       label: 'Address',
-      value: 'Jl. Dr. Setiabudhi No. 229, Bandung, Jawa Barat 40154',
+      value: 'Jl. Dr. Setiabudhi No. 207, Bandung, Jawa Barat 40154',
       icon: MapPin,
     },
     {
