@@ -44,16 +44,20 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo and Brand */}
         <Link href={ROUTES.HOME} className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+          <div className="bg-primary text-primary-foreground flex h-10 w-10 items-center justify-center rounded-lg">
             <span className="text-lg font-bold">IKA</span>
           </div>
           <div className="hidden sm:block">
-            <div className="text-lg font-bold text-foreground">{APP_CONFIG.name}</div>
-            <div className="text-xs text-muted-foreground">Teknik Elektro UPI</div>
+            <div className="text-foreground text-lg font-bold">
+              {APP_CONFIG.name}
+            </div>
+            <div className="text-muted-foreground text-xs">
+              Teknik Elektro UPI
+            </div>
           </div>
         </Link>
 
@@ -73,13 +77,13 @@ export function Header() {
                           <NavigationMenuLink key={child.href} asChild>
                             <Link
                               href={child.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              className="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none"
                             >
-                              <div className="text-sm font-medium leading-none">
+                              <div className="text-sm leading-none font-medium">
                                 {child.title}
                               </div>
                               {child.description && (
-                                <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
                                   {child.description}
                                 </p>
                               )}
@@ -93,7 +97,7 @@ export function Header() {
                   <NavigationMenuLink asChild>
                     <Link
                       href={item.href}
-                      className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                      className="group bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                     >
                       {item.title}
                     </Link>
@@ -108,15 +112,20 @@ export function Header() {
         <div className="flex items-center space-x-4">
           {/* User Menu or Login Button */}
           {status === 'loading' ? (
-            <div className="h-8 w-8 animate-pulse rounded-full bg-muted" />
+            <div className="bg-muted h-8 w-8 animate-pulse rounded-full" />
           ) : session?.user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                <Button
+                  variant="ghost"
+                  className="relative h-8 w-8 rounded-full"
+                >
                   <Avatar className="h-8 w-8">
                     <AvatarImage src="" alt={session.user.name || ''} />
                     <AvatarFallback>
-                      {getUserInitials(session.user.name || session.user.email || 'U')}
+                      {getUserInitials(
+                        session.user.name || session.user.email || 'U'
+                      )}
                     </AvatarFallback>
                   </Avatar>
                 </Button>
@@ -128,7 +137,7 @@ export function Header() {
                       <p className="font-medium">{session.user.name}</p>
                     )}
                     {session.user.email && (
-                      <p className="w-[200px] truncate text-sm text-muted-foreground">
+                      <p className="text-muted-foreground w-[200px] truncate text-sm">
                         {session.user.email}
                       </p>
                     )}
@@ -152,7 +161,10 @@ export function Header() {
                   <>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
-                      <Link href={ROUTES.ADMIN.DASHBOARD} className="cursor-pointer">
+                      <Link
+                        href={ROUTES.ADMIN.DASHBOARD}
+                        className="cursor-pointer"
+                      >
                         <Settings className="mr-2 h-4 w-4" />
                         Admin Dashboard
                       </Link>
@@ -160,7 +172,10 @@ export function Header() {
                   </>
                 )}
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
+                <DropdownMenuItem
+                  onClick={handleSignOut}
+                  className="cursor-pointer"
+                >
                   <LogOut className="mr-2 h-4 w-4" />
                   Sign Out
                 </DropdownMenuItem>
@@ -195,20 +210,22 @@ export function Header() {
 
       {/* Mobile Navigation Menu */}
       {isMobileMenuOpen && (
-        <div className="border-t bg-background lg:hidden">
+        <div className="bg-background border-t lg:hidden">
           <div className="container mx-auto px-4 py-4">
             <nav className="space-y-4">
               {MAIN_NAVIGATION.map((item) => (
                 <div key={item.href}>
                   {item.children ? (
                     <div className="space-y-2">
-                      <h3 className="font-medium text-foreground">{item.title}</h3>
+                      <h3 className="text-foreground font-medium">
+                        {item.title}
+                      </h3>
                       <div className="ml-4 space-y-2">
                         {item.children.map((child) => (
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="block text-sm text-muted-foreground hover:text-foreground"
+                            className="text-muted-foreground hover:text-foreground block text-sm"
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
                             {child.title}
@@ -219,7 +236,7 @@ export function Header() {
                   ) : (
                     <Link
                       href={item.href}
-                      className="block font-medium text-foreground hover:text-primary"
+                      className="text-foreground hover:text-primary block font-medium"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {item.title}
@@ -227,17 +244,27 @@ export function Header() {
                   )}
                 </div>
               ))}
-              
+
               {/* Mobile Auth Buttons */}
               {!session?.user && (
                 <div className="space-y-2 border-t pt-4 sm:hidden">
-                  <Button variant="ghost" className="w-full justify-start" asChild>
-                    <Link href={ROUTES.LOGIN} onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    asChild
+                  >
+                    <Link
+                      href={ROUTES.LOGIN}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
                       Sign In
                     </Link>
                   </Button>
                   <Button className="w-full" asChild>
-                    <Link href={ROUTES.REGISTER} onClick={() => setIsMobileMenuOpen(false)}>
+                    <Link
+                      href={ROUTES.REGISTER}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
                       Join Alumni
                     </Link>
                   </Button>

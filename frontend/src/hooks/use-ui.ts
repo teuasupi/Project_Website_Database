@@ -7,15 +7,15 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 // Hook for disclosure state (modals, dropdowns, etc.)
 export function useDisclosure(initialState = false) {
   const [isOpen, setIsOpen] = useState(initialState);
-  
+
   const onOpen = useCallback(() => setIsOpen(true), []);
   const onClose = useCallback(() => setIsOpen(false), []);
-  const onToggle = useCallback(() => setIsOpen(prev => !prev), []);
-  
-  return { 
-    isOpen, 
-    onOpen, 
-    onClose, 
+  const onToggle = useCallback(() => setIsOpen((prev) => !prev), []);
+
+  return {
+    isOpen,
+    onOpen,
+    onClose,
     onToggle,
     setIsOpen,
   };
@@ -23,7 +23,7 @@ export function useDisclosure(initialState = false) {
 
 // Hook for local storage with type safety
 export function useLocalStorage<T>(
-  key: string, 
+  key: string,
   initialValue: T
 ): [T, (value: T | ((val: T) => T)) => void] {
   // State to store our value
@@ -31,7 +31,7 @@ export function useLocalStorage<T>(
     if (typeof window === 'undefined') {
       return initialValue;
     }
-    
+
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -42,33 +42,37 @@ export function useLocalStorage<T>(
   });
 
   // Return a wrapped version of useState's setter function that persists the new value to localStorage
-  const setValue = useCallback((value: T | ((val: T) => T)) => {
-    try {
-      // Allow value to be a function so we have the same API as useState
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+  const setValue = useCallback(
+    (value: T | ((val: T) => T)) => {
+      try {
+        // Allow value to be a function so we have the same API as useState
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+        setStoredValue(valueToStore);
+
+        if (typeof window !== 'undefined') {
+          window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        }
+      } catch (error) {
+        console.warn(`Error setting localStorage key "${key}":`, error);
       }
-    } catch (error) {
-      console.warn(`Error setting localStorage key "${key}":`, error);
-    }
-  }, [key, storedValue]);
+    },
+    [key, storedValue]
+  );
 
   return [storedValue, setValue];
 }
 
 // Hook for session storage
 export function useSessionStorage<T>(
-  key: string, 
+  key: string,
   initialValue: T
 ): [T, (value: T | ((val: T) => T)) => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === 'undefined') {
       return initialValue;
     }
-    
+
     try {
       const item = window.sessionStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -78,18 +82,22 @@ export function useSessionStorage<T>(
     }
   });
 
-  const setValue = useCallback((value: T | ((val: T) => T)) => {
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      
-      if (typeof window !== 'undefined') {
-        window.sessionStorage.setItem(key, JSON.stringify(valueToStore));
+  const setValue = useCallback(
+    (value: T | ((val: T) => T)) => {
+      try {
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+        setStoredValue(valueToStore);
+
+        if (typeof window !== 'undefined') {
+          window.sessionStorage.setItem(key, JSON.stringify(valueToStore));
+        }
+      } catch (error) {
+        console.warn(`Error setting sessionStorage key "${key}":`, error);
       }
-    } catch (error) {
-      console.warn(`Error setting sessionStorage key "${key}":`, error);
-    }
-  }, [key, storedValue]);
+    },
+    [key, storedValue]
+  );
 
   return [storedValue, setValue];
 }
@@ -148,12 +156,9 @@ export function useIntersectionObserver(
   useEffect(() => {
     if (!elementRef.current) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsIntersecting(entry.isIntersecting);
-      },
-      options
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsIntersecting(entry.isIntersecting);
+    }, options);
 
     observer.observe(elementRef.current);
 
@@ -193,11 +198,11 @@ export function useCopyToClipboard() {
 // Hook for previous value
 export function usePrevious<T>(value: T): T | undefined {
   const ref = useRef<T | undefined>(undefined);
-  
+
   useEffect(() => {
     ref.current = value;
   });
-  
+
   return ref.current;
 }
 
@@ -303,38 +308,47 @@ export function useFormValidation<T extends Record<string, any>>(
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const validate = useCallback((fieldValues: T = values) => {
-    try {
-      validationSchema.parse(fieldValues);
-      setErrors({});
-      return true;
-    } catch (error: any) {
-      const fieldErrors: Record<string, string> = {};
-      error.errors?.forEach((err: any) => {
-        if (err.path) {
-          fieldErrors[err.path[0]] = err.message;
-        }
-      });
-      setErrors(fieldErrors);
-      return false;
-    }
-  }, [values, validationSchema]);
+  const validate = useCallback(
+    (fieldValues: T = values) => {
+      try {
+        validationSchema.parse(fieldValues);
+        setErrors({});
+        return true;
+      } catch (error: any) {
+        const fieldErrors: Record<string, string> = {};
+        error.errors?.forEach((err: any) => {
+          if (err.path) {
+            fieldErrors[err.path[0]] = err.message;
+          }
+        });
+        setErrors(fieldErrors);
+        return false;
+      }
+    },
+    [values, validationSchema]
+  );
 
   const setValue = useCallback((name: keyof T, value: any) => {
-    setValues(prev => ({ ...prev, [name]: value }));
-    setTouched(prev => ({ ...prev, [name]: true }));
+    setValues((prev) => ({ ...prev, [name]: value }));
+    setTouched((prev) => ({ ...prev, [name]: true }));
   }, []);
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setValue(name, value);
-  }, [setValue]);
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setValue(name, value);
+    },
+    [setValue]
+  );
 
-  const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name } = e.target;
-    setTouched(prev => ({ ...prev, [name]: true }));
-    validate();
-  }, [validate]);
+  const handleBlur = useCallback(
+    (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name } = e.target;
+      setTouched((prev) => ({ ...prev, [name]: true }));
+      validate();
+    },
+    [validate]
+  );
 
   const reset = useCallback(() => {
     setValues(initialValues);

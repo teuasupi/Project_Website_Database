@@ -5,17 +5,18 @@ export const APP_CONFIG = {
   name: 'IKA TEUAS UPI',
   fullName: 'Ikatan Keluarga Alumni Teknik Elektro UPI',
   description: 'Alumni Association of Electrical Engineering UPI',
-  shortDescription: 'Connecting electrical engineering alumni from Universitas Pendidikan Indonesia',
+  shortDescription:
+    'Connecting electrical engineering alumni from Universitas Pendidikan Indonesia',
   url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   version: '1.0.0',
-  
+
   // Contact information
   contact: {
     email: 'info@ikateuas.com',
     phone: '+62 22 2013163',
     address: 'Jl. Dr. Setiabudhi No. 229, Bandung 40154, Indonesia',
   },
-  
+
   // Social media links
   social: {
     facebook: 'https://facebook.com/ikateuas',
@@ -24,14 +25,14 @@ export const APP_CONFIG = {
     linkedin: 'https://linkedin.com/company/ikateuas',
     youtube: 'https://youtube.com/c/ikateuas',
   },
-  
+
   // API configuration
   api: {
     baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
     timeout: 10000,
     version: 'v1',
   },
-  
+
   // Feature flags
   features: {
     registration: true,
@@ -51,13 +52,13 @@ export const ROUTES = {
   HOME: '/',
   ABOUT: '/about',
   CONTACT: '/contact',
-  
+
   // Authentication routes
   LOGIN: '/login',
   REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
-  
+
   // Alumni routes
   ALUMNI: {
     ROOT: '/alumni',
@@ -65,7 +66,7 @@ export const ROUTES = {
     PROFILE: (id: string) => `/alumni/${id}`,
     EDIT_PROFILE: '/alumni/edit',
     NETWORK: '/alumni/network',
-    
+
     // Alumni articles
     ARTICLES: {
       ROOT: '/alumni/articles',
@@ -74,7 +75,7 @@ export const ROUTES = {
       VIEW: (slug: string) => `/alumni/articles/${slug}`,
       DASHBOARD: '/alumni/articles/dashboard',
     },
-    
+
     // Mentorship
     MENTORSHIP: {
       ROOT: '/alumni/mentorship',
@@ -82,27 +83,28 @@ export const ROUTES = {
       DASHBOARD: '/alumni/mentorship/dashboard',
     },
   },
-  
+
   // Content routes
   NEWS: {
     ROOT: '/news',
     ARTICLE: (slug: string) => `/news/${slug}`,
     CATEGORY: (slug: string) => `/news/category/${slug}`,
   },
-  
+
   EVENTS: {
     ROOT: '/events',
     DETAIL: (slug: string) => `/events/${slug}`,
     CALENDAR: '/events/calendar',
     REGISTER: (slug: string) => `/events/${slug}/register`,
   },
-  
+
   GALLERY: {
     ROOT: '/gallery',
     ALBUM: (slug: string) => `/gallery/${slug}`,
-    MEDIA: (albumSlug: string, mediaSlug: string) => `/gallery/${albumSlug}/${mediaSlug}`,
+    MEDIA: (albumSlug: string, mediaSlug: string) =>
+      `/gallery/${albumSlug}/${mediaSlug}`,
   },
-  
+
   // Community routes
   FORUM: {
     ROOT: '/forum',
@@ -111,7 +113,7 @@ export const ROUTES = {
     CREATE: '/forum/discussions/create',
     PLATFORMS: '/forum/platforms',
   },
-  
+
   // Opportunity routes
   SCHOLARSHIPS: {
     ROOT: '/scholarships',
@@ -121,25 +123,25 @@ export const ROUTES = {
     MY_APPLICATIONS: '/scholarships/my-applications',
     DONORS: '/scholarships/donors',
   },
-  
+
   JOBS: {
     ROOT: '/jobs',
     DETAIL: (id: string) => `/jobs/${id}`,
     POST: '/jobs/post',
     APPLICATIONS: '/jobs/applications',
   },
-  
+
   // Admin routes
   ADMIN: {
     ROOT: '/admin',
     DASHBOARD: '/admin',
-    
+
     USERS: {
       ROOT: '/admin/users',
       PENDING: '/admin/users/pending',
       DETAIL: (id: string) => `/admin/users/${id}`,
     },
-    
+
     CONTENT: {
       ROOT: '/admin/content',
       NEWS: '/admin/content/news',
@@ -147,11 +149,11 @@ export const ROUTES = {
       MEDIA: '/admin/content/media',
       ARTICLES: '/admin/content/articles',
     },
-    
+
     ANALYTICS: '/admin/analytics',
     SETTINGS: '/admin/settings',
   },
-  
+
   // Utility routes
   SEARCH: '/search',
   PRIVACY: '/privacy',
@@ -171,7 +173,7 @@ export const MAJORS = [
 
 // Graduation years (last 30 years)
 export const GRADUATION_YEARS = Array.from(
-  { length: 35 }, 
+  { length: 35 },
   (_, i) => new Date().getFullYear() - i
 );
 
@@ -198,7 +200,12 @@ export const EVENT_CATEGORIES = [
   { id: 'networking', name: 'Networking', color: '#3B82F6', icon: 'Users' },
   { id: 'workshop', name: 'Workshop', color: '#10B981', icon: 'Tool' },
   { id: 'seminar', name: 'Seminar', color: '#8B5CF6', icon: 'Presentation' },
-  { id: 'conference', name: 'Conference', color: '#F59E0B', icon: 'Microphone' },
+  {
+    id: 'conference',
+    name: 'Conference',
+    color: '#F59E0B',
+    icon: 'Microphone',
+  },
   { id: 'social', name: 'Social Event', color: '#EF4444', icon: 'Heart' },
   { id: 'career', name: 'Career Fair', color: '#EC4899', icon: 'Briefcase' },
   { id: 'reunion', name: 'Reunion', color: '#06B6D4', icon: 'Calendar' },
@@ -224,7 +231,11 @@ export const UPLOAD_LIMITS = {
   },
   DOCUMENT: {
     maxSize: 10 * 1024 * 1024, // 10MB
-    allowedTypes: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+    allowedTypes: [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ],
   },
   VIDEO: {
     maxSize: 100 * 1024 * 1024, // 100MB

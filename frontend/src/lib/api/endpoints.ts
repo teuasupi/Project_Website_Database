@@ -155,8 +155,10 @@ export const API_ENDPOINTS = {
   ADMIN: {
     USERS: '/api/admin/users',
     PENDING_REGISTRATIONS: '/api/admin/registrations/pending',
-    APPROVE_REGISTRATION: (id: string) => `/api/admin/registrations/${id}/approve`,
-    REJECT_REGISTRATION: (id: string) => `/api/admin/registrations/${id}/reject`,
+    APPROVE_REGISTRATION: (id: string) =>
+      `/api/admin/registrations/${id}/approve`,
+    REJECT_REGISTRATION: (id: string) =>
+      `/api/admin/registrations/${id}/reject`,
     CONTENT: '/api/admin/content',
     ANALYTICS: '/api/admin/analytics',
     SETTINGS: '/api/admin/settings',
@@ -172,23 +174,26 @@ export const API_ENDPOINTS = {
 // Helper function to build query string
 export const buildQueryString = (params: Record<string, any>): string => {
   const searchParams = new URLSearchParams();
-  
+
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== '') {
       if (Array.isArray(value)) {
-        value.forEach(item => searchParams.append(key, item.toString()));
+        value.forEach((item) => searchParams.append(key, item.toString()));
       } else {
         searchParams.append(key, value.toString());
       }
     }
   });
-  
+
   const queryString = searchParams.toString();
   return queryString ? `?${queryString}` : '';
 };
 
 // Helper function to build URL with query params
-export const buildUrl = (endpoint: string, params?: Record<string, any>): string => {
+export const buildUrl = (
+  endpoint: string,
+  params?: Record<string, any>
+): string => {
   if (!params) return endpoint;
   return `${endpoint}${buildQueryString(params)}`;
 };

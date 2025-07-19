@@ -63,7 +63,7 @@ export interface SessionData {
 }
 
 // NextAuth types extension
-declare module "next-auth" {
+declare module 'next-auth' {
   interface Session {
     accessToken?: string;
     user: {
@@ -83,7 +83,7 @@ declare module "next-auth" {
   }
 }
 
-declare module "next-auth/jwt" {
+declare module 'next-auth/jwt' {
   interface JWT {
     accessToken?: string;
     role?: string;

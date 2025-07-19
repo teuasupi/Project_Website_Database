@@ -37,7 +37,7 @@ export interface User {
   phoneNumber?: string;
   address?: string;
   profilePhoto?: string;
-  role: "admin" | "user";
+  role: 'admin' | 'user';
   currentCompany?: string;
   position?: string;
 }
@@ -46,7 +46,7 @@ export interface User {
 export interface AuthResponse {
   message: string;
   token?: string;
-  user?: Omit<User, "password">;
+  user?: Omit<User, 'password'>;
 }
 
 export interface LoginForm {

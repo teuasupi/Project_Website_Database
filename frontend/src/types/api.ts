@@ -1,6 +1,6 @@
 // API-specific types and interfaces
 
-import { User, Article, Event, MediaItem } from "./index";
+import { User, Article, Event, MediaItem } from './index';
 
 // Re-export from main types for convenience
 export interface ApiResponse<T = any> {
@@ -37,7 +37,7 @@ export interface ApiError {
 // Request/Response types
 export interface ApiRequestConfig {
   url: string;
-  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   params?: Record<string, any>;
   data?: any;
   headers?: Record<string, string>;
@@ -72,7 +72,7 @@ export interface BaseFilter {
   page?: number;
   limit?: number;
   sortBy?: string;
-  sortOrder?: "asc" | "desc";
+  sortOrder?: 'asc' | 'desc';
 }
 
 export interface UserFilter extends BaseFilter {
@@ -99,7 +99,7 @@ export interface EventFilter extends BaseFilter {
 }
 
 export interface MediaFilter extends BaseFilter {
-  type?: "image" | "video";
+  type?: 'image' | 'video';
   albumId?: number;
   uploadedBy?: number;
   tags?: string[];
@@ -158,7 +158,7 @@ export interface SearchApiResponse {
 }
 
 export interface SearchResult {
-  type: "user" | "article" | "event" | "media";
+  type: 'user' | 'article' | 'event' | 'media';
   id: number;
   title: string;
   excerpt?: string;
@@ -176,7 +176,7 @@ export interface NotificationApiResponse {
 
 export interface NotificationItem {
   id: string;
-  type: "mention" | "like" | "comment" | "follow" | "system";
+  type: 'mention' | 'like' | 'comment' | 'follow' | 'system';
   title: string;
   message: string;
   isRead: boolean;

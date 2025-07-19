@@ -25,7 +25,7 @@ export const contactSchema = z.object({
     .max(1000, 'Message must not exceed 1000 characters'),
   category: z
     .enum(['general', 'alumni-services', 'technical', 'partnerships'])
-    .refine(val => val !== undefined, 'Please select a category'),
+    .refine((val) => val !== undefined, 'Please select a category'),
 });
 
 export type ContactFormData = z.infer<typeof contactSchema>;
@@ -37,36 +37,23 @@ export const searchSchema = z.object({
     .min(1, 'Search query is required')
     .min(2, 'Search query must be at least 2 characters')
     .max(100, 'Search query must not exceed 100 characters'),
-  type: z
-    .enum(['all', 'alumni', 'articles', 'events', 'media'])
-    .optional(),
-  filters: z
-    .record(z.string(), z.any())
-    .optional(),
+  type: z.enum(['all', 'alumni', 'articles', 'events', 'media']).optional(),
+  filters: z.record(z.string(), z.any()).optional(),
 });
 
 export type SearchFormData = z.infer<typeof searchSchema>;
 
 // Pagination validation
 export const paginationSchema = z.object({
-  page: z
-    .number()
-    .min(1, 'Page must be at least 1')
-    .optional()
-    .default(1),
+  page: z.number().min(1, 'Page must be at least 1').optional().default(1),
   limit: z
     .number()
     .min(1, 'Limit must be at least 1')
     .max(100, 'Limit must not exceed 100')
     .optional()
     .default(10),
-  sortBy: z
-    .string()
-    .optional(),
-  sortOrder: z
-    .enum(['asc', 'desc'])
-    .optional()
-    .default('desc'),
+  sortBy: z.string().optional(),
+  sortOrder: z.enum(['asc', 'desc']).optional().default('desc'),
 });
 
 export type PaginationParams = z.infer<typeof paginationSchema>;
@@ -76,10 +63,11 @@ export const fileUploadSchema = z.object({
   file: z
     .any()
     .refine((file) => file instanceof File, 'File is required')
-    .refine((file) => file.size <= 10 * 1024 * 1024, 'File size must not exceed 10MB'),
-  type: z
-    .enum(['image', 'document', 'video'])
-    .optional(),
+    .refine(
+      (file) => file.size <= 10 * 1024 * 1024,
+      'File size must not exceed 10MB'
+    ),
+  type: z.enum(['image', 'document', 'video']).optional(),
 });
 
 export type FileUploadData = z.infer<typeof fileUploadSchema>;
@@ -89,9 +77,15 @@ export const imageUploadSchema = z.object({
   file: z
     .any()
     .refine((file) => file instanceof File, 'Image file is required')
-    .refine((file) => file.size <= 5 * 1024 * 1024, 'Image size must not exceed 5MB')
     .refine(
-      (file) => ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(file.type),
+      (file) => file.size <= 5 * 1024 * 1024,
+      'Image size must not exceed 5MB'
+    )
+    .refine(
+      (file) =>
+        ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(
+          file.type
+        ),
       'File must be a valid image (JPEG, PNG, WebP, or GIF)'
     ),
 });
@@ -107,7 +101,10 @@ export const profileUpdateSchema = z.object({
     .max(100, 'Full name must not exceed 100 characters'),
   phoneNumber: z
     .string()
-    .regex(/^(\+62|62|0)8[1-9][0-9]{6,9}$/, 'Please enter a valid Indonesian phone number')
+    .regex(
+      /^(\+62|62|0)8[1-9][0-9]{6,9}$/,
+      'Please enter a valid Indonesian phone number'
+    )
     .optional()
     .or(z.literal('')),
   address: z
@@ -122,10 +119,7 @@ export const profileUpdateSchema = z.object({
     .string()
     .max(100, 'Position must not exceed 100 characters')
     .optional(),
-  bio: z
-    .string()
-    .max(1000, 'Bio must not exceed 1000 characters')
-    .optional(),
+  bio: z.string().max(1000, 'Bio must not exceed 1000 characters').optional(),
   website: z
     .string()
     .url('Please enter a valid URL')
@@ -160,9 +154,7 @@ export const commentSchema = z.object({
     .min(1, 'Comment is required')
     .min(3, 'Comment must be at least 3 characters')
     .max(1000, 'Comment must not exceed 1000 characters'),
-  parentId: z
-    .number()
-    .optional(),
+  parentId: z.number().optional(),
 });
 
 export type CommentFormData = z.infer<typeof commentSchema>;

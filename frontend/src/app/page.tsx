@@ -9,13 +9,13 @@ export default function Home() {
     <RootLayout>
       {/* Hero Section */}
       <HeroSection />
-      
+
       {/* Latest News Section */}
       <LatestNews />
-      
+
       {/* Featured Alumni Section */}
       <FeaturedAlumni />
-      
+
       {/* Upcoming Events Section */}
       <UpcomingEvents />
     </RootLayout>

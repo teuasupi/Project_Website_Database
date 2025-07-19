@@ -39,7 +39,13 @@ export function useApi<T>(
     } finally {
       setIsLoading(false);
     }
-  }, [url, options?.enabled, options?.params, options?.onSuccess, options?.onError]);
+  }, [
+    url,
+    options?.enabled,
+    options?.params,
+    options?.onSuccess,
+    options?.onError,
+  ]);
 
   useEffect(() => {
     fetchData();
@@ -76,37 +82,52 @@ export function usePaginatedApi<T>(
   const [error, setError] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(false);
 
-  const fetchData = useCallback(async (page: number, append = false) => {
-    if (options?.enabled === false) return;
+  const fetchData = useCallback(
+    async (page: number, append = false) => {
+      if (options?.enabled === false) return;
 
-    setIsLoading(true);
-    setError(null);
+      setIsLoading(true);
+      setError(null);
 
-    try {
-      const params = {
-        page,
-        limit: pagination.itemsPerPage,
-        ...options?.params,
-      };
+      try {
+        const params = {
+          page,
+          limit: pagination.itemsPerPage,
+          ...options?.params,
+        };
 
-      const response = await api.get<PaginatedResponse<T>>(url, { params });
-      const responseData = response.data;
+        const response = await api.get<PaginatedResponse<T>>(url, { params });
+        const responseData = response.data;
 
-      if (responseData) {
-        setData(prev => append ? [...prev, ...responseData.data] : responseData.data);
-        setPagination(responseData.pagination);
-        setHasMore(responseData.pagination.currentPage < responseData.pagination.totalPages);
-        options?.onSuccess?.(responseData);
+        if (responseData) {
+          setData((prev) =>
+            append ? [...prev, ...responseData.data] : responseData.data
+          );
+          setPagination(responseData.pagination);
+          setHasMore(
+            responseData.pagination.currentPage <
+              responseData.pagination.totalPages
+          );
+          options?.onSuccess?.(responseData);
+        }
+      } catch (err: any) {
+        const errorMessage = err.message || 'An error occurred';
+        setError(errorMessage);
+        options?.onError?.(err);
+        toast.error(errorMessage);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (err: any) {
-      const errorMessage = err.message || 'An error occurred';
-      setError(errorMessage);
-      options?.onError?.(err);
-      toast.error(errorMessage);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [url, pagination.itemsPerPage, options?.enabled, options?.params, options?.onSuccess, options?.onError]);
+    },
+    [
+      url,
+      pagination.itemsPerPage,
+      options?.enabled,
+      options?.params,
+      options?.onSuccess,
+      options?.onError,
+    ]
+  );
 
   const loadMore = useCallback(() => {
     if (hasMore && !isLoading) {
@@ -114,9 +135,12 @@ export function usePaginatedApi<T>(
     }
   }, [fetchData, hasMore, isLoading, pagination.currentPage]);
 
-  const goToPage = useCallback((page: number) => {
-    fetchData(page, false);
-  }, [fetchData]);
+  const goToPage = useCallback(
+    (page: number) => {
+      fetchData(page, false);
+    },
+    [fetchData]
+  );
 
   const refresh = useCallback(() => {
     fetchData(1, false);
@@ -144,7 +168,11 @@ export function useMutation<TData, TVariables = any>(
   options?: {
     onSuccess?: (data: TData, variables: TVariables) => void;
     onError?: (error: any, variables: TVariables) => void;
-    onSettled?: (data: TData | undefined, error: any, variables: TVariables) => void;
+    onSettled?: (
+      data: TData | undefined,
+      error: any,
+      variables: TVariables
+    ) => void;
     showSuccessToast?: boolean;
     showErrorToast?: boolean;
     successMessage?: string;
@@ -153,38 +181,43 @@ export function useMutation<TData, TVariables = any>(
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const mutate = useCallback(async (variables: TVariables) => {
-    setIsLoading(true);
-    setError(null);
+  const mutate = useCallback(
+    async (variables: TVariables) => {
+      setIsLoading(true);
+      setError(null);
 
-    try {
-      const response = await mutationFn(variables);
-      const data = response.data as TData;
-      
-      options?.onSuccess?.(data, variables);
-      
-      if (options?.showSuccessToast !== false) {
-        toast.success(options?.successMessage || 'Operation completed successfully');
+      try {
+        const response = await mutationFn(variables);
+        const data = response.data as TData;
+
+        options?.onSuccess?.(data, variables);
+
+        if (options?.showSuccessToast !== false) {
+          toast.success(
+            options?.successMessage || 'Operation completed successfully'
+          );
+        }
+
+        options?.onSettled?.(data, null, variables);
+        return data;
+      } catch (err: any) {
+        const errorMessage = err.message || 'An error occurred';
+        setError(errorMessage);
+
+        options?.onError?.(err, variables);
+
+        if (options?.showErrorToast !== false) {
+          toast.error(errorMessage);
+        }
+
+        options?.onSettled?.(undefined, err, variables);
+        throw err;
+      } finally {
+        setIsLoading(false);
       }
-      
-      options?.onSettled?.(data, null, variables);
-      return data;
-    } catch (err: any) {
-      const errorMessage = err.message || 'An error occurred';
-      setError(errorMessage);
-      
-      options?.onError?.(err, variables);
-      
-      if (options?.showErrorToast !== false) {
-        toast.error(errorMessage);
-      }
-      
-      options?.onSettled?.(undefined, err, variables);
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [mutationFn, options]);
+    },
+    [mutationFn, options]
+  );
 
   return {
     mutate,
@@ -200,39 +233,47 @@ export function useOptimisticMutation<TData, TVariables = any>(
     onMutate?: (variables: TVariables) => any;
     onSuccess?: (data: TData, variables: TVariables, context: any) => void;
     onError?: (error: any, variables: TVariables, context: any) => void;
-    onSettled?: (data: TData | undefined, error: any, variables: TVariables, context: any) => void;
+    onSettled?: (
+      data: TData | undefined,
+      error: any,
+      variables: TVariables,
+      context: any
+    ) => void;
   }
 ) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const mutate = useCallback(async (variables: TVariables) => {
-    setIsLoading(true);
-    setError(null);
+  const mutate = useCallback(
+    async (variables: TVariables) => {
+      setIsLoading(true);
+      setError(null);
 
-    // Call onMutate for optimistic updates
-    const context = options.onMutate?.(variables);
+      // Call onMutate for optimistic updates
+      const context = options.onMutate?.(variables);
 
-    try {
-      const response = await mutationFn(variables);
-      const data = response.data as TData;
-      
-      options.onSuccess?.(data, variables, context);
-      options.onSettled?.(data, null, variables, context);
-      
-      return data;
-    } catch (err: any) {
-      const errorMessage = err.message || 'An error occurred';
-      setError(errorMessage);
-      
-      options.onError?.(err, variables, context);
-      options.onSettled?.(undefined, err, variables, context);
-      
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [mutationFn, options]);
+      try {
+        const response = await mutationFn(variables);
+        const data = response.data as TData;
+
+        options.onSuccess?.(data, variables, context);
+        options.onSettled?.(data, null, variables, context);
+
+        return data;
+      } catch (err: any) {
+        const errorMessage = err.message || 'An error occurred';
+        setError(errorMessage);
+
+        options.onError?.(err, variables, context);
+        options.onSettled?.(undefined, err, variables, context);
+
+        throw err;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [mutationFn, options]
+  );
 
   return {
     mutate,
@@ -254,30 +295,33 @@ export function useFileUpload(
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
-  const upload = useCallback(async (file: File) => {
-    setIsUploading(true);
-    setProgress(0);
-    setError(null);
+  const upload = useCallback(
+    async (file: File) => {
+      setIsUploading(true);
+      setProgress(0);
+      setError(null);
 
-    try {
-      const response = await uploadFn(file);
-      const data = response.data;
-      
-      setProgress(100);
-      options?.onSuccess?.(data, file);
-      toast.success('File uploaded successfully');
-      
-      return data;
-    } catch (err: any) {
-      const errorMessage = err.message || 'Upload failed';
-      setError(errorMessage);
-      options?.onError?.(err, file);
-      toast.error(errorMessage);
-      throw err;
-    } finally {
-      setIsUploading(false);
-    }
-  }, [uploadFn, options]);
+      try {
+        const response = await uploadFn(file);
+        const data = response.data;
+
+        setProgress(100);
+        options?.onSuccess?.(data, file);
+        toast.success('File uploaded successfully');
+
+        return data;
+      } catch (err: any) {
+        const errorMessage = err.message || 'Upload failed';
+        setError(errorMessage);
+        options?.onError?.(err, file);
+        toast.error(errorMessage);
+        throw err;
+      } finally {
+        setIsUploading(false);
+      }
+    },
+    [uploadFn, options]
+  );
 
   return {
     upload,

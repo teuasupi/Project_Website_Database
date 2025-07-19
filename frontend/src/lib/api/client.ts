@@ -1,6 +1,11 @@
 // API client configuration with axios
 
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios, {
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
 import { getSession } from 'next-auth/react';
 import { ApiError, ApiResponse } from '@/types/api';
 
@@ -34,10 +39,10 @@ apiClient.interceptors.request.use(
     } catch (error) {
       console.warn('Failed to get session for API request:', error);
     }
-    
+
     // Add request timestamp
     config.metadata = { startTime: new Date() };
-    
+
     return config;
   },
   (error) => {
@@ -53,18 +58,20 @@ apiClient.interceptors.response.use(
     const startTime = response.config.metadata?.startTime;
     if (startTime) {
       const duration = endTime.getTime() - startTime.getTime();
-      console.log(`API ${response.config.method?.toUpperCase()} ${response.config.url}: ${duration}ms`);
+      console.log(
+        `API ${response.config.method?.toUpperCase()} ${response.config.url}: ${duration}ms`
+      );
     }
-    
+
     return response;
   },
   async (error) => {
     const originalRequest = error.config;
-    
+
     // Handle 401 Unauthorized - redirect to login
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      
+
       // Clear session and redirect to login
       if (typeof window !== 'undefined') {
         // In browser environment
@@ -72,10 +79,10 @@ apiClient.interceptors.response.use(
         await signOut({ redirect: false });
         window.location.href = '/login';
       }
-      
+
       return Promise.reject(error);
     }
-    
+
     // Handle network errors
     if (!error.response) {
       const networkError: ApiError = {
@@ -85,15 +92,18 @@ apiClient.interceptors.response.use(
       };
       return Promise.reject(networkError);
     }
-    
+
     // Handle server errors
     const apiError: ApiError = {
-      message: error.response.data?.message || error.response.data?.error || 'An unexpected error occurred',
+      message:
+        error.response.data?.message ||
+        error.response.data?.error ||
+        'An unexpected error occurred',
       status: error.response.status,
       code: error.response.data?.code,
       details: error.response.data?.details,
     };
-    
+
     // Log error for debugging
     console.error('API Error:', {
       url: error.config?.url,
@@ -101,7 +111,7 @@ apiClient.interceptors.response.use(
       status: error.response.status,
       message: apiError.message,
     });
-    
+
     return Promise.reject(apiError);
   }
 );
@@ -114,33 +124,55 @@ export class ApiClient {
     this.client = apiClient;
   }
 
-  async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async get<T = any>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     const response = await this.client.get<ApiResponse<T>>(url, config);
     return response.data;
   }
 
-  async post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async post<T = any>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     const response = await this.client.post<ApiResponse<T>>(url, data, config);
     return response.data;
   }
 
-  async put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async put<T = any>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     const response = await this.client.put<ApiResponse<T>>(url, data, config);
     return response.data;
   }
 
-  async patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async patch<T = any>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     const response = await this.client.patch<ApiResponse<T>>(url, data, config);
     return response.data;
   }
 
-  async delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async delete<T = any>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     const response = await this.client.delete<ApiResponse<T>>(url, config);
     return response.data;
   }
 
   // File upload method
-  async upload<T = any>(url: string, file: File, onProgress?: (progress: number) => void): Promise<ApiResponse<T>> {
+  async upload<T = any>(
+    url: string,
+    file: File,
+    onProgress?: (progress: number) => void
+  ): Promise<ApiResponse<T>> {
     const formData = new FormData();
     formData.append('file', file);
 
@@ -150,20 +182,26 @@ export class ApiClient {
       },
       onUploadProgress: (progressEvent) => {
         if (onProgress && progressEvent.total) {
-          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          const progress = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
           onProgress(progress);
         }
       },
     };
 
-    const response = await this.client.post<ApiResponse<T>>(url, formData, config);
+    const response = await this.client.post<ApiResponse<T>>(
+      url,
+      formData,
+      config
+    );
     return response.data;
   }
 
   // Bulk upload method
   async uploadMultiple<T = any>(
-    url: string, 
-    files: File[], 
+    url: string,
+    files: File[],
     onProgress?: (progress: number) => void
   ): Promise<ApiResponse<T>> {
     const formData = new FormData();
@@ -177,13 +215,19 @@ export class ApiClient {
       },
       onUploadProgress: (progressEvent) => {
         if (onProgress && progressEvent.total) {
-          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          const progress = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
           onProgress(progress);
         }
       },
     };
 
-    const response = await this.client.post<ApiResponse<T>>(url, formData, config);
+    const response = await this.client.post<ApiResponse<T>>(
+      url,
+      formData,
+      config
+    );
     return response.data;
   }
 

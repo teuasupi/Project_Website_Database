@@ -1,6 +1,15 @@
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
-import { Facebook, Instagram, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Youtube,
+  Mail,
+  Phone,
+  MapPin,
+} from 'lucide-react';
 import { APP_CONFIG } from '@/lib/constants';
 import { FOOTER_NAVIGATION } from '@/lib/constants/navigation';
 
@@ -16,37 +25,41 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t bg-muted/50">
+    <footer className="bg-muted/50 border-t">
       <div className="container mx-auto px-4 py-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Organization Info */}
           <div className="lg:col-span-2">
             <div className="mb-4 flex items-center space-x-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <div className="bg-primary text-primary-foreground flex h-10 w-10 items-center justify-center rounded-lg">
                 <span className="text-lg font-bold">IKA</span>
               </div>
               <div>
-                <div className="text-lg font-bold text-foreground">{APP_CONFIG.name}</div>
-                <div className="text-sm text-muted-foreground">{APP_CONFIG.fullName}</div>
+                <div className="text-foreground text-lg font-bold">
+                  {APP_CONFIG.name}
+                </div>
+                <div className="text-muted-foreground text-sm">
+                  {APP_CONFIG.fullName}
+                </div>
               </div>
             </div>
-            
-            <p className="mb-6 text-sm text-muted-foreground">
+
+            <p className="text-muted-foreground mb-6 text-sm">
               {APP_CONFIG.shortDescription}
             </p>
 
             {/* Contact Information */}
             <div className="space-y-2 text-sm">
-              <div className="flex items-center space-x-2 text-muted-foreground">
+              <div className="text-muted-foreground flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
                 <span>{APP_CONFIG.contact.address}</span>
               </div>
-              <div className="flex items-center space-x-2 text-muted-foreground">
+              <div className="text-muted-foreground flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
                 <span>{APP_CONFIG.contact.phone}</span>
               </div>
-              <div className="flex items-center space-x-2 text-muted-foreground">
+              <div className="text-muted-foreground flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
                 <span>{APP_CONFIG.contact.email}</span>
               </div>
@@ -55,16 +68,17 @@ export function Footer() {
             {/* Social Media Links */}
             <div className="mt-6 flex space-x-4">
               {Object.entries(APP_CONFIG.social).map(([platform, url]) => {
-                const IconComponent = socialIcons[platform as keyof typeof socialIcons];
+                const IconComponent =
+                  socialIcons[platform as keyof typeof socialIcons];
                 if (!IconComponent) return null;
-                
+
                 return (
                   <Link
                     key={platform}
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground transition-colors hover:text-primary"
+                    className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     <IconComponent className="h-5 w-5" />
                     <span className="sr-only">{platform}</span>
@@ -77,7 +91,7 @@ export function Footer() {
           {/* Navigation Links */}
           {Object.entries(FOOTER_NAVIGATION).map(([key, section]) => (
             <div key={key}>
-              <h3 className="mb-4 text-sm font-semibold text-foreground">
+              <h3 className="text-foreground mb-4 text-sm font-semibold">
                 {section.title}
               </h3>
               <ul className="space-y-2">
@@ -85,7 +99,7 @@ export function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                     >
                       {item.title}
                     </Link>
@@ -99,7 +113,7 @@ export function Footer() {
         <Separator className="my-8" />
 
         {/* Bottom Footer */}
-        <div className="flex flex-col items-center justify-between space-y-4 text-sm text-muted-foreground md:flex-row md:space-y-0">
+        <div className="text-muted-foreground flex flex-col items-center justify-between space-y-4 text-sm md:flex-row md:space-y-0">
           <div className="flex flex-col items-center space-y-1 md:items-start">
             <p>
               © {currentYear} {APP_CONFIG.name}. All rights reserved.
@@ -108,17 +122,17 @@ export function Footer() {
               Built with ❤️ for the Teknik Elektro UPI community
             </p>
           </div>
-          
+
           <div className="flex space-x-4">
             <Link
               href="/privacy"
-              className="transition-colors hover:text-foreground"
+              className="hover:text-foreground transition-colors"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="transition-colors hover:text-foreground"
+              className="hover:text-foreground transition-colors"
             >
               Terms of Service
             </Link>
@@ -126,18 +140,18 @@ export function Footer() {
         </div>
 
         {/* University Partnership Acknowledgment */}
-        <div className="mt-8 rounded-lg bg-muted p-4 text-center">
-          <p className="text-xs text-muted-foreground">
+        <div className="bg-muted mt-8 rounded-lg p-4 text-center">
+          <p className="text-muted-foreground text-xs">
             In partnership with{' '}
             <Link
               href="https://upi.edu"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-primary hover:underline"
+              className="text-primary font-medium hover:underline"
             >
               Universitas Pendidikan Indonesia
-            </Link>
-            {' '}— Fakultas Pendidikan Teknologi dan Kejuruan
+            </Link>{' '}
+            — Fakultas Pendidikan Teknologi dan Kejuruan
           </p>
         </div>
       </div>

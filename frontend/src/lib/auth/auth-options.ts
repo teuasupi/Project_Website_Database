@@ -12,15 +12,15 @@ export const authOptions: NextAuthOptions = {
       id: 'credentials',
       name: 'credentials',
       credentials: {
-        email: { 
-          label: 'Email', 
+        email: {
+          label: 'Email',
           type: 'email',
-          placeholder: 'your.email@example.com'
+          placeholder: 'your.email@example.com',
         },
-        password: { 
-          label: 'Password', 
-          type: 'password' 
-        }
+        password: {
+          label: 'Password',
+          type: 'password',
+        },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -28,10 +28,13 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
-          const response = await api.post<AuthResponse>(API_ENDPOINTS.AUTH.LOGIN, {
-            email: credentials.email,
-            password: credentials.password,
-          });
+          const response = await api.post<AuthResponse>(
+            API_ENDPOINTS.AUTH.LOGIN,
+            {
+              email: credentials.email,
+              password: credentials.password,
+            }
+          );
 
           if (response.data?.user && response.data?.token) {
             return {
@@ -48,8 +51,8 @@ export const authOptions: NextAuthOptions = {
           console.error('Authentication error:', error);
           throw new Error(error.message || 'Authentication failed');
         }
-      }
-    })
+      },
+    }),
   ],
 
   pages: {
@@ -84,11 +87,10 @@ export const authOptions: NextAuthOptions = {
 
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      
+      if (url.startsWith('/')) return `${baseUrl}${url}`;
       // Allows callback URLs on the same origin
       else if (new URL(url).origin === baseUrl) return url;
-      
+
       return baseUrl;
     },
   },
@@ -108,11 +110,11 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account, profile, isNewUser }) {
       console.log('User signed in:', { userId: user.id, email: user.email });
     },
-    
+
     async signOut({ token }) {
       console.log('User signed out:', { userId: token?.sub });
     },
-    
+
     async session({ session, token }) {
       // Optional: Log session access for security monitoring
       if (process.env.NODE_ENV === 'development') {
