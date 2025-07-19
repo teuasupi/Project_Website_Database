@@ -1,8 +1,9 @@
 import { RootLayout } from '@/components/layout/RootLayout';
 import { MissionVision } from '@/components/features/about/MissionVision';
+import { LeadershipTeam } from '@/components/features/about/LeadershipTeam';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+
 import {
   GraduationCap,
   Users,
@@ -215,6 +216,9 @@ export default function AboutPage() {
 
       {/* Mission & Vision */}
       <MissionVision />
+
+      {/* Leadership Team */}
+      <LeadershipTeam className="bg-muted/30" />
 
       {/* History & Milestones */}
       <section className="bg-muted/50 py-16">
