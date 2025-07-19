@@ -15,10 +15,10 @@ const transporter = nodemailer.createTransport({
 });
 
 class UserModel {
-  static async query(sql: string, params?: any[]): Promise<any> {
+  static async query<T = unknown>(sql: string, params?: unknown[]): Promise<T> {
     try {
       const [rows] = await pool.query(sql, params);
-      return rows;
+      return rows as T;
     } catch (error) {
       console.error("Database error:", error);
       throw new Error("Database query failed");
@@ -26,13 +26,13 @@ class UserModel {
   }
 
   static async getAllUsers(): Promise<Omit<User, "password">[]> {
-    return this.query(
+    return this.query<Omit<User, "password">[]>(
       `SELECT id, email, fullName, graduationYear, nim, major, phoneNumber, address, profilePhoto, role, currentCompany, position FROM Users`
     );
   }
 
   static async getUserById(id: number): Promise<Omit<User, "password">[]> {
-    return this.query(
+    return this.query<Omit<User, "password">[]>(
       `SELECT id, email, fullName, graduationYear, nim, major, phoneNumber, address, profilePhoto, role, currentCompany, position FROM Users WHERE id = ?`,
       [id]
     );
@@ -42,7 +42,7 @@ class UserModel {
     if (!email || !password || !fullName)
       throw new Error("Email, password, and fullName are required");
     
-    const existingUser: User[] = await this.query(
+    const existingUser: User[] = await this.query<User[]>(
       "SELECT id FROM Users WHERE email = ?",
       [email]
     );
@@ -66,7 +66,7 @@ class UserModel {
   static async loginUser(email: string, password: string): Promise<AuthResponse> {
     if (!email || !password) throw new Error("Email and password are required");
     
-    const users: User[] = await this.query("SELECT * FROM Users WHERE email = ?", [email]);
+    const users: User[] = await this.query<User[]>("SELECT * FROM Users WHERE email = ?", [email]);
     if (users.length === 0) throw new Error("Invalid email or password");
 
     const user: User = users[0];
@@ -90,7 +90,7 @@ class UserModel {
     const query: string = `UPDATE Users SET ${fields
       .map((f) => `${f} = ?`)
       .join(", ")} WHERE id = ?`;
-    const values: any[] = [...fields.map((f) => (updateData as any)[f]), id];
+    const values: unknown[] = [...fields.map((f) => updateData[f as keyof typeof updateData]), id];
     await this.query(query, values);
 
     return { message: "User updated successfully" };

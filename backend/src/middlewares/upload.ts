@@ -64,13 +64,15 @@ export const uploadProfilePhoto = (req: UploadRequest, res: Response, next: Next
   req.uploadType = 'profile';
   const uploadSingle = upload.single('profilePhoto');
   
-  uploadSingle(req, res, function (err: any) {
+  uploadSingle(req, res, function (err: unknown) {
     if (err instanceof multer.MulterError) {
       // Multer error
-      return res.status(400).json({ error: err.message });
+      const message = err instanceof Error ? err.message : "Upload error occurred";
+      return res.status(400).json({ error: message });
     } else if (err) {
       // Other errors
-      return res.status(400).json({ error: err.message });
+      const message = err instanceof Error ? err.message : "Upload error occurred";
+      return res.status(400).json({ error: message });
     }
     
     // If upload successful and file exists
@@ -87,9 +89,10 @@ export const uploadArticleImage = (req: UploadRequest, res: Response, next: Next
   req.uploadType = 'article';
   const uploadSingle = upload.single('featureImage');
   
-  uploadSingle(req, res, function (err: any) {
+  uploadSingle(req, res, function (err: unknown) {
     if (err) {
-      return res.status(400).json({ error: err.message });
+      const message = err instanceof Error ? err.message : "Upload error occurred";
+      return res.status(400).json({ error: message });
     }
     
     if (req.file) {
@@ -105,9 +108,10 @@ export const uploadEventImage = (req: UploadRequest, res: Response, next: NextFu
   req.uploadType = 'event';
   const uploadSingle = upload.single('featuredImage');
   
-  uploadSingle(req, res, function (err: any) {
+  uploadSingle(req, res, function (err: unknown) {
     if (err) {
-      return res.status(400).json({ error: err.message });
+      const message = err instanceof Error ? err.message : "Upload error occurred";
+      return res.status(400).json({ error: message });
     }
     
     if (req.file) {
@@ -140,9 +144,10 @@ export const uploadResumeFile = (req: UploadRequest, res: Response, next: NextFu
   
   const uploadSingle = resumeUpload.single('resumeFile');
   
-  uploadSingle(req, res, function (err: any) {
+  uploadSingle(req, res, function (err: unknown) {
     if (err) {
-      return res.status(400).json({ error: err.message });
+      const message = err instanceof Error ? err.message : "Upload error occurred";
+      return res.status(400).json({ error: message });
     }
     
     if (req.file) {

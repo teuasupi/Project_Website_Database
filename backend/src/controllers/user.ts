@@ -6,8 +6,9 @@ class UserController {
     try {
       const result: T = await promise;
       res.status(successStatus).json(result);
-    } catch (err: any) {
-      res.status(500).json({ error: err.message });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "An unknown error occurred";
+      res.status(500).json({ error: message });
     }
   }
 
