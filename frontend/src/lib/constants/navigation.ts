@@ -1,12 +1,12 @@
-// Navigation configuration
+// Konfigurasi navigasi
 
 import { NavItem } from '@/types';
 import { ROUTES } from './index';
 
-// Main navigation items
+// Item navigasi utama
 export const MAIN_NAVIGATION: NavItem[] = [
   {
-    title: 'Home',
+    title: 'Beranda',
     href: ROUTES.HOME,
   },
   {
@@ -14,23 +14,23 @@ export const MAIN_NAVIGATION: NavItem[] = [
     href: ROUTES.ALUMNI.DIRECTORY,
   },
   {
-    title: 'Scholarship & Donation',
+    title: 'Beasiswa & Donasi',
     href: ROUTES.SCHOLARSHIPS.ROOT,
     children: [
       {
-        title: 'Scholarships',
+        title: 'Beasiswa',
         href: ROUTES.SCHOLARSHIPS.ROOT,
-        description: 'Find scholarship opportunities',
+        description: 'Temukan peluang beasiswa',
       },
       {
-        title: 'Donate',
+        title: 'Donasi',
         href: ROUTES.SCHOLARSHIPS.DONATE,
-        description: 'Support our endowment fund',
+        description: 'Dukung dana abadi kami',
       },
     ],
   },
   {
-    title: 'News',
+    title: 'Berita',
     href: ROUTES.NEWS.ROOT,
   },
   {
@@ -38,164 +38,164 @@ export const MAIN_NAVIGATION: NavItem[] = [
     href: ROUTES.FGD.ROOT,
   },
   {
-    title: 'Gallery',
+    title: 'Galeri',
     href: ROUTES.GALLERY.ROOT,
   },
 ];
 
-// Authenticated user navigation items
+// Item navigasi pengguna terotentikasi
 export const USER_NAVIGATION: NavItem[] = [
   {
-    title: 'My Profile',
+    title: 'Profil Saya',
     href: ROUTES.ALUMNI.EDIT_PROFILE,
   },
   {
-    title: 'My Articles',
+    title: 'Artikel Saya',
     href: ROUTES.ALUMNI.ARTICLES.DASHBOARD,
   },
   {
-    title: 'My Network',
+    title: 'Jaringan Saya',
     href: ROUTES.ALUMNI.NETWORK,
   },
   {
-    title: 'Mentorship',
+    title: 'Mentoring',
     href: ROUTES.ALUMNI.MENTORSHIP.DASHBOARD,
   },
   {
-    title: 'My Applications',
+    title: 'Aplikasi Saya',
     href: ROUTES.SCHOLARSHIPS.MY_APPLICATIONS,
   },
 ];
 
-// Admin navigation items
+// Item navigasi admin
 export const ADMIN_NAVIGATION: NavItem[] = [
   {
-    title: 'Dashboard',
+    title: 'Dasbor',
     href: ROUTES.ADMIN.DASHBOARD,
   },
   {
-    title: 'User Management',
+    title: 'Manajemen Pengguna',
     href: ROUTES.ADMIN.USERS.ROOT,
     children: [
       {
-        title: 'All Users',
+        title: 'Semua Pengguna',
         href: ROUTES.ADMIN.USERS.ROOT,
-        description: 'Manage all registered users',
+        description: 'Kelola semua pengguna terdaftar',
       },
       {
-        title: 'Pending Registrations',
+        title: 'Pendaftaran Tertunda',
         href: ROUTES.ADMIN.USERS.PENDING,
-        description: 'Review pending registrations',
+        description: 'Tinjau pendaftaran yang tertunda',
       },
     ],
   },
   {
-    title: 'Content Management',
+    title: 'Manajemen Konten',
     href: ROUTES.ADMIN.CONTENT.ROOT,
     children: [
       {
-        title: 'News Articles',
+        title: 'Artikel Berita',
         href: ROUTES.ADMIN.CONTENT.NEWS,
-        description: 'Manage news content',
+        description: 'Kelola konten berita',
       },
       {
-        title: 'Events',
+        title: 'Acara',
         href: ROUTES.ADMIN.CONTENT.EVENTS,
-        description: 'Manage events',
+        description: 'Kelola acara',
       },
       {
-        title: 'Media Gallery',
+        title: 'Galeri Media',
         href: ROUTES.ADMIN.CONTENT.MEDIA,
-        description: 'Manage media files',
+        description: 'Kelola file media',
       },
       {
-        title: 'Alumni Articles',
+        title: 'Artikel Alumni',
         href: ROUTES.ADMIN.CONTENT.ARTICLES,
-        description: 'Moderate alumni articles',
+        description: 'Moderasi artikel alumni',
       },
     ],
   },
   {
-    title: 'Analytics',
+    title: 'Analitik',
     href: ROUTES.ADMIN.ANALYTICS,
   },
   {
-    title: 'Settings',
+    title: 'Pengaturan',
     href: ROUTES.ADMIN.SETTINGS,
   },
 ];
 
-// Footer navigation items
+// Item navigasi footer
 export const FOOTER_NAVIGATION = {
   about: {
-    title: 'About',
+    title: 'Tentang',
     items: [
-      { title: 'Home', href: ROUTES.HOME },
-      { title: 'About TEUAS', href: ROUTES.ABOUT },
-      { title: 'Gallery', href: ROUTES.GALLERY.ROOT },
+      { title: 'Beranda', href: ROUTES.HOME },
+      { title: 'Tentang TEUAS', href: ROUTES.ABOUT },
+      { title: 'Galeri', href: ROUTES.GALLERY.ROOT },
     ],
   },
   community: {
-    title: 'Community',
+    title: 'Komunitas',
     items: [
-      { title: 'News', href: ROUTES.NEWS.ROOT },
-      { title: 'Articles', href: ROUTES.ALUMNI.ARTICLES.ROOT },
-      { title: 'Events', href: ROUTES.EVENTS.ROOT },
+      { title: 'Berita', href: ROUTES.NEWS.ROOT },
+      { title: 'Artikel', href: ROUTES.ALUMNI.ARTICLES.ROOT },
+      { title: 'Acara', href: ROUTES.EVENTS.ROOT },
       { title: 'FGD', href: ROUTES.FORUM.DISCUSSIONS },
     ],
   },
   opportunities: {
-    title: 'Opportunities',
+    title: 'Peluang',
     items: [
-      { title: 'Scholarship', href: ROUTES.SCHOLARSHIPS.ROOT },
-      { title: 'Job Board', href: ROUTES.JOBS.ROOT },
-      { title: 'Donate', href: ROUTES.SCHOLARSHIPS.DONATE },
+      { title: 'Beasiswa', href: ROUTES.SCHOLARSHIPS.ROOT },
+      { title: 'Papan Lowongan', href: ROUTES.JOBS.ROOT },
+      { title: 'Donasi', href: ROUTES.SCHOLARSHIPS.DONATE },
     ],
   },
   resources: {
-    title: 'Resources',
+    title: 'Sumber Daya',
     items: [
-      { title: 'Alumni Directory', href: ROUTES.ALUMNI.DIRECTORY },
-      { title: 'Discussion Forum', href: ROUTES.FORUM.DISCUSSIONS },
-      { title: 'External Platforms', href: ROUTES.FORUM.PLATFORMS },
-      { title: 'Mentorship', href: ROUTES.ALUMNI.MENTORSHIP.ROOT },
+      { title: 'Direktori Alumni', href: ROUTES.ALUMNI.DIRECTORY },
+      { title: 'Forum Diskusi', href: ROUTES.FORUM.DISCUSSIONS },
+      { title: 'Platform Eksternal', href: ROUTES.FORUM.PLATFORMS },
+      { title: 'Mentoring', href: ROUTES.ALUMNI.MENTORSHIP.ROOT },
     ],
   },
 } as const;
 
-// Breadcrumb configurations
+// Konfigurasi breadcrumb
 export const BREADCRUMB_CONFIG = {
   [ROUTES.ALUMNI.ROOT]: [
-    { label: 'Home', href: ROUTES.HOME },
+    { label: 'Beranda', href: ROUTES.HOME },
     { label: 'Alumni', href: ROUTES.ALUMNI.ROOT },
   ],
   [ROUTES.ALUMNI.ARTICLES.ROOT]: [
-    { label: 'Home', href: ROUTES.HOME },
+    { label: 'Beranda', href: ROUTES.HOME },
     { label: 'Alumni', href: ROUTES.ALUMNI.ROOT },
-    { label: 'Articles', href: ROUTES.ALUMNI.ARTICLES.ROOT },
+    { label: 'Artikel', href: ROUTES.ALUMNI.ARTICLES.ROOT },
   ],
   [ROUTES.NEWS.ROOT]: [
-    { label: 'Home', href: ROUTES.HOME },
-    { label: 'News', href: ROUTES.NEWS.ROOT },
+    { label: 'Beranda', href: ROUTES.HOME },
+    { label: 'Berita', href: ROUTES.NEWS.ROOT },
   ],
   [ROUTES.EVENTS.ROOT]: [
-    { label: 'Home', href: ROUTES.HOME },
-    { label: 'Events', href: ROUTES.EVENTS.ROOT },
+    { label: 'Beranda', href: ROUTES.HOME },
+    { label: 'Acara', href: ROUTES.EVENTS.ROOT },
   ],
   [ROUTES.GALLERY.ROOT]: [
-    { label: 'Home', href: ROUTES.HOME },
-    { label: 'Gallery', href: ROUTES.GALLERY.ROOT },
+    { label: 'Beranda', href: ROUTES.HOME },
+    { label: 'Galeri', href: ROUTES.GALLERY.ROOT },
   ],
   [ROUTES.FORUM.ROOT]: [
-    { label: 'Home', href: ROUTES.HOME },
+    { label: 'Beranda', href: ROUTES.HOME },
     { label: 'Forum', href: ROUTES.FORUM.ROOT },
   ],
   [ROUTES.SCHOLARSHIPS.ROOT]: [
-    { label: 'Home', href: ROUTES.HOME },
-    { label: 'Scholarships', href: ROUTES.SCHOLARSHIPS.ROOT },
+    { label: 'Beranda', href: ROUTES.HOME },
+    { label: 'Beasiswa', href: ROUTES.SCHOLARSHIPS.ROOT },
   ],
   [ROUTES.JOBS.ROOT]: [
-    { label: 'Home', href: ROUTES.HOME },
-    { label: 'Jobs', href: ROUTES.JOBS.ROOT },
+    { label: 'Beranda', href: ROUTES.HOME },
+    { label: 'Pekerjaan', href: ROUTES.JOBS.ROOT },
   ],
 } as const;

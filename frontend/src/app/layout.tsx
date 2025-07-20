@@ -24,10 +24,19 @@ export const metadata: Metadata = {
     'electrical engineering',
     'networking',
     'mentorship',
+    'IKA TEUAS',
+    'alumni association',
+    'electrical engineering alumni',
+    'bandung',
+    'indonesia',
   ],
   authors: [{ name: APP_CONFIG.name }],
   creator: APP_CONFIG.name,
+  publisher: APP_CONFIG.name,
   metadataBase: new URL(APP_CONFIG.url),
+  alternates: {
+    canonical: APP_CONFIG.url,
+  },
   openGraph: {
     type: 'website',
     locale: 'id_ID',
@@ -35,16 +44,51 @@ export const metadata: Metadata = {
     title: APP_CONFIG.name,
     description: APP_CONFIG.description,
     siteName: APP_CONFIG.name,
+    images: [
+      {
+        url: '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: `${APP_CONFIG.name} - ${APP_CONFIG.description}`,
+        type: 'image/png',
+      },
+      {
+        url: '/assets/hero/background.png',
+        width: 1200,
+        height: 630,
+        alt: `${APP_CONFIG.fullName} Alumni Network`,
+        type: 'image/png',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@ikateuas',
+    creator: '@ikateuas',
     title: APP_CONFIG.name,
     description: APP_CONFIG.description,
+    images: [
+      {
+        url: '/logo.png',
+        alt: `${APP_CONFIG.name} - ${APP_CONFIG.description}`,
+      },
+    ],
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
+  category: 'education',
 };
 
 export default function RootLayout({
@@ -53,7 +97,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="id" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
         <AuthProvider>
           {children}
