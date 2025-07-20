@@ -23,7 +23,7 @@ export function StatisticsSection() {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="bg-background py-20">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
           {stats.map((stat, index) => {
@@ -31,18 +31,18 @@ export function StatisticsSection() {
             return (
               <div
                 key={index}
-                className="flex flex-col items-center rounded-lg border bg-card p-6 transition-transform hover:scale-105"
+                className="bg-card flex flex-col items-center rounded-lg border p-6 transition-transform hover:scale-105"
               >
                 <div className="bg-primary/10 mb-3 flex h-12 w-12 items-center justify-center rounded-lg">
                   <IconComponent className="text-primary h-6 w-6" />
                 </div>
-                <div className="text-3xl font-bold text-foreground">
+                <div className="text-foreground text-3xl font-bold">
                   {stat.value}
                 </div>
-                <div className="text-sm font-medium text-foreground">
+                <div className="text-foreground text-sm font-medium">
                   {stat.label}
                 </div>
-                <div className="text-xs text-muted-foreground">
+                <div className="text-muted-foreground text-xs">
                   {stat.description}
                 </div>
               </div>
