@@ -10,6 +10,7 @@ import {
   Lightbulb,
   Battery,
   Plane,
+  GraduationCap,
 } from 'lucide-react';
 import { ROUTES } from '@/lib/constants';
 
@@ -94,8 +95,8 @@ export function HeroSection({
             <div className="relative text-center lg:text-left">
               {/* Badge */}
               <div className="mb-6 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm backdrop-blur-sm">
-                <span className="text-primary">🎓</span>
-                <span className="ml-2 text-white/80">
+                <GraduationCap className="text-primary h-4 w-4" />
+                <span className="text-primary-foreground ml-2">
                   Menghubungkan alumni sejak 2006
                 </span>
               </div>

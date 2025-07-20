@@ -1,23 +1,23 @@
-// Application constants and configuration
+// Konstanta dan konfigurasi aplikasi
 
-// App configuration
+// Konfigurasi aplikasi
 export const APP_CONFIG = {
   name: 'TEUAS UPI',
   fullName: 'Teknik Elektro Unity And Solidarity',
-  description: 'Alumni Association of Electrical Engineering UPI',
+  description: 'Ikatan Alumni Teknik Elektro UPI',
   shortDescription:
-    'Connecting electrical engineering alumni from Universitas Pendidikan Indonesia',
+    'Menghubungkan alumni teknik elektro dari Universitas Pendidikan Indonesia',
   url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   version: '1.0.0',
 
-  // Contact information
+  // Informasi kontak
   contact: {
     email: 'info@ikateuas.com',
     phone: '+62 22 2013163',
     address: 'Jl. Dr. Setiabudhi No. 229, Bandung 40154, Indonesia',
   },
 
-  // Social media links
+  // Tautan media sosial
   social: {
     facebook: 'https://facebook.com/ikateuas',
     instagram: 'https://instagram.com/ikateuas_upi',
@@ -26,14 +26,14 @@ export const APP_CONFIG = {
     youtube: 'https://youtube.com/c/ikateuas',
   },
 
-  // API configuration
+  // Konfigurasi API
   api: {
     baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
     timeout: 10000,
     version: 'v1',
   },
 
-  // Feature flags
+  // Flag fitur
   features: {
     registration: true,
     forum: true,
@@ -46,20 +46,20 @@ export const APP_CONFIG = {
   },
 } as const;
 
-// Route constants
+// Konstanta rute
 export const ROUTES = {
-  // Public routes
+  // Rute publik
   HOME: '/',
   ABOUT: '/about',
   CONTACT: '/contact',
 
-  // Authentication routes
+  // Rute autentikasi
   LOGIN: '/login',
   REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
 
-  // Alumni routes
+  // Rute alumni
   ALUMNI: {
     ROOT: '/alumni',
     DIRECTORY: '/alumni',
@@ -67,7 +67,7 @@ export const ROUTES = {
     EDIT_PROFILE: '/alumni/edit',
     NETWORK: '/alumni/network',
 
-    // Alumni articles
+    // Artikel alumni
     ARTICLES: {
       ROOT: '/alumni/articles',
       CREATE: '/alumni/articles/create',
@@ -76,7 +76,7 @@ export const ROUTES = {
       DASHBOARD: '/alumni/articles/dashboard',
     },
 
-    // Mentorship
+    // Mentoring
     MENTORSHIP: {
       ROOT: '/alumni/mentorship',
       FIND_MENTOR: '/alumni/mentorship/find-mentor',
@@ -84,7 +84,7 @@ export const ROUTES = {
     },
   },
 
-  // Content routes
+  // Rute konten
   NEWS: {
     ROOT: '/news',
     ARTICLE: (slug: string) => `/news/${slug}`,
@@ -110,7 +110,7 @@ export const ROUTES = {
     DETAIL: (slug: string) => `/fgd/${slug}`,
   },
 
-  // Community routes
+  // Rute komunitas
   FORUM: {
     ROOT: '/forum',
     DISCUSSIONS: '/forum/discussions',
@@ -119,7 +119,7 @@ export const ROUTES = {
     PLATFORMS: '/forum/platforms',
   },
 
-  // Opportunity routes
+  // Rute peluang
   SCHOLARSHIPS: {
     ROOT: '/scholarships',
     DETAIL: (slug: string) => `/scholarships/${slug}`,
@@ -136,7 +136,7 @@ export const ROUTES = {
     APPLICATIONS: '/jobs/applications',
   },
 
-  // Admin routes
+  // Rute admin
   ADMIN: {
     ROOT: '/admin',
     DASHBOARD: '/admin',
@@ -159,14 +159,14 @@ export const ROUTES = {
     SETTINGS: '/admin/settings',
   },
 
-  // Utility routes
+  // Rute utilitas
   SEARCH: '/search',
   PRIVACY: '/privacy',
   TERMS: '/terms',
   SITEMAP: '/sitemap.xml',
 } as const;
 
-// Academic programs and majors
+// Program akademik dan jurusan
 export const MAJORS = [
   'Teknik Elektro',
   'Teknik Elektronika',
@@ -176,57 +176,57 @@ export const MAJORS = [
   'Sistem Informasi',
 ] as const;
 
-// Graduation years (last 30 years)
+// Tahun kelulusan (35 tahun terakhir)
 export const GRADUATION_YEARS = Array.from(
   { length: 35 },
   (_, i) => new Date().getFullYear() - i
 );
 
-// User roles
+// Peran pengguna
 export const USER_ROLES = {
   ADMIN: 'admin',
   USER: 'user',
   MODERATOR: 'moderator',
 } as const;
 
-// Article categories
+// Kategori artikel
 export const ARTICLE_CATEGORIES = [
-  { id: 'technology', name: 'Technology', color: '#3B82F6' },
-  { id: 'career', name: 'Career Development', color: '#10B981' },
-  { id: 'research', name: 'Research & Innovation', color: '#8B5CF6' },
-  { id: 'industry', name: 'Industry Insights', color: '#F59E0B' },
-  { id: 'education', name: 'Education', color: '#EF4444' },
-  { id: 'entrepreneurship', name: 'Entrepreneurship', color: '#EC4899' },
-  { id: 'lifestyle', name: 'Lifestyle', color: '#6B7280' },
+  { id: 'technology', name: 'Teknologi', color: '#3B82F6' },
+  { id: 'career', name: 'Pengembangan Karir', color: '#10B981' },
+  { id: 'research', name: 'Penelitian & Inovasi', color: '#8B5CF6' },
+  { id: 'industry', name: 'Wawasan Industri', color: '#F59E0B' },
+  { id: 'education', name: 'Pendidikan', color: '#EF4444' },
+  { id: 'entrepreneurship', name: 'Kewirausahaan', color: '#EC4899' },
+  { id: 'lifestyle', name: 'Gaya Hidup', color: '#6B7280' },
 ] as const;
 
-// Event categories
+// Kategori acara
 export const EVENT_CATEGORIES = [
   { id: 'networking', name: 'Networking', color: '#3B82F6', icon: 'Users' },
   { id: 'workshop', name: 'Workshop', color: '#10B981', icon: 'Tool' },
   { id: 'seminar', name: 'Seminar', color: '#8B5CF6', icon: 'Presentation' },
   {
     id: 'conference',
-    name: 'Conference',
+    name: 'Konferensi',
     color: '#F59E0B',
     icon: 'Microphone',
   },
-  { id: 'social', name: 'Social Event', color: '#EF4444', icon: 'Heart' },
-  { id: 'career', name: 'Career Fair', color: '#EC4899', icon: 'Briefcase' },
-  { id: 'reunion', name: 'Reunion', color: '#06B6D4', icon: 'Calendar' },
+  { id: 'social', name: 'Acara Sosial', color: '#EF4444', icon: 'Heart' },
+  { id: 'career', name: 'Bursa Kerja', color: '#EC4899', icon: 'Briefcase' },
+  { id: 'reunion', name: 'Reuni', color: '#06B6D4', icon: 'Calendar' },
 ] as const;
 
-// Contact form categories
+// Kategori formulir kontak
 export const CONTACT_CATEGORIES = [
-  { value: 'general', label: 'General Inquiry' },
-  { value: 'alumni-services', label: 'Alumni Services' },
-  { value: 'technical', label: 'Technical Support' },
-  { value: 'partnerships', label: 'Partnerships' },
-  { value: 'media', label: 'Media Inquiry' },
-  { value: 'feedback', label: 'Feedback' },
+  { value: 'general', label: 'Pertanyaan Umum' },
+  { value: 'alumni-services', label: 'Layanan Alumni' },
+  { value: 'technical', label: 'Dukungan Teknis' },
+  { value: 'partnerships', label: 'Kemitraan' },
+  { value: 'media', label: 'Pertanyaan Media' },
+  { value: 'feedback', label: 'Umpan Balik' },
 ] as const;
 
-// File upload constraints
+// Batasan unggahan file
 export const UPLOAD_LIMITS = {
   IMAGE: {
     maxSize: 5 * 1024 * 1024, // 5MB
@@ -248,7 +248,7 @@ export const UPLOAD_LIMITS = {
   },
 } as const;
 
-// Pagination defaults
+// Default paginasi
 export const PAGINATION = {
   DEFAULT_PAGE: 1,
   DEFAULT_LIMIT: 10,
@@ -256,7 +256,7 @@ export const PAGINATION = {
   ITEMS_PER_PAGE_OPTIONS: [10, 20, 50, 100],
 } as const;
 
-// Theme configuration
+// Konfigurasi tema
 export const THEME = {
   COLORS: {
     PRIMARY: '#1E40AF', // Blue
@@ -272,7 +272,7 @@ export const THEME = {
   },
 } as const;
 
-// Animation durations
+// Durasi animasi
 export const ANIMATION = {
   FAST: 150,
   NORMAL: 300,
@@ -280,7 +280,7 @@ export const ANIMATION = {
   EXTRA_SLOW: 1000,
 } as const;
 
-// Breakpoints (should match Tailwind config)
+// Breakpoint (harus sesuai dengan konfigurasi Tailwind)
 export const BREAKPOINTS = {
   SM: 640,
   MD: 768,
@@ -289,7 +289,7 @@ export const BREAKPOINTS = {
   '2XL': 1536,
 } as const;
 
-// Local storage keys
+// Kunci penyimpanan lokal
 export const STORAGE_KEYS = {
   AUTH_TOKEN: 'ika_teuas_auth_token',
   USER_PREFERENCES: 'ika_teuas_user_preferences',
@@ -299,26 +299,26 @@ export const STORAGE_KEYS = {
   DRAFT_ARTICLES: 'ika_teuas_draft_articles',
 } as const;
 
-// Error messages
+// Pesan kesalahan
 export const ERROR_MESSAGES = {
-  NETWORK: 'Network error. Please check your internet connection.',
-  UNAUTHORIZED: 'You are not authorized to perform this action.',
-  FORBIDDEN: 'Access forbidden. Please contact administrator.',
-  NOT_FOUND: 'The requested resource was not found.',
-  VALIDATION: 'Please check your input and try again.',
-  SERVER: 'Server error. Please try again later.',
-  UNKNOWN: 'An unexpected error occurred.',
+  NETWORK: 'Kesalahan jaringan. Periksa koneksi internet Anda.',
+  UNAUTHORIZED: 'Anda tidak berwenang untuk melakukan tindakan ini.',
+  FORBIDDEN: 'Akses ditolak. Silakan hubungi administrator.',
+  NOT_FOUND: 'Sumber daya yang diminta tidak ditemukan.',
+  VALIDATION: 'Periksa input Anda dan coba lagi.',
+  SERVER: 'Kesalahan server. Silakan coba lagi nanti.',
+  UNKNOWN: 'Terjadi kesalahan yang tidak terduga.',
 } as const;
 
-// Success messages
+// Pesan sukses
 export const SUCCESS_MESSAGES = {
-  SAVE: 'Changes saved successfully',
-  CREATE: 'Created successfully',
-  UPDATE: 'Updated successfully',
-  DELETE: 'Deleted successfully',
-  SEND: 'Sent successfully',
-  UPLOAD: 'Uploaded successfully',
-  LOGIN: 'Logged in successfully',
-  LOGOUT: 'Logged out successfully',
-  REGISTER: 'Registration completed successfully',
+  SAVE: 'Perubahan berhasil disimpan',
+  CREATE: 'Berhasil dibuat',
+  UPDATE: 'Berhasil diperbarui',
+  DELETE: 'Berhasil dihapus',
+  SEND: 'Berhasil dikirim',
+  UPLOAD: 'Berhasil diunggah',
+  LOGIN: 'Berhasil masuk',
+  LOGOUT: 'Berhasil keluar',
+  REGISTER: 'Pendaftaran berhasil diselesaikan',
 } as const;
