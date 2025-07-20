@@ -10,90 +10,11 @@ export const MAIN_NAVIGATION: NavItem[] = [
     href: ROUTES.HOME,
   },
   {
-    title: 'About',
-    href: ROUTES.ABOUT,
-    children: [
-      {
-        title: 'About TEUAS',
-        href: ROUTES.ABOUT,
-        description: 'Learn about our organization',
-      },
-      {
-        title: 'Contact Us',
-        href: ROUTES.CONTACT,
-        description: 'Get in touch with us',
-      },
-    ],
+    title: 'Database Alumni',
+    href: ROUTES.ALUMNI.DIRECTORY,
   },
   {
-    title: 'Alumni',
-    href: ROUTES.ALUMNI.ROOT,
-    children: [
-      {
-        title: 'Alumni Directory',
-        href: ROUTES.ALUMNI.DIRECTORY,
-        description: 'Find and connect with fellow alumni',
-      },
-      {
-        title: 'Register as Alumni',
-        href: ROUTES.REGISTER,
-        description: 'Join our alumni community',
-      },
-      {
-        title: 'Alumni Articles',
-        href: ROUTES.ALUMNI.ARTICLES.ROOT,
-        description: 'Read articles by alumni',
-      },
-      {
-        title: 'Mentorship',
-        href: ROUTES.ALUMNI.MENTORSHIP.ROOT,
-        description: 'Find mentors or become one',
-      },
-    ],
-  },
-  {
-    title: 'News & Events',
-    href: ROUTES.NEWS.ROOT,
-    children: [
-      {
-        title: 'Latest News',
-        href: ROUTES.NEWS.ROOT,
-        description: 'Stay updated with latest news',
-      },
-      {
-        title: 'Upcoming Events',
-        href: ROUTES.EVENTS.ROOT,
-        description: 'Discover upcoming events',
-      },
-      {
-        title: 'Event Calendar',
-        href: ROUTES.EVENTS.CALENDAR,
-        description: 'View events in calendar format',
-      },
-    ],
-  },
-  {
-    title: 'Gallery',
-    href: ROUTES.GALLERY.ROOT,
-  },
-  {
-    title: 'Community',
-    href: ROUTES.FORUM.ROOT,
-    children: [
-      {
-        title: 'Discussion Forum',
-        href: ROUTES.FORUM.DISCUSSIONS,
-        description: 'Join community discussions',
-      },
-      {
-        title: 'External Platforms',
-        href: ROUTES.FORUM.PLATFORMS,
-        description: 'Connect on other platforms',
-      },
-    ],
-  },
-  {
-    title: 'Opportunities',
+    title: 'Scholarship & Donation',
     href: ROUTES.SCHOLARSHIPS.ROOT,
     children: [
       {
@@ -102,16 +23,23 @@ export const MAIN_NAVIGATION: NavItem[] = [
         description: 'Find scholarship opportunities',
       },
       {
-        title: 'Job Board',
-        href: ROUTES.JOBS.ROOT,
-        description: 'Explore job opportunities',
-      },
-      {
         title: 'Donate',
         href: ROUTES.SCHOLARSHIPS.DONATE,
         description: 'Support our endowment fund',
       },
     ],
+  },
+  {
+    title: 'News',
+    href: ROUTES.NEWS.ROOT,
+  },
+  {
+    title: 'FGD',
+    href: ROUTES.FGD.ROOT,
+  },
+  {
+    title: 'Gallery',
+    href: ROUTES.GALLERY.ROOT,
   },
 ];
 

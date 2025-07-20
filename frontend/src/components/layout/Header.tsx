@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSession, signOut } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import {
@@ -47,15 +48,19 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo and Brand */}
         <Link href={ROUTES.HOME} className="flex items-center space-x-3">
-          <div className="bg-primary text-primary-foreground flex h-10 w-10 items-center justify-center rounded-lg">
-            <span className="text-lg font-bold">IKA</span>
-          </div>
+          <Image
+            src="/logo.png"
+            alt="TEUAS UPI Logo"
+            width={40}
+            height={40}
+            className="rounded-lg"
+          />
           <div className="hidden sm:block">
             <div className="text-foreground text-lg font-bold">
               {APP_CONFIG.name}
             </div>
             <div className="text-muted-foreground text-xs">
-              Teknik Elektro UPI
+              {APP_CONFIG.fullName}
             </div>
           </div>
         </Link>
@@ -181,10 +186,7 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <div className="hidden sm:flex sm:space-x-2">
-              <Button variant="ghost" asChild>
-                <Link href={ROUTES.LOGIN}>Sign In</Link>
-              </Button>
+            <div className="hidden sm:flex">
               <Button asChild>
                 <Link href={ROUTES.REGISTER}>Join Alumni</Link>
               </Button>

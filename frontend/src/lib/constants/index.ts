@@ -2,8 +2,8 @@
 
 // App configuration
 export const APP_CONFIG = {
-  name: 'IKA TEUAS UPI',
-  fullName: 'Ikatan Keluarga Alumni Teknik Elektro UPI',
+  name: 'TEUAS UPI',
+  fullName: 'Teknik Elektro Unity And Solidarity',
   description: 'Alumni Association of Electrical Engineering UPI',
   shortDescription:
     'Connecting electrical engineering alumni from Universitas Pendidikan Indonesia',
@@ -103,6 +103,11 @@ export const ROUTES = {
     ALBUM: (slug: string) => `/gallery/${slug}`,
     MEDIA: (albumSlug: string, mediaSlug: string) =>
       `/gallery/${albumSlug}/${mediaSlug}`,
+  },
+
+  FGD: {
+    ROOT: '/fgd',
+    DETAIL: (slug: string) => `/fgd/${slug}`,
   },
 
   // Community routes

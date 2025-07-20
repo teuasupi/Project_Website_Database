@@ -1,5 +1,6 @@
 import { RootLayout } from '@/components/layout/RootLayout';
 import { HeroSection } from '@/components/common/HeroSection';
+import { StatisticsSection } from '@/components/features/home/StatisticsSection';
 import { LatestNews } from '@/components/features/news/LatestNews';
 import { FeaturedAlumni } from '@/components/features/alumni/FeaturedAlumni';
 import { UpcomingEvents } from '@/components/features/events/UpcomingEvents';
@@ -12,6 +13,9 @@ export default function Home() {
     <RootLayout>
       {/* Hero Section */}
       <HeroSection />
+
+      {/* Statistics Section */}
+      <StatisticsSection />
 
       <Separator />
 
