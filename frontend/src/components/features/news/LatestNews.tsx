@@ -88,23 +88,31 @@ export function LatestNews({
           {/* Badge */}
           <div className="mb-6 text-center">
             <div className="border-primary/20 bg-primary/10 inline-flex items-center rounded-full border px-4 py-2 text-sm">
-              <span className="text-primary font-medium">INFORMASI TERKINI</span>
+              <span className="text-primary font-medium">
+                INFORMASI TERKINI
+              </span>
             </div>
           </div>
 
           {/* Title and CTA */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-center sm:text-left">
+          <div className="flex flex-col text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
             <div>
-              <h2 className="text-foreground text-3xl font-bold md:text-4xl lg:text-5xl mb-2">
+              <h2 className="text-foreground mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">
                 {title}
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Tetap terkini dengan berita dan kegiatan terbaru dari komunitas kami
+                Tetap terkini dengan berita dan kegiatan terbaru dari komunitas
+                kami
               </p>
             </div>
 
             {showViewAll && (
-              <Button variant="outline" size="lg" asChild className="hidden sm:flex">
+              <Button
+                variant="outline"
+                size="lg"
+                asChild
+                className="hidden sm:flex"
+              >
                 <Link href={ROUTES.NEWS.ROOT}>
                   Lebih Lanjut
                   <ArrowRight className="ml-2 h-4 w-4" />
