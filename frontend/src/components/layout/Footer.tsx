@@ -9,6 +9,9 @@ import {
   MapPin,
   Mail,
   Phone,
+  Info,
+  Users,
+  Briefcase,
 } from 'lucide-react';
 import { APP_CONFIG } from '@/lib/constants';
 import { FOOTER_NAVIGATION } from '@/lib/constants/navigation';
@@ -32,46 +35,46 @@ export function Footer() {
                     alt="IKA TE UPI Logo"
                     width={64}
                     height={64}
-                    className="h-16 w-16 rounded-lg shadow-lg ring-2 ring-blue-500/20"
+                    className="h-16 w-16"
                   />
-                  <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 opacity-20 blur"></div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-white">TEUAS UPI</div>
-                  <div className="text-sm font-medium text-blue-300">
+                  <div className="text-primary text-sm font-medium">
                     Alumni Network
                   </div>
                 </div>
               </div>
 
-              <p className="mb-6 text-base leading-relaxed text-gray-300">
+              <p className="text-primary-foreground mb-6 text-base leading-relaxed">
                 Menghubungkan alumni Teknik Elektro UPI untuk membangun masa
                 depan yang lebih cerah bersama melalui kolaborasi dan inovasi.
               </p>
 
               {/* Contact Info */}
               <div className="space-y-3">
-                <div className="group flex items-center text-sm text-gray-400 transition-colors duration-300 hover:text-orange-300">
-                  <Mail className="mr-2 h-4 w-4 text-orange-400 transition-transform duration-300 group-hover:scale-110" />
+                <div className="group hover:text-primary text-primary-foreground flex items-center text-sm transition-colors duration-300">
+                  <Mail className="text-primary mr-2 h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
                   <span>info@ikateuas.upi.edu</span>
                 </div>
-                <div className="group flex items-center text-sm text-gray-400 transition-colors duration-300 hover:text-orange-300">
-                  <Phone className="mr-2 h-4 w-4 text-orange-400 transition-transform duration-300 group-hover:scale-110" />
+                <div className="group hover:text-primary text-primary-foreground flex items-center text-sm transition-colors duration-300">
+                  <Phone className="text-primary mr-2 h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
                   <span>+62 22 2013161</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Navigation Sections - Flex Layout */}
+          {/* Navigation Sections - Grid Layout */}
           <div className="flex-grow">
-            <div className="flex h-full flex-col gap-8 md:flex-row md:gap-6 lg:gap-8">
+            <div className="grid gap-8 lg:grid-cols-4 lg:gap-6">
               {/* About Section */}
-              <div className="min-w-0 flex-1">
-                <h3 className="relative mb-6 border-b border-blue-500/30 pb-3 text-lg font-bold text-white">
+              <div>
+                <h3 className="border-primary/30 relative mb-6 flex items-center border-b pb-3 text-lg font-bold text-white">
+                  <Info className="text-primary mr-2 h-4 w-4" />
                   <span className="relative">
                     {FOOTER_NAVIGATION.about.title}
-                    <div className="absolute -bottom-3 left-0 h-0.5 w-8 bg-gradient-to-r from-blue-500 to-blue-300"></div>
+                    <div className="from-primary to-primary/60 absolute -bottom-3 left-0 h-0.5 w-8 bg-gradient-to-r"></div>
                   </span>
                 </h3>
                 <ul className="space-y-3">
@@ -79,12 +82,11 @@ export function Footer() {
                     <li key={index}>
                       <Link
                         href={item.href}
-                        className="group flex items-center text-sm text-gray-400 transition-all duration-300 hover:translate-x-1 hover:text-blue-300"
+                        className="group text-primary-foreground hover:text-primary flex items-center text-sm transition-all duration-300 hover:translate-x-1"
                       >
-                        <span className="mr-3 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-500 opacity-0 transition-all duration-300 group-hover:scale-125 group-hover:opacity-100"></span>
                         <span className="relative">
                           {item.title}
-                          <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                          <span className="bg-primary absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-300 group-hover:w-full"></span>
                         </span>
                       </Link>
                     </li>
@@ -93,11 +95,12 @@ export function Footer() {
               </div>
 
               {/* Community Section */}
-              <div className="min-w-0 flex-1">
-                <h3 className="relative mb-6 border-b border-purple-500/30 pb-3 text-lg font-bold text-white">
+              <div>
+                <h3 className="border-primary/30 relative mb-6 flex items-center border-b pb-3 text-lg font-bold text-white">
+                  <Users className="text-primary mr-2 h-4 w-4" />
                   <span className="relative">
                     {FOOTER_NAVIGATION.community.title}
-                    <div className="absolute -bottom-3 left-0 h-0.5 w-8 bg-gradient-to-r from-purple-500 to-purple-300"></div>
+                    <div className="from-primary to-primary/60 absolute -bottom-3 left-0 h-0.5 w-8 bg-gradient-to-r"></div>
                   </span>
                 </h3>
                 <ul className="space-y-3">
@@ -105,12 +108,11 @@ export function Footer() {
                     <li key={index}>
                       <Link
                         href={item.href}
-                        className="group flex items-center text-sm text-gray-400 transition-all duration-300 hover:translate-x-1 hover:text-purple-300"
+                        className="group text-primary-foreground hover:text-primary flex items-center text-sm transition-all duration-300 hover:translate-x-1"
                       >
-                        <span className="mr-3 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-purple-500 opacity-0 transition-all duration-300 group-hover:scale-125 group-hover:opacity-100"></span>
                         <span className="relative">
                           {item.title}
-                          <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                          <span className="bg-primary absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-300 group-hover:w-full"></span>
                         </span>
                       </Link>
                     </li>
@@ -119,11 +121,12 @@ export function Footer() {
               </div>
 
               {/* Opportunities Section */}
-              <div className="min-w-0 flex-1">
-                <h3 className="relative mb-6 border-b border-green-500/30 pb-3 text-lg font-bold text-white">
+              <div>
+                <h3 className="border-primary/30 relative mb-6 flex items-center border-b pb-3 text-lg font-bold text-white">
+                  <Briefcase className="text-primary mr-2 h-4 w-4" />
                   <span className="relative">
                     {FOOTER_NAVIGATION.opportunities.title}
-                    <div className="absolute -bottom-3 left-0 h-0.5 w-8 bg-gradient-to-r from-green-500 to-green-300"></div>
+                    <div className="from-primary to-primary/60 absolute -bottom-3 left-0 h-0.5 w-8 bg-gradient-to-r"></div>
                   </span>
                 </h3>
                 <ul className="space-y-3">
@@ -131,12 +134,11 @@ export function Footer() {
                     <li key={index}>
                       <Link
                         href={item.href}
-                        className="group flex items-center text-sm text-gray-400 transition-all duration-300 hover:translate-x-1 hover:text-green-300"
+                        className="group text-primary-foreground hover:text-primary flex items-center text-sm transition-all duration-300 hover:translate-x-1"
                       >
-                        <span className="mr-3 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-green-500 opacity-0 transition-all duration-300 group-hover:scale-125 group-hover:opacity-100"></span>
                         <span className="relative">
                           {item.title}
-                          <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+                          <span className="bg-primary absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-300 group-hover:w-full"></span>
                         </span>
                       </Link>
                     </li>
@@ -145,19 +147,19 @@ export function Footer() {
               </div>
 
               {/* Location Section */}
-              <div className="min-w-0 flex-1">
+              <div>
                 <h3 className="relative mb-6 flex items-center border-b border-orange-500/30 pb-3 text-lg font-bold text-white">
-                  <MapPin className="mr-2 h-4 w-4 text-orange-400" />
+                  <MapPin className="text-primary mr-2 h-4 w-4" />
                   <span className="relative">
                     Lokasi
-                    <div className="absolute -bottom-3 left-0 h-0.5 w-8 bg-gradient-to-r from-orange-500 to-orange-300"></div>
+                    <div className="from-primary to-primary/60 absolute -bottom-3 left-0 h-0.5 w-8 bg-gradient-to-r"></div>
                   </span>
                 </h3>
-                <div className="text-sm leading-relaxed text-gray-300">
+                <div className="text-primary-foreground text-sm leading-relaxed">
                   <p className="mb-2 font-semibold text-white">
                     Fakultas Pendidikan Teknologi dan Kejuruan
                   </p>
-                  <div className="space-y-1 text-gray-400">
+                  <div className="text-primary-foreground space-y-1">
                     <p>Jl. Dr. Setiabudi No.207</p>
                     <p>Isola, Kec. Sukasari</p>
                     <p>Kota Bandung - 40154</p>
@@ -175,32 +177,35 @@ export function Footer() {
         </div>
 
         {/* Bottom Footer */}
-        <div className="flex flex-col space-y-6 lg:flex-row lg:items-center lg:justify-between lg:space-y-0">
-          {/* Left side - Terms and Copyright */}
-          <div className="flex flex-col space-y-3 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-6">
-            <div className="flex flex-wrap items-center gap-4 text-sm">
+        <div className="flex flex-col items-center space-y-6 text-center">
+          {/* Terms, Privacy Policy, and Copyright */}
+          <div className="flex flex-col items-center space-y-3 lg:w-full lg:flex-row lg:justify-between lg:space-y-0 lg:space-x-6">
+            {/* Terms and Privacy Policy */}
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
               <Link
                 href="/terms"
-                className="text-gray-400 decoration-blue-400 underline-offset-4 transition-all duration-300 hover:text-white hover:underline"
+                className="text-primary-foreground decoration-primary underline-offset-4 transition-all duration-300 hover:text-white hover:underline"
               >
                 Syarat & Ketentuan
               </Link>
-              <span className="hidden text-gray-600 sm:inline">•</span>
+              <span className="text-primary">•</span>
               <Link
                 href="/privacy"
-                className="text-gray-400 decoration-blue-400 underline-offset-4 transition-all duration-300 hover:text-white hover:underline"
+                className="text-primary-foreground decoration-primary underline-offset-4 transition-all duration-300 hover:text-white hover:underline"
               >
                 Kebijakan Privasi
               </Link>
             </div>
-            <p className="text-sm text-gray-500">
+
+            {/* Copyright */}
+            <p className="text-primary-foreground text-sm">
               © {currentYear} IKA TEUAS UPI. Seluruh hak cipta dilindungi.
             </p>
           </div>
 
-          {/* Right side - Social Media Links */}
-          <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-6">
-            <span className="text-sm font-medium text-gray-300">
+          {/* Social Media Links */}
+          <div className="flex flex-col items-center space-y-4">
+            <span className="text-primary-foreground text-sm font-medium">
               Ikuti Kami:
             </span>
             <div className="flex space-x-2">
@@ -252,7 +257,7 @@ export function Footer() {
                       href={url || '#'}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`group relative rounded-xl p-3 text-gray-400 transition-all duration-300 ${config.colors} hover:scale-110 hover:shadow-lg`}
+                      className={`group text-primary-foreground relative rounded-xl p-3 transition-all duration-300 ${config.colors} hover:scale-110 hover:shadow-lg`}
                       aria-label={
                         platform.charAt(0).toUpperCase() + platform.slice(1)
                       }
