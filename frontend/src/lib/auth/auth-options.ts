@@ -50,7 +50,8 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Invalid credentials');
         } catch (error: unknown) {
           logger.error('Authentication error:', error);
-          const errorMessage = error instanceof Error ? error.message : 'Authentication failed';
+          const errorMessage =
+            error instanceof Error ? error.message : 'Authentication failed';
           throw new Error(errorMessage);
         }
       },
