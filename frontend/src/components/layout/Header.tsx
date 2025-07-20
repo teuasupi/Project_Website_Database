@@ -57,13 +57,14 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo and Brand */}
         <Link href={ROUTES.HOME} className="flex items-center space-x-3">
+          {/* <div className="bg-primary text-primary-foreground flex h-10 w-10 items-center justify-center rounded-lg"> */}
           <Image
-            src="/logo.png"
-            alt="TEUAS UPI Logo"
+            src="/assets/icon/logo.png"
+            alt="IKA TE UPI Logo"
             width={40}
             height={40}
-            className="rounded-lg"
           />
+          {/* </div> */}
           <div className="hidden sm:block">
             <div className="text-foreground text-lg font-bold">
               {APP_CONFIG.name}
@@ -83,10 +84,10 @@ export function Header() {
                 <NavigationMenuItem key={item.href}>
                   {item.children ? (
                     <>
-                      <NavigationMenuTrigger 
-                        className={`h-10 relative ${
-                          isActive 
-                            ? 'text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:content-[""]' 
+                      <NavigationMenuTrigger
+                        className={`relative h-10 ${
+                          isActive
+                            ? 'text-primary after:bg-primary after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.5 after:content-[""]'
                             : ''
                         }`}
                       >
@@ -118,9 +119,9 @@ export function Header() {
                     <NavigationMenuLink asChild>
                       <Link
                         href={item.href}
-                        className={`group bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50 relative ${
-                          isActive 
-                            ? 'text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:content-[""]' 
+                        className={`group bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground relative inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50 ${
+                          isActive
+                            ? 'text-primary after:bg-primary after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.5 after:content-[""]'
                             : ''
                         }`}
                       >
@@ -242,9 +243,11 @@ export function Header() {
                   <div key={item.href}>
                     {item.children ? (
                       <div className="space-y-2">
-                        <h3 className={`font-medium ${
-                          isActive ? 'text-primary' : 'text-foreground'
-                        }`}>
+                        <h3
+                          className={`font-medium ${
+                            isActive ? 'text-primary' : 'text-foreground'
+                          }`}
+                        >
                           {item.title}
                         </h3>
                         <div className="ml-4 space-y-2">
@@ -255,8 +258,8 @@ export function Header() {
                                 key={child.href}
                                 href={child.href}
                                 className={`block text-sm ${
-                                  isChildActive 
-                                    ? 'text-primary font-medium' 
+                                  isChildActive
+                                    ? 'text-primary font-medium'
                                     : 'text-muted-foreground hover:text-foreground'
                                 }`}
                                 onClick={() => setIsMobileMenuOpen(false)}
@@ -271,8 +274,8 @@ export function Header() {
                       <Link
                         href={item.href}
                         className={`block font-medium ${
-                          isActive 
-                            ? 'text-primary' 
+                          isActive
+                            ? 'text-primary'
                             : 'text-foreground hover:text-primary'
                         }`}
                         onClick={() => setIsMobileMenuOpen(false)}
