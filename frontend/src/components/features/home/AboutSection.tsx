@@ -17,7 +17,7 @@ export function AboutSection() {
 
             {/* Title */}
             <h2 className="text-foreground text-3xl leading-tight font-bold md:text-4xl lg:text-5xl">
-              TEKNIK ELEKTRO UNITY AND SOLIDARITY
+              Teknik Elektro Unity And Solidarity
             </h2>
 
             {/* Description */}

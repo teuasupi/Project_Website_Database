@@ -17,7 +17,6 @@ export default function Home() {
       <FeaturedAlumni />
       <Separator />
       <LatestNews />
-      <Separator />
     </RootLayout>
   );
 }
