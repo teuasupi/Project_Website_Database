@@ -8,7 +8,7 @@ export interface User {
   phoneNumber?: string;
   address?: string;
   profilePhoto?: string;
-  role: "admin" | "user";
+  role: 'admin' | 'user';
   currentCompany?: string;
   position?: string;
   password?: string;
@@ -17,7 +17,7 @@ export interface User {
 export interface AuthResponse {
   message: string;
   token?: string;
-  user?: Omit<User, "password">;
+  user?: Omit<User, 'password'>;
 }
 
 export interface ApiResponse<T = unknown> {

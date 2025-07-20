@@ -3,7 +3,7 @@ declare global {
     interface ProcessEnv {
       JWT_SECRET: string;
       PASSWORD_GMAIL: string;
-      NODE_ENV: "development" | "production" | "test";
+      NODE_ENV: 'development' | 'production' | 'test';
     }
   }
 }

@@ -1,7 +1,7 @@
 // Main type definitions for IKA TEUAS UPI frontend
 
 // API Response types
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success?: boolean;
   message?: string;
   data?: T;
@@ -179,7 +179,7 @@ export interface FilterState {
 }
 
 // Form types
-export interface FormState<T = any> {
+export interface FormState<T = unknown> {
   data: T;
   errors: Record<string, string>;
   isSubmitting: boolean;

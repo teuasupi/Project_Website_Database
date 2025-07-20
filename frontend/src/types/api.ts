@@ -3,7 +3,7 @@
 import { User, Article, Event, MediaItem } from './index';
 
 // Re-export from main types for convenience
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success?: boolean;
   message?: string;
   data?: T;
@@ -31,15 +31,15 @@ export interface ApiError {
   message: string;
   status: number;
   code?: string;
-  details?: any;
+  details?: Record<string, unknown>;
 }
 
 // Request/Response types
 export interface ApiRequestConfig {
   url: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-  params?: Record<string, any>;
-  data?: any;
+  params?: Record<string, unknown>;
+  data?: unknown;
   headers?: Record<string, string>;
 }
 
@@ -106,10 +106,10 @@ export interface MediaFilter extends BaseFilter {
 }
 
 // API endpoint response types
-export interface UsersApiResponse extends PaginatedApiResponse<User> {}
-export interface ArticlesApiResponse extends PaginatedApiResponse<Article> {}
-export interface EventsApiResponse extends PaginatedApiResponse<Event> {}
-export interface MediaApiResponse extends PaginatedApiResponse<MediaItem> {}
+export type UsersApiResponse = PaginatedApiResponse<User>;
+export type ArticlesApiResponse = PaginatedApiResponse<Article>;
+export type EventsApiResponse = PaginatedApiResponse<Event>;
+export type MediaApiResponse = PaginatedApiResponse<MediaItem>;
 
 // File upload types
 export interface FileUploadResponse {
@@ -182,5 +182,5 @@ export interface NotificationItem {
   isRead: boolean;
   createdAt: string;
   actionUrl?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }

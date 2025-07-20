@@ -24,7 +24,6 @@ import { Badge } from '@/components/ui/badge';
 import { Menu, X, User, LogOut, Settings } from 'lucide-react';
 import { MAIN_NAVIGATION, USER_NAVIGATION } from '@/lib/constants/navigation';
 import { ROUTES, APP_CONFIG } from '@/lib/constants';
-import { cn } from '@/lib/utils';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
