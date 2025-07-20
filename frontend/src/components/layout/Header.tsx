@@ -25,7 +25,6 @@ import { Badge } from '@/components/ui/badge';
 import { Menu, X, User, LogOut, Settings } from 'lucide-react';
 import { MAIN_NAVIGATION, USER_NAVIGATION } from '@/lib/constants/navigation';
 import { ROUTES, APP_CONFIG } from '@/lib/constants';
-
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { data: session, status } = useSession();
@@ -44,17 +43,18 @@ export function Header() {
   };
 
   return (
-    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
+   <header className="bg-header-bg supports-[backdrop-filter]:bg-header-bg/60 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo and Brand */}
         <Link href={ROUTES.HOME} className="flex items-center space-x-3">
-          <Image
-            src="/logo.png"
-            alt="TEUAS UPI Logo"
-            width={40}
-            height={40}
-            className="rounded-lg"
-          />
+          {/* <div className="bg-primary text-primary-foreground flex h-10 w-10 items-center justify-center rounded-lg"> */}
+            <Image
+              src="/assets/icon/logo.png"
+              alt="IKA TE UPI Logo"
+              width={40}
+              height={40}
+            />
+          {/* </div> */}
           <div className="hidden sm:block">
             <div className="text-foreground text-lg font-bold">
               {APP_CONFIG.name}

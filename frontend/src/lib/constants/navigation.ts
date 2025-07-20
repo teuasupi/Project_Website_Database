@@ -130,39 +130,37 @@ export const FOOTER_NAVIGATION = {
   about: {
     title: 'About',
     items: [
+      { title: 'Home', href: ROUTES.HOME },
       { title: 'About TEUAS', href: ROUTES.ABOUT },
-      { title: 'Contact Us', href: ROUTES.CONTACT },
-      { title: 'Privacy Policy', href: ROUTES.PRIVACY },
-      { title: 'Terms of Service', href: ROUTES.TERMS },
+      { title: 'Gallery', href: ROUTES.GALLERY.ROOT },
     ],
   },
   community: {
     title: 'Community',
     items: [
-      { title: 'Alumni Directory', href: ROUTES.ALUMNI.DIRECTORY },
-      { title: 'Discussion Forum', href: ROUTES.FORUM.DISCUSSIONS },
-      { title: 'Events', href: ROUTES.EVENTS.ROOT },
       { title: 'News', href: ROUTES.NEWS.ROOT },
+      { title: 'Articles', href: ROUTES.ALUMNI.ARTICLES.ROOT },
+      { title: 'Events', href: ROUTES.EVENTS.ROOT },
+      { title: 'FGD', href: ROUTES.FORUM.DISCUSSIONS },
     ],
   },
   opportunities: {
     title: 'Opportunities',
     items: [
-      { title: 'Scholarships', href: ROUTES.SCHOLARSHIPS.ROOT },
+      { title: 'Scholarship', href: ROUTES.SCHOLARSHIPS.ROOT },
       { title: 'Job Board', href: ROUTES.JOBS.ROOT },
-      { title: 'Mentorship', href: ROUTES.ALUMNI.MENTORSHIP.ROOT },
       { title: 'Donate', href: ROUTES.SCHOLARSHIPS.DONATE },
     ],
   },
   resources: {
     title: 'Resources',
     items: [
-      { title: 'Alumni Articles', href: ROUTES.ALUMNI.ARTICLES.ROOT },
-      { title: 'Gallery', href: ROUTES.GALLERY.ROOT },
+      { title: 'Alumni Directory', href: ROUTES.ALUMNI.DIRECTORY },
+      { title: 'Discussion Forum', href: ROUTES.FORUM.DISCUSSIONS },
       { title: 'External Platforms', href: ROUTES.FORUM.PLATFORMS },
-      { title: 'Sitemap', href: ROUTES.SITEMAP },
+      { title: 'Mentorship', href: ROUTES.ALUMNI.MENTORSHIP.ROOT },
     ],
-  },
+  }
 } as const;
 
 // Breadcrumb configurations
