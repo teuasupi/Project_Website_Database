@@ -251,7 +251,7 @@ export function UpcomingEvents({
                         </div>
                         {availabilityStatus && (
                           <Badge
-                            variant={availabilityStatus.color as any}
+                            variant={availabilityStatus.color as "default" | "secondary" | "destructive" | "outline"}
                             className="text-xs"
                           >
                             {availabilityStatus.text}

@@ -5,6 +5,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { api } from '@/lib/api/client';
 import { API_ENDPOINTS } from '@/lib/api/endpoints';
 import { AuthResponse } from '@/types';
+import { logger } from '@teuas/shared/utils';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -47,9 +48,10 @@ export const authOptions: NextAuthOptions = {
           }
 
           throw new Error('Invalid credentials');
-        } catch (error: any) {
-          console.error('Authentication error:', error);
-          throw new Error(error.message || 'Authentication failed');
+        } catch (error: unknown) {
+          logger.error('Authentication error:', error);
+          const errorMessage = error instanceof Error ? error.message : 'Authentication failed';
+          throw new Error(errorMessage);
         }
       },
     }),
@@ -108,18 +110,16 @@ export const authOptions: NextAuthOptions = {
 
   events: {
     async signIn({ user }) {
-      console.log('User signed in:', { userId: user.id, email: user.email });
+      logger.log('User signed in:', { userId: user.id, email: user.email });
     },
 
     async signOut() {
-      console.log('User signed out');
+      logger.log('User signed out');
     },
 
     async session({ session }) {
       // Optional: Log session access for security monitoring
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Session accessed:', { userId: session.user.id });
-      }
+      logger.log('Session accessed:', { userId: session.user.id });
     },
   },
 };

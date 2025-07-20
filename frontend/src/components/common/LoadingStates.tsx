@@ -161,7 +161,7 @@ export function ButtonLoading({
 }: {
   children: React.ReactNode;
   isLoading: boolean;
-  [key: string]: any;
+  [key: string]: unknown;
 }) {
   return (
     <button {...props} disabled={isLoading || props.disabled}>

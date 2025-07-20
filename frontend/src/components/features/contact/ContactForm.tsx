@@ -28,6 +28,7 @@ import {
   Youtube,
 } from 'lucide-react';
 import Link from 'next/link';
+import { logger } from '@teuas/shared/utils';
 
 interface ContactFormData {
   name: string;
@@ -107,7 +108,7 @@ export function ContactForm() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Here you would typically send the data to your backend
-      console.log('Form submitted:', formData);
+      logger.log('Form submitted:', formData);
 
       setSubmitStatus('success');
       setFormData({
@@ -118,7 +119,7 @@ export function ContactForm() {
         category: 'general',
       });
     } catch (error) {
-      console.error('Error submitting form:', error);
+      logger.error('Error submitting form:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
