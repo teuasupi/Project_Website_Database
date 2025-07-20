@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { GraduationCap, Users, Award, Building } from 'lucide-react';
+import { Users, Award, Building } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { APP_CONFIG } from '@/lib/constants';
 import { ROUTES } from '@/lib/constants';
