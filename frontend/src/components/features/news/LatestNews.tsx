@@ -21,6 +21,50 @@ interface NewsItem {
   readingTime: number;
 }
 
+const newsItems: NewsItem[] = [
+  {
+    id: 1,
+    title: 'IKA TEUAS UPI Hosts Annual Networking Event 2025',
+    excerpt:
+      'Join us for the biggest alumni gathering of the year, featuring keynote speakers, networking sessions, and career opportunities.',
+    slug: 'annual-networking-event-2025',
+    featuredImage: '/assets/images/image-business-1.png',
+    category: {
+      name: 'Events',
+      color: '#3B82F6',
+    },
+    publishedAt: '2025-01-15T10:00:00Z',
+    readingTime: 3,
+  },
+  {
+    id: 2,
+    title: 'New Scholarship Program for Engineering Students',
+    excerpt:
+      "We're proud to announce our new scholarship program supporting aspiring electrical engineering students from underprivileged backgrounds.",
+    slug: 'new-scholarship-program-2025',
+    featuredImage: '/assets/images/image-minimal-1.png',
+    category: {
+      name: 'Scholarships',
+      color: '#10B981',
+    },
+    publishedAt: '2025-01-12T14:30:00Z',
+    readingTime: 5,
+  },
+  {
+    id: 3,
+    title: 'Alumni Success Story: Innovation in Renewable Energy',
+    excerpt:
+      "Meet Sarah Wijaya, Class of 2018, who's making waves in the renewable energy sector with her groundbreaking solar panel technology.",
+    slug: 'alumni-success-renewable-energy',
+    featuredImage: '/assets/images/image-abstract-1.png',
+    category: {
+      name: 'Alumni Spotlight',
+      color: '#8B5CF6',
+    },
+    publishedAt: '2025-01-10T09:15:00Z',
+    readingTime: 4,
+  },
+];
 interface LatestNewsProps {
   title?: string;
   showViewAll?: boolean;
@@ -35,57 +79,13 @@ export function LatestNews({
   className = '',
 }: LatestNewsProps) {
   // Mock data - would come from API in real implementation
-  const newsItems: NewsItem[] = [
-    {
-      id: 1,
-      title: 'IKA TEUAS UPI Hosts Annual Networking Event 2025',
-      excerpt:
-        'Join us for the biggest alumni gathering of the year, featuring keynote speakers, networking sessions, and career opportunities.',
-      slug: 'annual-networking-event-2025',
-      featuredImage: '/assets/images/image-business-1.png',
-      category: {
-        name: 'Events',
-        color: '#3B82F6',
-      },
-      publishedAt: '2025-01-15T10:00:00Z',
-      readingTime: 3,
-    },
-    {
-      id: 2,
-      title: 'New Scholarship Program for Engineering Students',
-      excerpt:
-        "We're proud to announce our new scholarship program supporting aspiring electrical engineering students from underprivileged backgrounds.",
-      slug: 'new-scholarship-program-2025',
-      featuredImage: '/assets/images/image-minimal-1.png',
-      category: {
-        name: 'Scholarships',
-        color: '#10B981',
-      },
-      publishedAt: '2025-01-12T14:30:00Z',
-      readingTime: 5,
-    },
-    {
-      id: 3,
-      title: 'Alumni Success Story: Innovation in Renewable Energy',
-      excerpt:
-        "Meet Sarah Wijaya, Class of 2018, who's making waves in the renewable energy sector with her groundbreaking solar panel technology.",
-      slug: 'alumni-success-renewable-energy',
-      featuredImage: '/assets/images/image-abstract-1.png',
-      category: {
-        name: 'Alumni Spotlight',
-        color: '#8B5CF6',
-      },
-      publishedAt: '2025-01-10T09:15:00Z',
-      readingTime: 4,
-    },
-  ];
 
   const formatDate = (dateString: string) => {
     return formatDistanceToNow(new Date(dateString), { addSuffix: true });
   };
 
   return (
-    <section className={`py-16 ${className}`}>
+    <section className={`py-16 ${className} bg-muted/50`}>
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="mb-12 flex items-center justify-between">

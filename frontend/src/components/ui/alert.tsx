@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { 
-  CheckCircle, 
-  AlertTriangle, 
-  XCircle, 
-  Info, 
+import {
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+  Info,
   X,
-  AlertCircle
+  AlertCircle,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -50,25 +50,29 @@ const alertVariants = {
     description: 'text-muted-foreground',
   },
   success: {
-    container: 'bg-green-50 border-green-200 text-green-800 dark:bg-green-950 dark:border-green-800 dark:text-green-200',
+    container:
+      'bg-green-50 border-green-200 text-green-800 dark:bg-green-950 dark:border-green-800 dark:text-green-200',
     icon: 'text-green-600 dark:text-green-400',
     title: 'text-green-800 dark:text-green-200',
     description: 'text-green-700 dark:text-green-300',
   },
   warning: {
-    container: 'bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-950 dark:border-yellow-800 dark:text-yellow-200',
+    container:
+      'bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-950 dark:border-yellow-800 dark:text-yellow-200',
     icon: 'text-yellow-600 dark:text-yellow-400',
     title: 'text-yellow-800 dark:text-yellow-200',
     description: 'text-yellow-700 dark:text-yellow-300',
   },
   error: {
-    container: 'bg-red-50 border-red-200 text-red-800 dark:bg-red-950 dark:border-red-800 dark:text-red-200',
+    container:
+      'bg-red-50 border-red-200 text-red-800 dark:bg-red-950 dark:border-red-800 dark:text-red-200',
     icon: 'text-red-600 dark:text-red-400',
     title: 'text-red-800 dark:text-red-200',
     description: 'text-red-700 dark:text-red-300',
   },
   info: {
-    container: 'bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-200',
+    container:
+      'bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-200',
     icon: 'text-blue-600 dark:text-blue-400',
     title: 'text-blue-800 dark:text-blue-200',
     description: 'text-blue-700 dark:text-blue-300',
@@ -161,7 +165,9 @@ export function Alert({
                 {icon}
               </div>
             ) : IconComponent ? (
-              <IconComponent className={cn(sizeStyles.icon, variantStyles.icon)} />
+              <IconComponent
+                className={cn(sizeStyles.icon, variantStyles.icon)}
+              />
             ) : null}
           </div>
         )}
@@ -173,28 +179,28 @@ export function Alert({
               {title}
             </div>
           )}
-          
+
           {description && (
-            <div className={cn(sizeStyles.description, variantStyles.description)}>
+            <div
+              className={cn(sizeStyles.description, variantStyles.description)}
+            >
               {description}
             </div>
           )}
-          
+
           {children && (
-            <div className={cn(
-              description || title ? 'mt-2' : '',
-              variantStyles.description
-            )}>
+            <div
+              className={cn(
+                description || title ? 'mt-2' : '',
+                variantStyles.description
+              )}
+            >
               {children}
             </div>
           )}
 
           {/* Actions */}
-          {actions && (
-            <div className="mt-3 flex space-x-2">
-              {actions}
-            </div>
-          )}
+          {actions && <div className="mt-3 flex space-x-2">{actions}</div>}
         </div>
 
         {/* Dismiss Button */}
@@ -204,7 +210,7 @@ export function Alert({
             onClick={handleDismiss}
             className={cn(
               'flex-shrink-0 rounded-md transition-colors duration-150',
-              'hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-offset-2',
+              'hover:bg-black/5 focus:ring-2 focus:ring-offset-2 focus:outline-none',
               showIcon ? 'ml-3' : 'ml-2',
               variantStyles.icon,
               'focus:ring-current'
@@ -218,11 +224,11 @@ export function Alert({
 
       {/* Auto hide progress bar */}
       {autoHide && (
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/10 rounded-b-lg overflow-hidden">
-          <div 
-            className="h-full bg-current opacity-30 rounded-b-lg"
+        <div className="absolute right-0 bottom-0 left-0 h-1 overflow-hidden rounded-b-lg bg-black/10">
+          <div
+            className="h-full rounded-b-lg bg-current opacity-30"
             style={{
-              animation: `shrink ${autoHideDelay}ms linear forwards`
+              animation: `shrink ${autoHideDelay}ms linear forwards`,
             }}
           />
         </div>
@@ -230,8 +236,12 @@ export function Alert({
 
       <style jsx>{`
         @keyframes shrink {
-          from { width: 100%; }
-          to { width: 0%; }
+          from {
+            width: 100%;
+          }
+          to {
+            width: 0%;
+          }
         }
       `}</style>
     </div>
@@ -257,39 +267,41 @@ export function InfoAlert(props: Omit<AlertProps, 'variant'>) {
 
 // Toast-like Alert Hook
 export function useAlert() {
-  const [alerts, setAlerts] = useState<Array<{
-    id: string;
-    props: AlertProps;
-  }>>([]);
+  const [alerts, setAlerts] = useState<
+    Array<{
+      id: string;
+      props: AlertProps;
+    }>
+  >([]);
 
   const showAlert = (props: AlertProps) => {
     const id = Date.now().toString();
-    setAlerts(prev => [...prev, { id, props }]);
-    
+    setAlerts((prev) => [...prev, { id, props }]);
+
     // Auto remove after delay
     if (props.autoHide !== false) {
       setTimeout(() => {
         removeAlert(id);
       }, props.autoHideDelay || 5000);
     }
-    
+
     return id;
   };
 
   const removeAlert = (id: string) => {
-    setAlerts(prev => prev.filter(alert => alert.id !== id));
+    setAlerts((prev) => prev.filter((alert) => alert.id !== id));
   };
 
-  const showSuccess = (message: string, options?: Partial<AlertProps>) => 
+  const showSuccess = (message: string, options?: Partial<AlertProps>) =>
     showAlert({ variant: 'success', description: message, ...options });
 
-  const showError = (message: string, options?: Partial<AlertProps>) => 
+  const showError = (message: string, options?: Partial<AlertProps>) =>
     showAlert({ variant: 'error', description: message, ...options });
 
-  const showWarning = (message: string, options?: Partial<AlertProps>) => 
+  const showWarning = (message: string, options?: Partial<AlertProps>) =>
     showAlert({ variant: 'warning', description: message, ...options });
 
-  const showInfo = (message: string, options?: Partial<AlertProps>) => 
+  const showInfo = (message: string, options?: Partial<AlertProps>) =>
     showAlert({ variant: 'info', description: message, ...options });
 
   const clearAlerts = () => setAlerts([]);
@@ -311,7 +323,7 @@ export function AlertContainer() {
   const { alerts, removeAlert } = useAlert();
 
   return (
-    <div className="fixed top-4 right-4 z-50 space-y-2 max-w-md">
+    <div className="fixed top-4 right-4 z-50 max-w-md space-y-2">
       {alerts.map(({ id, props }) => (
         <Alert
           key={id}
@@ -339,11 +351,7 @@ export function FormAlert({
 
   if (success) {
     return (
-      <SuccessAlert
-        description={success}
-        className={className}
-        {...props}
-      />
+      <SuccessAlert description={success} className={className} {...props} />
     );
   }
 
@@ -351,14 +359,16 @@ export function FormAlert({
     const errorList = Array.isArray(errors) ? errors : [errors];
     return (
       <ErrorAlert
-        title={errorList.length > 1 ? 'Please fix the following errors:' : undefined}
+        title={
+          errorList.length > 1 ? 'Please fix the following errors:' : undefined
+        }
         className={className}
         {...props}
       >
         {errorList.length === 1 ? (
           errorList[0]
         ) : (
-          <ul className="list-disc list-inside space-y-1">
+          <ul className="list-inside list-disc space-y-1">
             {errorList.map((error, index) => (
               <li key={index}>{error}</li>
             ))}

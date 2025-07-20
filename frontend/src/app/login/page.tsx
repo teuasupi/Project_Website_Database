@@ -6,7 +6,7 @@ import { ROUTES } from '@/lib/constants';
 import LoginForm from './components/LoginForm';
 import { RootLayout } from '@/components/layout/RootLayout';
 import Image from 'next/image';
-import { ErrorBoundary  } from '@/components/common/ErrorBoundary';
+import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 
 export default function LoginPage() {
   const stats = [
@@ -41,7 +41,7 @@ export default function LoginPage() {
               </div>
 
               {/* Login Form Card - Client Component */}
-              <ErrorBoundary >
+              <ErrorBoundary>
                 <LoginForm />
               </ErrorBoundary>
 
@@ -95,7 +95,7 @@ export default function LoginPage() {
               {/* Quote Card */}
               <Card className="mt-12 border-white/20 bg-white/10 backdrop-blur-sm">
                 <CardContent className="text-center">
-                  <p className="mb-3 italic text-white/90">
+                  <p className="mb-3 text-white/90 italic">
                     "IKA TEUAS UPI has been instrumental in my career growth.
                     The network and resources available here are invaluable."
                   </p>
