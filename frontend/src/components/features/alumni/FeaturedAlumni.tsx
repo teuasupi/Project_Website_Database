@@ -140,7 +140,7 @@ export function FeaturedAlumni({ className = '' }: FeaturedAlumniProps) {
                   >
                     <Card
                       className={cn(
-                        'flex h-[500px] flex-col overflow-hidden p-0 transition-all hover:shadow-lg',
+                        'flex h-[480px] flex-col overflow-hidden p-0 transition-all hover:shadow-lg sm:h-[450px] md:h-[510px] lg:h-[530px] xl:h-[505px]',
                         isCenter && 'md:translate-y-[-10px] md:scale-105'
                       )}
                     >
@@ -149,7 +149,6 @@ export function FeaturedAlumni({ className = '' }: FeaturedAlumniProps) {
                         <Image
                           src={testimonial.image}
                           alt={testimonial.name}
-                          // fill
                           width={480}
                           height={480}
                           className="h-60 object-cover"
