@@ -1,207 +1,197 @@
+'use client';
+
 import Link from 'next/link';
+import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowRight, MapPin, Calendar } from 'lucide-react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+import { ArrowRight, Quote } from 'lucide-react';
 import { ROUTES } from '@/lib/constants';
+import Autoplay from 'embla-carousel-autoplay';
+import { useEffect, useState } from 'react';
+import { type CarouselApi } from '@/components/ui/carousel';
+import { cn } from '@/lib/utils';
 
-interface FeaturedAlumnus {
-  id: number;
-  fullName: string;
-  graduationYear: number;
-  major: string;
-  currentCompany: string;
+interface Testimonial {
+  name: string;
+  year: number;
   position: string;
-  location: string;
-  profilePhoto?: string;
-  bio: string;
-  achievements: string[];
+  testimonial: string;
+  image: string;
 }
 
+// Testimonial data
+const testimonials: Testimonial[] = [
+  {
+    name: 'Egin',
+    year: 2016,
+    position: 'Project Manager',
+    testimonial:
+      'Melalui IKA TEUAS, saya bisa terhubung dengan senior yang sudah lebih dulu bekerja di industri manufaktur. Berkat bimbingan mereka, saya bisa lebih siap menghadapi tantangan di dunia kerja dan kini menjadi project manager',
+    image: '/assets/testimonials/Egin.png',
+  },
+  {
+    name: 'Dante',
+    year: 2016,
+    position: 'Product Solution Officer',
+    testimonial:
+      'IKA TEUAS memberikan akses ke berbagai lowongan kerja yang sangat relevan. Dari info loker yang dibagikan, saya menemukan kesempatan untuk bergabung di startup teknologi dan mengembangkan karir saya sebagai product solution officer',
+    image: '/assets/testimonials/Dante.png',
+  },
+  {
+    name: 'Devi',
+    year: 2016,
+    position: 'Quality Assurance',
+    testimonial:
+      'Bergabung dengan IKA TEUAS membuka banyak peluang bagi saya. Melalui jaringan alumni, saya mendapatkan mentor yang membantu saya memahami industri B2B2C dan akhirnya mendapatkan pekerjaan impian saya!',
+    image: '/assets/testimonials/Devi.png',
+  },
+  {
+    name: 'Adit',
+    year: 2020,
+    position: 'Fresh Graduate yang Baru Mendapat Pekerjaan',
+    testimonial:
+      'Sebagai fresh graduate, saya sempat bingung mencari pekerjaan. Namun, dengan bantuan e-learning dan bimbingan dari alumni, saya lebih percaya diri dalam wawancara dan akhirnya mendapatkan pekerjaan pertama saya!',
+    image: '/assets/testimonials/Adit.png',
+  },
+  {
+    name: 'Ramdan',
+    year: 2019,
+    position: 'Software Engineer',
+    testimonial:
+      'Bekal dari IKA TEUAS membuka jalan karier saya. Sekarang saya bekerja remote sebagai Lead Software Engineer di perusahaan Eropa, sekaligus bagian dari Apple Developer Academy international di Bali.',
+    image: '/assets/testimonials/Ramdan.jpeg',
+  },
+];
+
 interface FeaturedAlumniProps {
-  title?: string;
-  showViewAll?: boolean;
-  maxItems?: number;
   className?: string;
 }
 
-export function FeaturedAlumni({
-  title = 'Featured Alumni',
-  showViewAll = true,
-  maxItems = 3,
-  className = '',
-}: FeaturedAlumniProps) {
-  // Mock data - would come from API in real implementation
-  const featuredAlumni: FeaturedAlumnus[] = [
-    {
-      id: 1,
-      fullName: 'Dr. Ahmad Santoso',
-      graduationYear: 2010,
-      major: 'Teknik Elektro',
-      currentCompany: 'Tesla Inc.',
-      position: 'Senior Electrical Engineer',
-      location: 'Palo Alto, California',
-      profilePhoto: '/assets/avatars/avatar-1.png',
-      bio: 'Leading innovation in electric vehicle technology with a focus on battery management systems.',
-      achievements: [
-        'Led development of Tesla Model Y battery system',
-        'Published 15+ research papers on energy storage',
-        'Recipient of IEEE Outstanding Engineer Award 2023',
-      ],
-    },
-    {
-      id: 2,
-      fullName: 'Sarah Wijaya, M.Eng',
-      graduationYear: 2015,
-      major: 'Teknik Elektronika',
-      currentCompany: 'Google',
-      position: 'Principal Hardware Engineer',
-      location: 'Mountain View, California',
-      profilePhoto: '/assets/avatars/avatar-2.png',
-      bio: 'Pioneering next-generation computing hardware and AI chip architectures.',
-      achievements: [
-        'Key contributor to Google Tensor chip development',
-        'Patents holder in AI accelerator technology',
-        'Speaker at major tech conferences worldwide',
-      ],
-    },
-    {
-      id: 3,
-      fullName: 'Rizki Pratama',
-      graduationYear: 2012,
-      major: 'Teknik Telekomunikasi',
-      currentCompany: 'Gojek',
-      position: 'VP of Engineering',
-      location: 'Jakarta, Indonesia',
-      profilePhoto: '/assets/avatars/avatar-3.png',
-      bio: 'Building scalable technology solutions that impact millions of users across Southeast Asia.',
-      achievements: [
-        "Scaled Gojek's platform to 50+ million users",
-        'Led digital transformation initiatives',
-        'Named in Forbes 30 Under 30 Asia 2020',
-      ],
-    },
-  ];
+export function FeaturedAlumni({ className = '' }: FeaturedAlumniProps) {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
 
-  const getUserInitials = (name: string) => {
-    return name
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
-  };
+  // Update current slide when carousel changes
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCurrent(api.selectedScrollSnap());
+
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
 
   return (
-    <section className={`bg-muted/50 py-16 ${className}`}>
+    <section className={`bg-background py-20 ${className}`}>
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="mb-12 text-center">
-          <h2 className="text-foreground text-3xl font-bold md:text-4xl">
-            {title}
+        <div className="mx-auto mb-16 max-w-4xl text-center">
+          {/* Badge */}
+          <div className="border-primary/20 bg-primary/10 mb-6 inline-flex items-center rounded-full border px-4 py-2 text-sm">
+            <span className="text-primary font-medium">TESTIMONI ALUMNI</span>
+          </div>
+
+          {/* Title */}
+          <h2 className="text-foreground mb-6 text-3xl font-bold md:text-4xl lg:text-5xl">
+            Cerita Sukses Alumni TEUAS
           </h2>
-          <p className="text-muted-foreground mt-2">
-            Celebrating our alumni making impact around the world
+
+          {/* Description */}
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Jaringan alumni Teknik Elektro UPI telah membantu banyak lulusan
+            dalam membangun karir, memperluas koneksi, dan mendapatkan wawasan
+            industri. Simak kisah inspiratif dari para alumni yang telah meraih
+            kesuksesan di berbagai bidang!
           </p>
         </div>
 
-        {/* Alumni Grid */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {featuredAlumni.slice(0, maxItems).map((alumnus) => (
-            <Card
-              key={alumnus.id}
-              className="group overflow-hidden transition-all hover:shadow-lg"
-            >
-              <CardContent className="p-6">
-                {/* Profile Section */}
-                <div className="mb-4 flex items-start space-x-4">
-                  <Avatar className="h-16 w-16">
-                    <AvatarImage
-                      src={alumnus.profilePhoto}
-                      alt={alumnus.fullName}
-                    />
-                    <AvatarFallback className="text-lg">
-                      {getUserInitials(alumnus.fullName)}
-                    </AvatarFallback>
-                  </Avatar>
-
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-foreground group-hover:text-primary text-lg font-semibold">
-                      {alumnus.fullName}
-                    </h3>
-                    <p className="text-primary text-sm font-medium">
-                      {alumnus.position}
-                    </p>
-                    <p className="text-muted-foreground text-sm">
-                      {alumnus.currentCompany}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Bio */}
-                <p className="text-muted-foreground mb-4 line-clamp-3 text-sm">
-                  {alumnus.bio}
-                </p>
-
-                {/* Meta Information */}
-                <div className="mb-4 space-y-2">
-                  <div className="text-muted-foreground flex items-center text-xs">
-                    <Calendar className="mr-2 h-3 w-3" />
-                    <span>
-                      Class of {alumnus.graduationYear} • {alumnus.major}
-                    </span>
-                  </div>
-                  <div className="text-muted-foreground flex items-center text-xs">
-                    <MapPin className="mr-2 h-3 w-3" />
-                    <span>{alumnus.location}</span>
-                  </div>
-                </div>
-
-                {/* Key Achievements */}
-                <div className="mb-4">
-                  <h4 className="text-foreground mb-2 text-sm font-medium">
-                    Key Achievements:
-                  </h4>
-                  <ul className="space-y-1">
-                    {alumnus.achievements
-                      .slice(0, 2)
-                      .map((achievement, idx) => (
-                        <li key={idx} className="text-muted-foreground text-xs">
-                          • {achievement}
-                        </li>
-                      ))}
-                    {alumnus.achievements.length > 2 && (
-                      <li className="text-muted-foreground text-xs">
-                        • +{alumnus.achievements.length - 2} more achievements
-                      </li>
-                    )}
-                  </ul>
-                </div>
-
-                {/* View Profile Link */}
-                <Link
-                  href={ROUTES.ALUMNI.PROFILE(alumnus.id.toString())}
-                  className="text-primary inline-flex items-center text-sm font-medium hover:underline"
-                >
-                  View Full Profile
-                  <ArrowRight className="ml-1 h-3 w-3" />
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
+        {/* Testimonials Carousel */}
+        <div className="mx-auto max-w-6xl">
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: 'center',
+              loop: true,
+            }}
+            plugins={[
+              Autoplay({
+                delay: 5000,
+              }),
+            ]}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4 md:py-6">
+              {testimonials.map((testimonial, index) => {
+                const isCenter = index === current;
+                return (
+                  <CarouselItem
+                    key={testimonial.name}
+                    className="pl-2 md:basis-1/2 md:pl-4 lg:basis-1/3"
+                  >
+                    <Card
+                      className={cn(
+                        'flex h-[550px] flex-col overflow-hidden p-0 transition-all hover:shadow-lg',
+                        isCenter && 'md:translate-y-[-10px] md:scale-105'
+                      )}
+                    >
+                      {/* Full Image at Top */}
+                      <div className="relative h-48 w-full">
+                        <Image
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          // fill
+                          width={480}
+                          height={480}
+                          className="h-48 object-cover"
+                        />
+                      </div>
+                      {/* Content Area */}
+                      <CardContent className="flex flex-1 flex-col p-6 text-center">
+                        <Quote className="text-primary mx-auto mb-4 h-6 w-6" />
+                        <p className="text-muted-foreground mb-6 flex-1 text-sm leading-relaxed italic">
+                          "{testimonial.testimonial}"
+                        </p>
+                        <div className="mt-auto space-y-2">
+                          <h4 className="text-foreground text-lg font-semibold">
+                            {testimonial.name}
+                          </h4>
+                          <p className="text-primary text-sm font-medium">
+                            {testimonial.position}
+                          </p>
+                          <p className="text-muted-foreground text-xs">
+                            Class of {testimonial.year}
+                          </p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex" />
+            <CarouselNext className="hidden md:flex" />
+          </Carousel>
         </div>
 
         {/* View All Button */}
-        {showViewAll && (
-          <div className="mt-12 text-center">
-            <Button variant="outline" size="lg" asChild>
-              <Link href={ROUTES.ALUMNI.DIRECTORY}>
-                Explore Alumni Directory
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        )}
+        <div className="mt-16 text-center">
+          <Button variant="outline" size="lg" asChild>
+            <Link href={ROUTES.ALUMNI.DIRECTORY}>
+              Jelajahi Direktori Alumni
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </section>
   );
