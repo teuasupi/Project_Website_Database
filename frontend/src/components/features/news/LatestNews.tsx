@@ -110,7 +110,7 @@ export function LatestNews({
 
         {/* News Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {newsItems.slice(0, maxItems).map((item, index) => (
+          {newsItems.slice(0, maxItems).map((item) => (
             <Card
               key={item.id}
               className="group overflow-hidden p-0 transition-transform hover:scale-[1.02]"

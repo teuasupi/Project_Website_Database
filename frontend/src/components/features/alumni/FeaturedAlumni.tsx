@@ -1,10 +1,8 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowRight, MapPin, Building, Calendar } from 'lucide-react';
+import { ArrowRight, MapPin, Calendar } from 'lucide-react';
 import { ROUTES } from '@/lib/constants';
 
 interface FeaturedAlumnus {
@@ -109,7 +107,7 @@ export function FeaturedAlumni({
 
         {/* Alumni Grid */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {featuredAlumni.slice(0, maxItems).map((alumnus, index) => (
+          {featuredAlumni.slice(0, maxItems).map((alumnus) => (
             <Card
               key={alumnus.id}
               className="group overflow-hidden transition-all hover:shadow-lg"

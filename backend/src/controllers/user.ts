@@ -1,13 +1,18 @@
-import { Request, Response } from "express";
-import UserModel from "../models/user";
+import { Request, Response } from 'express';
+import UserModel from '../models/user';
 
 class UserController {
-  static async handleResponse<T>(promise: Promise<T>, res: Response, successStatus: number = 200): Promise<void> {
+  static async handleResponse<T>(
+    promise: Promise<T>,
+    res: Response,
+    successStatus: number = 200
+  ): Promise<void> {
     try {
       const result: T = await promise;
       res.status(successStatus).json(result);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "An unknown error occurred";
+      const message =
+        err instanceof Error ? err.message : 'An unknown error occurred';
       res.status(500).json({ error: message });
     }
   }
@@ -37,13 +42,20 @@ class UserController {
 
   static updateUser(req: Request, res: Response): void {
     const { id } = req.params;
-    UserController.handleResponse(UserModel.updateUser(parseInt(id), req.body), res);
+    UserController.handleResponse(
+      UserModel.updateUser(parseInt(id), req.body),
+      res
+    );
   }
 
   static uploadProfilePhoto(req: Request, res: Response): void {
     const { id } = req.params;
     UserController.handleResponse(
-      UserModel.uploadProfilePhoto(parseInt(id), req.file!, req.body.profilePhoto),
+      UserModel.uploadProfilePhoto(
+        parseInt(id),
+        req.file!,
+        req.body.profilePhoto
+      ),
       res
     );
   }

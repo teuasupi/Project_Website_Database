@@ -1,0 +1,32 @@
+{
+  "name": "teuas-website",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "frontend": "turbo dev --filter=@teuas/frontend",
+    "backend": "turbo dev --filter=@teuas/backend",
+    "shared": "turbo dev --filter=@teuas/shared",
+    "lint": "turbo lint",
+    "type-check": "turbo type-check",
+    "format": "turbo format",
+    "format:check": "turbo format:check",
+    "clean": "turbo clean"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9",
+    "@typescript-eslint/eslint-plugin": "^8",
+    "@typescript-eslint/parser": "^8",
+    "eslint": "^9",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "turbo": "^2.0.0"
+  },
+  "packageManager": "npm@10.0.0"
+}

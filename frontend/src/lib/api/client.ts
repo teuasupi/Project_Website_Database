@@ -8,6 +8,7 @@ import axios, {
 } from 'axios';
 import { getSession } from 'next-auth/react';
 import { ApiError, ApiResponse } from '@/types/api';
+import { logger } from '@teuas/shared/utils';
 
 // Create axios instance
 const apiClient: AxiosInstance = axios.create({
@@ -37,7 +38,7 @@ apiClient.interceptors.request.use(
         config.headers.Authorization = `Bearer ${session.accessToken}`;
       }
     } catch (error) {
-      console.warn('Failed to get session for API request:', error);
+      logger.warn('Failed to get session for API request:', error);
     }
 
     // Add request timestamp
@@ -58,7 +59,7 @@ apiClient.interceptors.response.use(
     const startTime = response.config.metadata?.startTime;
     if (startTime) {
       const duration = endTime.getTime() - startTime.getTime();
-      console.log(
+      logger.log(
         `API ${response.config.method?.toUpperCase()} ${response.config.url}: ${duration}ms`
       );
     }
@@ -105,7 +106,7 @@ apiClient.interceptors.response.use(
     };
 
     // Log error for debugging
-    console.error('API Error:', {
+    logger.error('API Error:', {
       url: error.config?.url,
       method: error.config?.method,
       status: error.response.status,
@@ -124,7 +125,7 @@ export class ApiClient {
     this.client = apiClient;
   }
 
-  async get<T = any>(
+  async get<T = unknown>(
     url: string,
     config?: AxiosRequestConfig
   ): Promise<ApiResponse<T>> {
@@ -132,34 +133,34 @@ export class ApiClient {
     return response.data;
   }
 
-  async post<T = any>(
+  async post<T = unknown>(
     url: string,
-    data?: any,
+    data?: unknown,
     config?: AxiosRequestConfig
   ): Promise<ApiResponse<T>> {
     const response = await this.client.post<ApiResponse<T>>(url, data, config);
     return response.data;
   }
 
-  async put<T = any>(
+  async put<T = unknown>(
     url: string,
-    data?: any,
+    data?: unknown,
     config?: AxiosRequestConfig
   ): Promise<ApiResponse<T>> {
     const response = await this.client.put<ApiResponse<T>>(url, data, config);
     return response.data;
   }
 
-  async patch<T = any>(
+  async patch<T = unknown>(
     url: string,
-    data?: any,
+    data?: unknown,
     config?: AxiosRequestConfig
   ): Promise<ApiResponse<T>> {
     const response = await this.client.patch<ApiResponse<T>>(url, data, config);
     return response.data;
   }
 
-  async delete<T = any>(
+  async delete<T = unknown>(
     url: string,
     config?: AxiosRequestConfig
   ): Promise<ApiResponse<T>> {
@@ -168,7 +169,7 @@ export class ApiClient {
   }
 
   // File upload method
-  async upload<T = any>(
+  async upload<T = unknown>(
     url: string,
     file: File,
     onProgress?: (progress: number) => void
@@ -199,7 +200,7 @@ export class ApiClient {
   }
 
   // Bulk upload method
-  async uploadMultiple<T = any>(
+  async uploadMultiple<T = unknown>(
     url: string,
     files: File[],
     onProgress?: (progress: number) => void

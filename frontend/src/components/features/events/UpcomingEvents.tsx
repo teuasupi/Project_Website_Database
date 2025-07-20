@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Clock, MapPin, Users, ArrowRight } from 'lucide-react';
+import { Calendar, MapPin, Users, ArrowRight } from 'lucide-react';
 import { ROUTES } from '@/lib/constants';
 import { format, isToday, isTomorrow, parseISO } from 'date-fns';
 
@@ -159,7 +159,7 @@ export function UpcomingEvents({
 
         {/* Events Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {upcomingEvents.slice(0, maxItems).map((event, index) => {
+          {upcomingEvents.slice(0, maxItems).map((event) => {
             const availabilityStatus = getAvailabilityStatus(event);
 
             return (
@@ -251,7 +251,7 @@ export function UpcomingEvents({
                         </div>
                         {availabilityStatus && (
                           <Badge
-                            variant={availabilityStatus.color as any}
+                            variant={availabilityStatus.color as "default" | "secondary" | "destructive" | "outline"}
                             className="text-xs"
                           >
                             {availabilityStatus.text}
