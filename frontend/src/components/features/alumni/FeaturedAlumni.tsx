@@ -55,7 +55,7 @@ const testimonials: Testimonial[] = [
   {
     name: 'Adit',
     year: 2020,
-    position: 'Fresh Graduate yang Baru Mendapat Pekerjaan',
+    position: 'Fresh Graduate',
     testimonial:
       'Sebagai fresh graduate, saya sempat bingung mencari pekerjaan. Namun, dengan bantuan e-learning dan bimbingan dari alumni, saya lebih percaya diri dalam wawancara dan akhirnya mendapatkan pekerjaan pertama saya!',
     image: '/assets/testimonials/Adit.png',
@@ -140,7 +140,7 @@ export function FeaturedAlumni({ className = '' }: FeaturedAlumniProps) {
                   >
                     <Card
                       className={cn(
-                        'flex h-[550px] flex-col overflow-hidden p-0 transition-all hover:shadow-lg',
+                        'flex h-[500px] flex-col overflow-hidden p-0 transition-all hover:shadow-lg',
                         isCenter && 'md:translate-y-[-10px] md:scale-105'
                       )}
                     >
@@ -152,22 +152,22 @@ export function FeaturedAlumni({ className = '' }: FeaturedAlumniProps) {
                           // fill
                           width={480}
                           height={480}
-                          className="h-48 object-cover"
+                          className="h-60 object-cover"
                         />
                       </div>
                       {/* Content Area */}
-                      <CardContent className="flex flex-1 flex-col p-6 text-center">
-                        <Quote className="text-primary mx-auto mb-4 h-6 w-6" />
+                      <CardContent className="mt-6 flex flex-1 flex-col p-6 text-center">
                         <p className="text-muted-foreground mb-6 flex-1 text-sm leading-relaxed italic">
-                          "{testimonial.testimonial}"
+                          <Quote className="text-primary mx-auto mr-1 inline-block h-6 w-6" />
+                          {testimonial.testimonial}
                         </p>
                         <div className="mt-auto space-y-2">
                           <h4 className="text-foreground text-lg font-semibold">
-                            {testimonial.name}
+                            {testimonial.name} /{' '}
+                            <span className="text-primary text-sm font-medium">
+                              {testimonial.position}
+                            </span>
                           </h4>
-                          <p className="text-primary text-sm font-medium">
-                            {testimonial.position}
-                          </p>
                           <p className="text-muted-foreground text-xs">
                             Class of {testimonial.year}
                           </p>

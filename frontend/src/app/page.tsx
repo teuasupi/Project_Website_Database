@@ -11,7 +11,7 @@ export default function Home() {
     <RootLayout>
       <HeroSection />
       <AboutSection />
-
+      <Separator />
       <OurFocus />
       <Separator />
       <FeaturedAlumni />

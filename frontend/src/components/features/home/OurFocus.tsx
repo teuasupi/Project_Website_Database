@@ -55,7 +55,7 @@ const focusFeatures = [
 
 export function OurFocus() {
   return (
-    <section className="bg-background py-20">
+    <section className="bg-muted/50 py-20">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="mx-auto mb-16 max-w-4xl text-center">
