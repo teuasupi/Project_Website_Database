@@ -160,7 +160,7 @@ export const FOOTER_NAVIGATION = {
       { title: 'External Platforms', href: ROUTES.FORUM.PLATFORMS },
       { title: 'Mentorship', href: ROUTES.ALUMNI.MENTORSHIP.ROOT },
     ],
-  }
+  },
 } as const;
 
 // Breadcrumb configurations

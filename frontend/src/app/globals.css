@@ -42,13 +42,13 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-   /* Custom Colors */
-  --color-header-bg: #F8F9FB;
+  /* Custom Colors */
+  --color-header-bg: #f8f9fb;
   --color-forest-green: #014631;
-  --color-burnt-orange: #E46713;
+  --color-burnt-orange: #e46713;
   --color-slate-gray: #374957;
-  --color-midnight-blue: #0C1532;
-  --color-dark-sage: #31453F;
+  --color-midnight-blue: #0c1532;
+  --color-dark-sage: #31453f;
   --color-charcoal: #212025;
 }
 
