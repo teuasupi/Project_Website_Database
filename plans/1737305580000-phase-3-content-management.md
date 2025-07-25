@@ -1,12 +1,14 @@
 # Phase 3 Detailed Plan: Content Management
 
 **Date:** July 19, 2025
-**Author:** Claude
+**Author:** Ramdan
 **Phase:** 3 of 6
 **Estimated Time:** 4-5 days
 **Dependencies:** Phase 1 (Infrastructure) and Phase 2 (Core Layout) must be completed
+**Status:** In Progress 🔄
 
 ## Overview
+
 This phase implements content management features for news, events, and media gallery as defined in PRD features FEAT-03 (News and Events) and FEAT-04 (Media Gallery). We'll create both public viewing interfaces and admin management capabilities.
 
 ## 1. News and Events System (FEAT-03)
@@ -14,6 +16,7 @@ This phase implements content management features for news, events, and media ga
 ### 1.1 News Architecture
 
 #### 1.1.1 News Data Types (src/types/content.ts)
+
 ```typescript
 export interface NewsArticle {
   id: number;
@@ -53,14 +56,16 @@ export interface NewsFilter {
 ```
 
 #### 1.1.2 News API Integration (src/lib/api/news.ts)
+
 ```typescript
 export const newsApi = {
   // Public endpoints
-  getNews: (params?: PaginationParams & NewsFilter) => Promise<PaginatedResponse<NewsArticle>>,
+  getNews: (params?: PaginationParams & NewsFilter) =>
+    Promise<PaginatedResponse<NewsArticle>>,
   getNewsArticle: (slug: string) => Promise<NewsArticle>,
   getNewsCategories: () => Promise<NewsCategory[]>,
   getTrendingNews: (limit?: number) => Promise<NewsArticle[]>,
-  
+
   // Admin endpoints
   createNews: (data: CreateNewsData) => Promise<NewsArticle>,
   updateNews: (id: number, data: UpdateNewsData) => Promise<NewsArticle>,
@@ -72,6 +77,7 @@ export const newsApi = {
 ### 1.2 News Public Interface
 
 #### 1.2.1 News Listing Page (src/app/news/page.tsx)
+
 ```typescript
 // Features:
 - Paginated news articles grid
@@ -84,6 +90,7 @@ export const newsApi = {
 ```
 
 #### 1.2.2 News Article Page (src/app/news/[slug]/page.tsx)
+
 ```typescript
 // Features:
 - Full article content with rich text
@@ -99,6 +106,7 @@ export const newsApi = {
 #### 1.2.3 News Components
 
 ##### News Card (src/components/features/news/NewsCard.tsx)
+
 ```typescript
 interface NewsCardProps {
   article: NewsArticle;
@@ -118,6 +126,7 @@ interface NewsCardProps {
 ```
 
 ##### News Filter Sidebar (src/components/features/news/NewsFilterSidebar.tsx)
+
 ```typescript
 interface NewsFilterSidebarProps {
   categories: NewsCategory[];
@@ -136,6 +145,7 @@ interface NewsFilterSidebarProps {
 ```
 
 ##### News Hero Section (src/components/features/news/NewsHeroSection.tsx)
+
 ```typescript
 // Features:
 - Latest featured article
@@ -147,6 +157,7 @@ interface NewsFilterSidebarProps {
 ### 1.3 Events Architecture
 
 #### 1.3.1 Event Data Types (src/types/events.ts)
+
 ```typescript
 export interface Event {
   id: number;
@@ -204,15 +215,18 @@ export interface EventFilter {
 ```
 
 #### 1.3.2 Events API Integration (src/lib/api/events.ts)
+
 ```typescript
 export const eventsApi = {
   // Public endpoints
-  getEvents: (params?: PaginationParams & EventFilter) => Promise<PaginatedResponse<Event>>,
+  getEvents: (params?: PaginationParams & EventFilter) =>
+    Promise<PaginatedResponse<Event>>,
   getEvent: (slug: string) => Promise<Event>,
   getEventCategories: () => Promise<EventCategory[]>,
   getUpcomingEvents: (limit?: number) => Promise<Event[]>,
-  registerForEvent: (eventId: number, userData: EventRegistrationData) => Promise<void>,
-  
+  registerForEvent: (eventId: number, userData: EventRegistrationData) =>
+    Promise<void>,
+
   // Admin endpoints
   createEvent: (data: CreateEventData) => Promise<Event>,
   updateEvent: (id: number, data: UpdateEventData) => Promise<Event>,
@@ -225,6 +239,7 @@ export const eventsApi = {
 ### 1.4 Events Public Interface
 
 #### 1.4.1 Events Listing Page (src/app/events/page.tsx)
+
 ```typescript
 // Features:
 - Calendar view and list view toggle
@@ -237,6 +252,7 @@ export const eventsApi = {
 ```
 
 #### 1.4.2 Event Detail Page (src/app/events/[slug]/page.tsx)
+
 ```typescript
 // Features:
 - Event details and description
@@ -252,6 +268,7 @@ export const eventsApi = {
 #### 1.4.3 Event Components
 
 ##### Event Card (src/components/features/events/EventCard.tsx)
+
 ```typescript
 interface EventCardProps {
   event: Event;
@@ -270,6 +287,7 @@ interface EventCardProps {
 ```
 
 ##### Event Calendar (src/components/features/events/EventCalendar.tsx)
+
 ```typescript
 // Features:
 - Monthly calendar view
@@ -281,6 +299,7 @@ interface EventCardProps {
 ```
 
 ##### Event Registration Form (src/components/features/events/EventRegistrationForm.tsx)
+
 ```typescript
 interface EventRegistrationFormProps {
   event: Event;
@@ -301,6 +320,7 @@ interface EventRegistrationFormProps {
 ### 2.1 Gallery Architecture
 
 #### 2.1.1 Media Data Types (src/types/media.ts)
+
 ```typescript
 export interface MediaItem {
   id: number;
@@ -354,15 +374,18 @@ export interface MediaFilter {
 ```
 
 #### 2.1.2 Media API Integration (src/lib/api/media.ts)
+
 ```typescript
 export const mediaApi = {
   // Public endpoints
-  getMedia: (params?: PaginationParams & MediaFilter) => Promise<PaginatedResponse<MediaItem>>,
+  getMedia: (params?: PaginationParams & MediaFilter) =>
+    Promise<PaginatedResponse<MediaItem>>,
   getMediaItem: (slug: string) => Promise<MediaItem>,
-  getAlbums: (params?: PaginationParams) => Promise<PaginatedResponse<MediaAlbum>>,
+  getAlbums: (params?: PaginationParams) =>
+    Promise<PaginatedResponse<MediaAlbum>>,
   getAlbum: (slug: string) => Promise<MediaAlbum>,
   downloadMedia: (id: number) => Promise<Blob>,
-  
+
   // Admin endpoints
   uploadMedia: (files: File[], albumId?: number) => Promise<MediaItem[]>,
   createAlbum: (data: CreateAlbumData) => Promise<MediaAlbum>,
@@ -375,6 +398,7 @@ export const mediaApi = {
 ### 2.2 Gallery Public Interface
 
 #### 2.2.1 Gallery Main Page (src/app/gallery/page.tsx)
+
 ```typescript
 // Features:
 - Album grid layout
@@ -386,6 +410,7 @@ export const mediaApi = {
 ```
 
 #### 2.2.2 Album View Page (src/app/gallery/[slug]/page.tsx)
+
 ```typescript
 // Features:
 - Album details and description
@@ -397,6 +422,7 @@ export const mediaApi = {
 ```
 
 #### 2.2.3 Media Viewer (src/app/gallery/[albumSlug]/[mediaSlug]/page.tsx)
+
 ```typescript
 // Features:
 - Full-size media display
@@ -411,6 +437,7 @@ export const mediaApi = {
 #### 2.2.4 Gallery Components
 
 ##### Media Grid (src/components/features/gallery/MediaGrid.tsx)
+
 ```typescript
 interface MediaGridProps {
   items: MediaItem[];
@@ -430,6 +457,7 @@ interface MediaGridProps {
 ```
 
 ##### Lightbox Gallery (src/components/features/gallery/LightboxGallery.tsx)
+
 ```typescript
 interface LightboxGalleryProps {
   items: MediaItem[];
@@ -450,6 +478,7 @@ interface LightboxGalleryProps {
 ```
 
 ##### Album Card (src/components/features/gallery/AlbumCard.tsx)
+
 ```typescript
 interface AlbumCardProps {
   album: MediaAlbum;
@@ -467,6 +496,7 @@ interface AlbumCardProps {
 ```
 
 ##### Media Upload (src/components/features/gallery/MediaUpload.tsx)
+
 ```typescript
 interface MediaUploadProps {
   albumId?: number;
@@ -489,6 +519,7 @@ interface MediaUploadProps {
 ### 3.1 Admin Dashboard Overview
 
 #### 3.1.1 Content Dashboard (src/app/(dashboard)/admin/content/page.tsx)
+
 ```typescript
 // Features:
 - Content statistics overview
@@ -499,6 +530,7 @@ interface MediaUploadProps {
 ```
 
 #### 3.1.2 News Management (src/app/(dashboard)/admin/content/news/page.tsx)
+
 ```typescript
 // Features:
 - News articles table with filters
@@ -510,6 +542,7 @@ interface MediaUploadProps {
 ```
 
 #### 3.1.3 Events Management (src/app/(dashboard)/admin/content/events/page.tsx)
+
 ```typescript
 // Features:
 - Events calendar and list view
@@ -520,6 +553,7 @@ interface MediaUploadProps {
 ```
 
 #### 3.1.4 Media Management (src/app/(dashboard)/admin/content/media/page.tsx)
+
 ```typescript
 // Features:
 - Media library browser
@@ -532,6 +566,7 @@ interface MediaUploadProps {
 ### 3.2 Content Editor Components
 
 #### 3.2.1 Rich Text Editor (src/components/features/admin/RichTextEditor.tsx)
+
 ```typescript
 interface RichTextEditorProps {
   value: string;
@@ -550,6 +585,7 @@ interface RichTextEditorProps {
 ```
 
 #### 3.2.2 SEO Editor (src/components/features/admin/SEOEditor.tsx)
+
 ```typescript
 interface SEOEditorProps {
   title: string;
@@ -568,6 +604,7 @@ interface SEOEditorProps {
 ```
 
 #### 3.2.3 Content Scheduler (src/components/features/admin/ContentScheduler.tsx)
+
 ```typescript
 // Features:
 - Publication date/time picker
@@ -580,6 +617,7 @@ interface SEOEditorProps {
 ## 4. Search and Filtering System
 
 ### 4.1 Global Search (src/components/common/GlobalSearch.tsx)
+
 ```typescript
 interface SearchResult {
   type: 'news' | 'event' | 'media' | 'alumni';
@@ -602,6 +640,7 @@ interface SearchResult {
 ### 4.2 Filter Components
 
 #### 4.2.1 Date Range Picker (src/components/common/DateRangePicker.tsx)
+
 ```typescript
 // Features:
 - Calendar popup interface
@@ -612,6 +651,7 @@ interface SearchResult {
 ```
 
 #### 4.2.2 Multi-Select Filter (src/components/common/MultiSelectFilter.tsx)
+
 ```typescript
 // Features:
 - Searchable dropdown
@@ -624,6 +664,7 @@ interface SearchResult {
 ## 5. Performance and Optimization
 
 ### 5.1 Image Optimization
+
 ```typescript
 // Implementation:
 - Next.js Image component usage
@@ -634,6 +675,7 @@ interface SearchResult {
 ```
 
 ### 5.2 Content Caching
+
 ```typescript
 // Strategy:
 - Static site generation for published content
@@ -644,6 +686,7 @@ interface SearchResult {
 ```
 
 ### 5.3 Database Optimization
+
 ```typescript
 // Considerations:
 - Indexed search fields
@@ -730,6 +773,7 @@ src/
 ## Deliverables Checklist
 
 ### News System (FEAT-03)
+
 - [ ] News listing page with filtering
 - [ ] Individual news article pages
 - [ ] News categories and tagging
@@ -738,6 +782,7 @@ src/
 - [ ] SEO optimization for articles
 
 ### Events System (FEAT-03)
+
 - [ ] Events listing and calendar view
 - [ ] Event detail pages
 - [ ] Event registration system
@@ -746,6 +791,7 @@ src/
 - [ ] Calendar export functionality
 
 ### Media Gallery (FEAT-04)
+
 - [ ] Gallery overview and album browsing
 - [ ] Album and individual media pages
 - [ ] Lightbox viewing experience
@@ -754,6 +800,7 @@ src/
 - [ ] Download and sharing features
 
 ### Admin Interface
+
 - [ ] Content management dashboard
 - [ ] Rich text editing capabilities
 - [ ] Media library management
@@ -761,6 +808,7 @@ src/
 - [ ] Content analytics and metrics
 
 ### Technical Features
+
 - [ ] Search and filtering system
 - [ ] Performance optimization
 - [ ] Mobile responsive design
@@ -768,6 +816,7 @@ src/
 - [ ] Accessibility compliance
 
 ## Success Criteria
+
 - All content types display correctly
 - Admin can create, edit, and manage content
 - Search and filtering work efficiently
@@ -777,6 +826,7 @@ src/
 - SEO metadata is properly implemented
 
 ## Risk Mitigation
+
 - **Large media files**: Implement compression and CDN
 - **Search performance**: Use indexed database fields
 - **Content editor complexity**: Provide user training

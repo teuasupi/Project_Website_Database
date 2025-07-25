@@ -4,6 +4,8 @@ import './globals.css';
 import { AuthProvider } from '@/lib/providers/auth-provider';
 import { Toaster } from 'sonner';
 import { APP_CONFIG } from '@/lib/constants';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -91,17 +93,19 @@ export const metadata: Metadata = {
   category: 'education',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
     <html lang="id" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
         <AuthProvider>
-          {children}
           <Toaster richColors position="top-right" />
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
         </AuthProvider>
       </body>
     </html>

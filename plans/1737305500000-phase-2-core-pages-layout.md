@@ -1,17 +1,20 @@
 # Phase 2 Detailed Plan: Core Pages & Layout
 
 **Date:** July 19, 2025
-**Author:** Claude
+**Author:** Ramdan
 **Phase:** 2 of 6
 **Estimated Time:** 3-4 days
 **Dependencies:** Phase 1 (Setup & Infrastructure) must be completed
+**Status:** Done ✅
 
 ## Overview
+
 This phase implements the foundational pages and layout components for the IKA TEUAS UPI website. We'll create the main navigation, homepage, about page, and contact page as defined in PRD features FEAT-01, FEAT-02, and FEAT-05.
 
 ## 1. Global Layout System
 
 ### 1.1 Main Layout Component (src/components/layout/RootLayout.tsx)
+
 ```typescript
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -27,6 +30,7 @@ interface RootLayoutProps {
 ```
 
 ### 1.2 Header Component (src/components/layout/Header.tsx)
+
 ```typescript
 // Features:
 - IKA TEUAS UPI logo and branding
@@ -48,6 +52,7 @@ interface RootLayoutProps {
 ```
 
 ### 1.3 Navigation Component (src/components/layout/Navigation.tsx)
+
 ```typescript
 interface NavigationItem {
   title: string;
@@ -67,6 +72,7 @@ interface NavigationItem {
 ```
 
 ### 1.4 Footer Component (src/components/layout/Footer.tsx)
+
 ```typescript
 // Sections:
 - Organization info (address, phone, email)
@@ -78,6 +84,7 @@ interface NavigationItem {
 ```
 
 ### 1.5 Mobile Navigation (src/components/layout/MobileNav.tsx)
+
 ```typescript
 // Features:
 - Slide-in navigation drawer
@@ -90,6 +97,7 @@ interface NavigationItem {
 ## 2. Homepage Implementation (FEAT-01)
 
 ### 2.1 Homepage Structure (src/app/page.tsx)
+
 ```typescript
 // Sections:
 1. Hero Section
@@ -102,6 +110,7 @@ interface NavigationItem {
 ```
 
 ### 2.2 Hero Section (src/components/common/HeroSection.tsx)
+
 ```typescript
 interface HeroSectionProps {
   title: string;
@@ -123,6 +132,7 @@ interface HeroSectionProps {
 ```
 
 ### 2.3 Stats Section (src/components/common/StatsSection.tsx)
+
 ```typescript
 interface StatItem {
   label: string;
@@ -140,6 +150,7 @@ interface StatItem {
 ```
 
 ### 2.4 Latest News Widget (src/components/features/news/LatestNews.tsx)
+
 ```typescript
 // Features:
 - Display 3-4 latest news/announcements
@@ -151,6 +162,7 @@ interface StatItem {
 ```
 
 ### 2.5 Featured Alumni (src/components/features/alumni/FeaturedAlumni.tsx)
+
 ```typescript
 // Features:
 - Alumni spotlight carousel
@@ -161,6 +173,7 @@ interface StatItem {
 ```
 
 ### 2.6 Upcoming Events (src/components/features/events/UpcomingEvents.tsx)
+
 ```typescript
 // Features:
 - Next 3-4 upcoming events
@@ -173,6 +186,7 @@ interface StatItem {
 ## 3. About TEUAS Page (FEAT-02)
 
 ### 3.1 About Page Structure (src/app/about/page.tsx)
+
 ```typescript
 // Sections:
 1. Page header with breadcrumbs
@@ -185,6 +199,7 @@ interface StatItem {
 ```
 
 ### 3.2 Mission/Vision Component (src/components/features/about/MissionVision.tsx)
+
 ```typescript
 interface MissionVisionProps {
   mission: string;
@@ -200,6 +215,7 @@ interface MissionVisionProps {
 ```
 
 ### 3.3 Leadership Team (src/components/features/about/LeadershipTeam.tsx)
+
 ```typescript
 interface LeadershipMember {
   name: string;
@@ -218,6 +234,7 @@ interface LeadershipMember {
 ```
 
 ### 3.4 History Timeline (src/components/features/about/HistoryTimeline.tsx)
+
 ```typescript
 interface TimelineEvent {
   year: number;
@@ -234,6 +251,7 @@ interface TimelineEvent {
 ```
 
 ### 3.5 Program Overview (src/components/features/about/ProgramOverview.tsx)
+
 ```typescript
 // Content:
 - Teknik Elektro UPI department information
@@ -247,6 +265,7 @@ interface TimelineEvent {
 ## 4. Contact & Services Page (FEAT-05)
 
 ### 4.1 Contact Page Structure (src/app/contact/page.tsx)
+
 ```typescript
 // Sections:
 1. Page header
@@ -258,6 +277,7 @@ interface TimelineEvent {
 ```
 
 ### 4.2 Contact Information (src/components/features/contact/ContactInfo.tsx)
+
 ```typescript
 interface ContactMethod {
   type: 'email' | 'phone' | 'address' | 'social';
@@ -275,6 +295,7 @@ interface ContactMethod {
 ```
 
 ### 4.3 Contact Form (src/components/features/contact/ContactForm.tsx)
+
 ```typescript
 interface ContactFormData {
   name: string;
@@ -293,6 +314,7 @@ interface ContactFormData {
 ```
 
 ### 4.4 Alumni Services (src/components/features/contact/AlumniServices.tsx)
+
 ```typescript
 interface ServiceItem {
   title: string;
@@ -312,6 +334,7 @@ interface ServiceItem {
 ```
 
 ### 4.5 Office Location (src/components/features/contact/OfficeLocation.tsx)
+
 ```typescript
 // Features:
 - Embedded map (Google Maps or alternative)
@@ -324,6 +347,7 @@ interface ServiceItem {
 ## 5. Shared Components
 
 ### 5.1 Page Header (src/components/common/PageHeader.tsx)
+
 ```typescript
 interface PageHeaderProps {
   title: string;
@@ -341,6 +365,7 @@ interface PageHeaderProps {
 ```
 
 ### 5.2 Breadcrumbs (src/components/common/Breadcrumbs.tsx)
+
 ```typescript
 interface BreadcrumbItem {
   label: string;
@@ -356,16 +381,14 @@ interface BreadcrumbItem {
 ```
 
 ### 5.3 Loading States (src/components/common/LoadingStates.tsx)
+
 ```typescript
 // Components:
-- PageSkeleton
-- CardSkeleton
-- ListSkeleton
-- ImageSkeleton
-- TextSkeleton
+-PageSkeleton - CardSkeleton - ListSkeleton - ImageSkeleton - TextSkeleton;
 ```
 
 ### 5.4 Error Boundaries (src/components/common/ErrorBoundary.tsx)
+
 ```typescript
 // Features:
 - Graceful error handling
@@ -377,6 +400,7 @@ interface BreadcrumbItem {
 ## 6. Responsive Design Implementation
 
 ### 6.1 Breakpoint Strategy
+
 ```css
 /* Tailwind CSS breakpoints */
 sm: 640px   /* Small tablets */
@@ -387,12 +411,14 @@ xl: 1280px  /* Laptops */
 ```
 
 ### 6.2 Mobile-First Components
+
 - All components designed mobile-first
 - Progressive enhancement for larger screens
 - Touch-friendly interactions
 - Optimized loading for mobile networks
 
 ### 6.3 Typography Scale
+
 ```css
 /* Custom typography scale for TEUAS branding */
 - Heading fonts: Professional sans-serif
@@ -404,6 +430,7 @@ xl: 1280px  /* Laptops */
 ## 7. Accessibility Implementation
 
 ### 7.1 WCAG 2.1 Compliance
+
 - AA level compliance target
 - Keyboard navigation support
 - Screen reader compatibility
@@ -411,6 +438,7 @@ xl: 1280px  /* Laptops */
 - Focus management
 
 ### 7.2 Semantic HTML
+
 - Proper heading hierarchy
 - ARIA labels and descriptions
 - Landmark regions
@@ -419,12 +447,14 @@ xl: 1280px  /* Laptops */
 ## 8. Performance Optimization
 
 ### 8.1 Image Optimization
+
 - Next.js Image component usage
 - WebP format with fallbacks
 - Lazy loading implementation
 - Responsive image sizes
 
 ### 8.2 Code Splitting
+
 - Route-based code splitting
 - Component lazy loading
 - Dynamic imports for heavy components
@@ -432,12 +462,14 @@ xl: 1280px  /* Laptops */
 ## 9. Testing Strategy
 
 ### 9.1 Component Testing
+
 - Unit tests for utility functions
 - Component rendering tests
 - User interaction testing
 - Accessibility testing
 
 ### 9.2 Integration Testing
+
 - Navigation flow testing
 - Form submission testing
 - API integration testing
@@ -495,6 +527,7 @@ src/
 ## Deliverables Checklist
 
 ### Layout Components
+
 - [ ] Root layout with header and footer
 - [ ] Responsive navigation system
 - [ ] Mobile navigation drawer
@@ -502,6 +535,7 @@ src/
 - [ ] Loading states and error boundaries
 
 ### Homepage (FEAT-01)
+
 - [ ] Hero section with branding
 - [ ] Statistics dashboard
 - [ ] Latest news widget
@@ -510,6 +544,7 @@ src/
 - [ ] Call-to-action sections
 
 ### About Page (FEAT-02)
+
 - [ ] Organization overview
 - [ ] Mission and vision statements
 - [ ] Leadership team profiles
@@ -517,6 +552,7 @@ src/
 - [ ] Program information
 
 ### Contact Page (FEAT-05)
+
 - [ ] Contact information display
 - [ ] Contact form with validation
 - [ ] Alumni services overview
@@ -524,6 +560,7 @@ src/
 - [ ] FAQ section
 
 ### Technical Implementation
+
 - [ ] Responsive design (mobile-first)
 - [ ] Accessibility compliance
 - [ ] Performance optimization
@@ -531,6 +568,7 @@ src/
 - [ ] Error handling and loading states
 
 ## Success Criteria
+
 - All pages load without errors
 - Responsive design works across all devices
 - Navigation functions correctly
@@ -541,6 +579,7 @@ src/
 - Component tests pass
 
 ## Risk Mitigation
+
 - **Design inconsistencies**: Create design system early
 - **Mobile layout issues**: Test on real devices
 - **Performance problems**: Implement lazy loading and optimization

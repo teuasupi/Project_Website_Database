@@ -34,97 +34,97 @@ export function LeadershipTeam({ className = '' }: LeadershipTeamProps) {
   const leadershipMembers: LeadershipMember[] = [
     {
       name: 'Dr. Ahmad Suryadi, S.T., M.T.',
-      position: 'Chairman',
-      bio: 'Leading the organization with over 20 years of experience in electrical engineering and alumni relations. Passionate about fostering connections between academia and industry.',
+      position: 'Ketua',
+      bio: 'Memimpin organisasi dengan pengalaman lebih dari 20 tahun dalam teknik elektro dan hubungan alumni. Bersemangat dalam memupuk koneksi antara akademia dan industri.',
       photo: '/assets/avatars/avatar-1.png',
       email: 'chairman@ikateuas.upi.edu',
       linkedin: 'https://linkedin.com/in/ahmad-suryadi',
       graduationYear: 1998,
       currentCompany: 'PT. Teknologi Listrik Indonesia',
       achievements: [
-        'IEEE Senior Member',
-        'Outstanding Alumni Award 2020',
-        'Industry Innovation Award',
+        'Anggota Senior IEEE',
+        'Penghargaan Alumni Terbaik 2020',
+        'Penghargaan Inovasi Industri',
       ],
-      specialization: 'Power Systems',
+      specialization: 'Sistem Tenaga',
     },
     {
       name: 'Ir. Siti Nurhaliza, M.T.',
-      position: 'Vice Chairman',
-      bio: 'Dedicated to advancing professional development programs and mentorship initiatives. Expert in telecommunications and network infrastructure.',
+      position: 'Wakil Ketua',
+      bio: 'Berdedikasi untuk memajukan program pengembangan profesional dan inisiatif mentoring. Ahli dalam telekomunikasi dan infrastruktur jaringan.',
       photo: '/assets/avatars/avatar-2.png',
       email: 'vice.chairman@ikateuas.upi.edu',
       linkedin: 'https://linkedin.com/in/siti-nurhaliza',
       graduationYear: 2001,
       currentCompany: 'Telkom Indonesia',
       achievements: [
-        'Telecommunications Excellence Award',
-        'Women in Engineering Leader',
-        'Innovation in Network Design',
+        'Penghargaan Keunggulan Telekomunikasi',
+        'Pemimpin Wanita dalam Teknik',
+        'Inovasi dalam Desain Jaringan',
       ],
-      specialization: 'Telecommunications',
+      specialization: 'Telekomunikasi',
     },
     {
       name: 'Budi Santoso, S.T., M.Eng.',
-      position: 'Secretary General',
-      bio: 'Ensuring smooth operations and effective communication within the organization. Specializes in control systems and industrial automation.',
+      position: 'Sekretaris Jenderal',
+      bio: 'Memastikan operasi yang lancar dan komunikasi efektif dalam organisasi. Spesialis dalam sistem kontrol dan otomasi industri.',
       photo: '/assets/avatars/avatar-3.png',
       email: 'secretary@ikateuas.upi.edu',
       graduationYear: 2003,
       currentCompany: 'Schneider Electric Indonesia',
       achievements: [
-        'Automation Excellence Award',
-        'Professional Development Leader',
-        'Industry 4.0 Pioneer',
+        'Penghargaan Keunggulan Otomasi',
+        'Pemimpin Pengembangan Profesional',
+        'Pelopor Industri 4.0',
       ],
-      specialization: 'Control Systems',
+      specialization: 'Sistem Kontrol',
     },
     {
       name: 'Dr. Rina Kartika, S.T., M.T.',
-      position: 'Treasurer',
-      bio: 'Managing financial resources and scholarship programs with transparency and accountability. Expert in renewable energy systems.',
+      position: 'Bendahara',
+      bio: 'Mengelola sumber daya keuangan dan program beasiswa dengan transparansi dan akuntabilitas. Ahli dalam sistem energi terbarukan.',
       photo: '/assets/avatars/avatar-4.png',
       email: 'treasurer@ikateuas.upi.edu',
       linkedin: 'https://linkedin.com/in/rina-kartika',
       graduationYear: 2000,
       currentCompany: 'PT. Energi Terbarukan Nusantara',
       achievements: [
-        'Renewable Energy Pioneer',
-        'Financial Management Excellence',
-        'Sustainability Leadership Award',
+        'Pelopor Energi Terbarukan',
+        'Keunggulan Manajemen Keuangan',
+        'Penghargaan Kepemimpinan Berkelanjutan',
       ],
-      specialization: 'Renewable Energy',
+      specialization: 'Energi Terbarukan',
     },
     {
       name: 'Dedi Kurniawan, S.T., M.T.',
-      position: 'Head of Alumni Relations',
-      bio: 'Building and maintaining strong relationships with alumni worldwide. Passionate about creating networking opportunities and career development.',
+      position: 'Kepala Hubungan Alumni',
+      bio: 'Membangun dan memelihara hubungan kuat dengan alumni di seluruh dunia. Bersemangat dalam menciptakan peluang jaringan dan pengembangan karir.',
       photo: '/assets/avatars/avatar-5.png',
       email: 'alumni.relations@ikateuas.upi.edu',
       graduationYear: 2005,
       currentCompany: 'PT. Siemens Indonesia',
       achievements: [
-        'Alumni Engagement Excellence',
-        'Global Network Builder',
-        'Career Development Mentor',
+        'Keunggulan Keterlibatan Alumni',
+        'Pembangun Jaringan Global',
+        'Mentor Pengembangan Karir',
       ],
-      specialization: 'Electronics',
+      specialization: 'Elektronika',
     },
     {
       name: 'Maya Sari, S.T., M.T.',
-      position: 'Head of Programs',
-      bio: 'Developing and implementing educational programs, workshops, and professional development initiatives for the alumni community.',
+      position: 'Kepala Program',
+      bio: 'Mengembangkan dan menerapkan program pendidikan, workshop, dan inisiatif pengembangan profesional untuk komunitas alumni.',
       photo: '/assets/avatars/avatar-6.png',
       email: 'programs@ikateuas.upi.edu',
       linkedin: 'https://linkedin.com/in/maya-sari',
       graduationYear: 2004,
       currentCompany: 'General Electric Indonesia',
       achievements: [
-        'Program Development Excellence',
-        'Educational Innovation Award',
-        'Community Impact Leader',
+        'Keunggulan Pengembangan Program',
+        'Penghargaan Inovasi Pendidikan',
+        'Pemimpin Dampak Komunitas',
       ],
-      specialization: 'Power Electronics',
+      specialization: 'Elektronika Daya',
     },
   ];
 
@@ -134,10 +134,11 @@ export function LeadershipTeam({ className = '' }: LeadershipTeamProps) {
         {/* Section Header */}
         <div className="mb-12 text-center">
           <h2 className="text-foreground text-3xl font-bold md:text-4xl">
-            Leadership Team
+            Tim Kepemimpinan
           </h2>
           <p className="text-muted-foreground mt-2">
-            Meet the dedicated professionals leading our alumni community
+            Temui para profesional berdedikasi yang memimpin komunitas alumni
+            kami
           </p>
         </div>
 
@@ -197,7 +198,7 @@ export function LeadershipTeam({ className = '' }: LeadershipTeamProps) {
                     <div className="flex items-center space-x-2 text-sm">
                       <GraduationCap className="text-primary h-4 w-4" />
                       <span className="text-muted-foreground">
-                        Class of {member.graduationYear}
+                        Angkatan {member.graduationYear}
                       </span>
                     </div>
                   )}
@@ -225,7 +226,7 @@ export function LeadershipTeam({ className = '' }: LeadershipTeamProps) {
                 {member.achievements && member.achievements.length > 0 && (
                   <div>
                     <h4 className="text-foreground mb-2 text-sm font-semibold">
-                      Key Achievements:
+                      Pencapaian Utama:
                     </h4>
                     <ul className="space-y-1">
                       {member.achievements
@@ -280,10 +281,10 @@ export function LeadershipTeam({ className = '' }: LeadershipTeamProps) {
         <div className="mt-16">
           <div className="mb-8 text-center">
             <h3 className="text-foreground text-2xl font-bold">
-              Advisory Board
+              Dewan Penasihat
             </h3>
             <p className="text-muted-foreground mt-2">
-              Distinguished alumni providing strategic guidance
+              Alumni terhormat yang memberikan bimbingan strategis
             </p>
           </div>
 
@@ -296,7 +297,7 @@ export function LeadershipTeam({ className = '' }: LeadershipTeamProps) {
                     Prof. Dr. Ir. Bambang Riyanto
                   </h4>
                   <p className="text-muted-foreground text-sm">
-                    Senior Advisor - Academic Excellence
+                    Penasihat Senior - Keunggulan Akademik
                   </p>
                 </div>
 
@@ -306,7 +307,7 @@ export function LeadershipTeam({ className = '' }: LeadershipTeamProps) {
                     Ir. Soekarno Hatta, M.T.
                   </h4>
                   <p className="text-muted-foreground text-sm">
-                    Industry Relations Advisor
+                    Penasihat Hubungan Industri
                   </p>
                 </div>
 
@@ -316,7 +317,7 @@ export function LeadershipTeam({ className = '' }: LeadershipTeamProps) {
                     Dr. Ir. Kartini Sari, M.Eng.
                   </h4>
                   <p className="text-muted-foreground text-sm">
-                    Research & Innovation Advisor
+                    Penasihat Penelitian & Inovasi
                   </p>
                 </div>
               </div>
@@ -327,13 +328,13 @@ export function LeadershipTeam({ className = '' }: LeadershipTeamProps) {
         {/* Contact Leadership */}
         <div className="mt-12 text-center">
           <h3 className="text-foreground mb-4 text-xl font-bold">
-            Get in Touch with Leadership
+            Hubungi Tim Kepemimpinan
           </h3>
           <p className="text-muted-foreground mb-6">
-            Have questions or suggestions? Our leadership team is here to help.
+            Ada pertanyaan atau saran? Tim kepemimpinan kami siap membantu.
           </p>
           <Button asChild>
-            <Link href="/contact">Contact Leadership Team</Link>
+            <Link href="/contact">Hubungi Tim Kepemimpinan</Link>
           </Button>
         </div>
       </div>

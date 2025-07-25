@@ -52,10 +52,10 @@ export function ContactForm() {
   >('idle');
 
   const categories = [
-    { value: 'general', label: 'General Inquiry' },
-    { value: 'alumni-services', label: 'Alumni Services' },
-    { value: 'technical', label: 'Technical Support' },
-    { value: 'partnerships', label: 'Partnerships & Collaboration' },
+    { value: 'general', label: 'Pertanyaan Umum' },
+    { value: 'alumni-services', label: 'Layanan Alumni' },
+    { value: 'technical', label: 'Dukungan Teknis' },
+    { value: 'partnerships', label: 'Kemitraan & Kolaborasi' },
   ];
 
   const contactMethods = [
@@ -133,10 +133,10 @@ export function ContactForm() {
     <section className="py-16">
       <div className="container mx-auto px-4">
         <div className="mb-8 text-center">
-          <h2 className="mb-4 text-3xl font-bold">Get in Touch</h2>
+          <h2 className="mb-4 text-3xl font-bold">Hubungi Kami</h2>
           <p className="text-muted-foreground mx-auto max-w-2xl">
-            Have a question or need assistance? We're here to help. Send us a
-            message and we'll get back to you as soon as possible.
+            Ada pertanyaan atau butuh bantuan? Kami siap membantu. Kirimkan
+            pesan kepada kami dan kami akan merespons secepat mungkin.
           </p>
         </div>
 
@@ -145,14 +145,14 @@ export function ContactForm() {
           <div className="lg:col-span-2">
             <Card className="flex h-full flex-col">
               <CardHeader>
-                <CardTitle>Send us a Message</CardTitle>
+                <CardTitle>Kirim Pesan</CardTitle>
               </CardHeader>
               <CardContent className="flex-1">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Name & Email Row */}
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Full Name *</Label>
+                      <Label htmlFor="name">Nama Lengkap *</Label>
                       <Input
                         id="name"
                         type="text"
@@ -160,12 +160,12 @@ export function ContactForm() {
                         onChange={(e) =>
                           handleInputChange('name', e.target.value)
                         }
-                        placeholder="Enter your full name"
+                        placeholder="Masukkan nama lengkap Anda"
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email Address *</Label>
+                      <Label htmlFor="email">Alamat Email *</Label>
                       <Input
                         id="email"
                         type="email"
@@ -173,62 +173,64 @@ export function ContactForm() {
                         onChange={(e) =>
                           handleInputChange('email', e.target.value)
                         }
-                        placeholder="Enter your email address"
+                        placeholder="Masukkan alamat email Anda"
                         required
                       />
                     </div>
                   </div>
 
-                  {/* Category */}
-                  <div className="space-y-2">
-                    <Label htmlFor="category">Category</Label>
-                    <Select
-                      value={formData.category}
-                      onValueChange={(value) =>
-                        handleInputChange('category', value)
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a category" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {categories.map((category) => (
-                          <SelectItem
-                            key={category.value}
-                            value={category.value}
-                          >
-                            {category.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  {/* Category & Subject Row */}
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div className="space-y-2">
+                      <Label htmlFor="category">Kategori</Label>
+                      <Select
+                        value={formData.category}
+                        onValueChange={(value) =>
+                          handleInputChange('category', value)
+                        }
+                      >
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Pilih kategori" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {categories.map((category) => (
+                            <SelectItem
+                              key={category.value}
+                              value={category.value}
+                            >
+                              {category.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
 
-                  {/* Subject */}
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Subject *</Label>
-                    <Input
-                      id="subject"
-                      type="text"
-                      value={formData.subject}
-                      onChange={(e) =>
-                        handleInputChange('subject', e.target.value)
-                      }
-                      placeholder="Enter the subject of your message"
-                      required
-                    />
+                    {/* Subject */}
+                    <div className="space-y-2">
+                      <Label htmlFor="subject">Subjek *</Label>
+                      <Input
+                        id="subject"
+                        type="text"
+                        value={formData.subject}
+                        onChange={(e) =>
+                          handleInputChange('subject', e.target.value)
+                        }
+                        placeholder="Masukkan subjek pesan Anda"
+                        required
+                      />
+                    </div>
                   </div>
 
                   {/* Message */}
                   <div className="space-y-2">
-                    <Label htmlFor="message">Message *</Label>
+                    <Label htmlFor="message">Pesan *</Label>
                     <Textarea
                       id="message"
                       value={formData.message}
                       onChange={(e) =>
                         handleInputChange('message', e.target.value)
                       }
-                      placeholder="Enter your message here..."
+                      placeholder="Masukkan pesan Anda di sini..."
                       rows={10}
                       className="h-[160px]"
                       required
@@ -240,7 +242,8 @@ export function ContactForm() {
                     <div className="flex items-center space-x-2 text-green-600">
                       <CheckCircle className="h-5 w-5" />
                       <span>
-                        Message sent successfully! We'll get back to you soon.
+                        Pesan berhasil dikirim! Kami akan segera menghubungi
+                        Anda.
                       </span>
                     </div>
                   )}
@@ -248,7 +251,7 @@ export function ContactForm() {
                   {submitStatus === 'error' && (
                     <div className="flex items-center space-x-2 text-red-600">
                       <AlertCircle className="h-5 w-5" />
-                      <span>Failed to send message. Please try again.</span>
+                      <span>Gagal mengirim pesan. Silakan coba lagi.</span>
                     </div>
                   )}
 
@@ -261,18 +264,18 @@ export function ContactForm() {
                     {isSubmitting ? (
                       <span className="flex items-center space-x-2">
                         <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                        <span>Sending...</span>
+                        <span>Mengirim...</span>
                       </span>
                     ) : (
                       <span className="flex items-center space-x-2">
                         <Send className="h-4 w-4" />
-                        <span>Send Message</span>
+                        <span>Kirim Pesan</span>
                       </span>
                     )}
                   </Button>
 
                   <p className="text-muted-foreground text-sm">
-                    * Required fields. We'll respond within 24-48 hours.
+                    * Field wajib diisi. Kami akan merespons dalam 24-48 jam.
                   </p>
                 </form>
               </CardContent>
@@ -284,7 +287,7 @@ export function ContactForm() {
             {/* Contact Methods */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Contact Information</CardTitle>
+                <CardTitle className="text-lg">Informasi Kontak</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {contactMethods.map((method, index) => {
@@ -322,22 +325,22 @@ export function ContactForm() {
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2 text-lg">
                   <Clock className="h-5 w-5" />
-                  <span>Office Hours</span>
+                  <span>Jam Kantor</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="font-medium">Mon - Fri</span>
+                    <span className="font-medium">Sen - Jum</span>
                     <span className="text-muted-foreground">08:00 - 16:00</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="font-medium">Saturday</span>
+                    <span className="font-medium">Sabtu</span>
                     <span className="text-muted-foreground">08:00 - 12:00</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="font-medium">Sunday</span>
-                    <span className="text-muted-foreground">Closed</span>
+                    <span className="font-medium">Minggu</span>
+                    <span className="text-muted-foreground">Tutup</span>
                   </div>
                 </div>
               </CardContent>
@@ -346,7 +349,7 @@ export function ContactForm() {
             {/* Social Media */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Follow Us</CardTitle>
+                <CardTitle className="text-lg">Ikuti Kami</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
@@ -364,7 +367,7 @@ export function ContactForm() {
                           href={social.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-label={`Follow us on ${social.name}`}
+                          aria-label={`Ikuti kami di ${social.name}`}
                         >
                           <IconComponent className="h-4 w-4" />
                         </Link>
