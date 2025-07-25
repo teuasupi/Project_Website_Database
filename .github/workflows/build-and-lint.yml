@@ -85,6 +85,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install LightningCSS native binaries
+        run: npm rebuild lightningcss --verbose
+
       - name: Build frontend
         run: npm run build --workspace=@teuas/frontend
 
@@ -143,6 +146,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Install LightningCSS native binaries
+        run: npm rebuild lightningcss --verbose
 
       - name: Build all packages
         run: npm run build
