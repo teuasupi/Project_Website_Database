@@ -5,8 +5,10 @@
 **Phase:** 6 of 6
 **Estimated Time:** 2-3 days
 **Dependencies:** All previous phases (1-5) must be completed
+**Status:** Draft📝
 
 ## Overview
+
 This final phase implements the remaining technical requirements as defined in PRD: TECH-01 (Responsive Design), TECH-02 (Admin Dashboard), and TECH-03 (Security). This phase also includes performance optimization, testing, deployment preparation, and comprehensive documentation.
 
 ## 1. Responsive Design Implementation (TECH-01)
@@ -14,14 +16,15 @@ This final phase implements the remaining technical requirements as defined in P
 ### 1.1 Mobile-First Design System
 
 #### 1.1.1 Breakpoint Strategy Refinement
+
 ```typescript
 // Enhanced responsive breakpoints
 export const breakpoints = {
-  xs: '320px',   // Small phones
-  sm: '640px',   // Large phones
-  md: '768px',   // Tablets
-  lg: '1024px',  // Small laptops
-  xl: '1280px',  // Laptops
+  xs: '320px', // Small phones
+  sm: '640px', // Large phones
+  md: '768px', // Tablets
+  lg: '1024px', // Small laptops
+  xl: '1280px', // Laptops
   '2xl': '1536px', // Large screens
   '3xl': '1920px', // Ultra-wide screens
 } as const;
@@ -30,17 +33,17 @@ export const breakpoints = {
 export const componentBreakpoints = {
   navigation: {
     mobileMenu: 'lg', // Show mobile menu below lg
-    fullNav: 'lg',    // Show full navigation at lg+
+    fullNav: 'lg', // Show full navigation at lg+
   },
   grid: {
-    singleColumn: 'md',   // Single column below md
-    twoColumn: 'lg',      // Two columns at lg
-    threeColumn: 'xl',    // Three columns at xl+
+    singleColumn: 'md', // Single column below md
+    twoColumn: 'lg', // Two columns at lg
+    threeColumn: 'xl', // Three columns at xl+
   },
   sidebar: {
-    hidden: 'lg',         // Hide sidebar below lg
-    overlay: 'lg',        // Overlay sidebar below lg
-    fixed: 'xl',          // Fixed sidebar at xl+
+    hidden: 'lg', // Hide sidebar below lg
+    overlay: 'lg', // Overlay sidebar below lg
+    fixed: 'xl', // Fixed sidebar at xl+
   },
 };
 ```
@@ -48,6 +51,7 @@ export const componentBreakpoints = {
 #### 1.1.2 Responsive Component Audit
 
 ##### Navigation System (src/components/layout/ResponsiveNavigation.tsx)
+
 ```typescript
 interface ResponsiveNavigationProps {
   items: NavigationItem[];
@@ -66,6 +70,7 @@ interface ResponsiveNavigationProps {
 ```
 
 ##### Data Tables (src/components/common/ResponsiveTable.tsx)
+
 ```typescript
 // Features:
 - Horizontal scroll on mobile
@@ -77,6 +82,7 @@ interface ResponsiveNavigationProps {
 ```
 
 ##### Forms (src/components/common/ResponsiveForm.tsx)
+
 ```typescript
 // Features:
 - Single-column layout on mobile
@@ -90,6 +96,7 @@ interface ResponsiveNavigationProps {
 ### 1.2 Touch and Gesture Support
 
 #### 1.2.1 Touch Interactions (src/lib/hooks/useTouch.ts)
+
 ```typescript
 export const useTouch = () => {
   // Gesture detection
@@ -109,10 +116,7 @@ export const useTouch = () => {
     // Implementation for pinch zoom
   };
 
-  const useLongPress = (
-    onLongPress: () => void,
-    delay: number = 500
-  ) => {
+  const useLongPress = (onLongPress: () => void, delay: number = 500) => {
     // Implementation for long press
   };
 
@@ -125,6 +129,7 @@ export const useTouch = () => {
 ```
 
 #### 1.2.2 Mobile Gallery (src/components/features/gallery/MobileGallery.tsx)
+
 ```typescript
 // Features:
 - Swipe navigation between images
@@ -138,27 +143,31 @@ export const useTouch = () => {
 ### 1.3 Performance Optimization for Mobile
 
 #### 1.3.1 Image Optimization (src/lib/utils/imageOptimization.ts)
+
 ```typescript
 export const imageOptimization = {
   // Responsive image sizing
   generateSrcSet: (baseUrl: string, sizes: number[]) => string,
-  
+
   // WebP conversion with fallback
-  getOptimizedImageUrl: (url: string, width?: number, quality?: number) => string,
-  
+  getOptimizedImageUrl: (url: string, width?: number, quality?: number) =>
+    string,
+
   // Lazy loading with intersection observer
   useLazyImage: (src: string, placeholder?: string) => {
     loading: boolean;
     error: boolean;
     imageSrc: string;
   },
-  
+
   // Progressive image loading
-  useProgressiveImage: (lowQualitySrc: string, highQualitySrc: string) => string,
+  useProgressiveImage: (lowQualitySrc: string, highQualitySrc: string) =>
+    string,
 };
 ```
 
 #### 1.3.2 Bundle Optimization
+
 ```typescript
 // Code splitting configuration
 export const bundleOptimization = {
@@ -168,7 +177,7 @@ export const bundleOptimization = {
     alumni: () => import('./pages/AlumniPages'),
     admin: () => import('./pages/AdminPages'),
   },
-  
+
   // Component lazy loading
   componentSplitting: {
     heavyComponents: [
@@ -178,7 +187,7 @@ export const bundleOptimization = {
       'Calendar',
     ],
   },
-  
+
   // Third-party library splitting
   vendorSplitting: {
     charts: () => import('chart.js'),
@@ -193,6 +202,7 @@ export const bundleOptimization = {
 ### 2.1 Admin Dashboard Architecture
 
 #### 2.1.1 Dashboard Layout (src/app/(dashboard)/admin/layout.tsx)
+
 ```typescript
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -209,6 +219,7 @@ interface AdminLayoutProps {
 ```
 
 #### 2.1.2 Dashboard Overview (src/app/(dashboard)/admin/page.tsx)
+
 ```typescript
 // Dashboard Widgets:
 1. Key Metrics Cards
@@ -224,6 +235,7 @@ interface AdminLayoutProps {
 ### 2.2 User Management System
 
 #### 2.2.1 User Management (src/app/(dashboard)/admin/users/page.tsx)
+
 ```typescript
 // Features:
 - User search and filtering
@@ -236,6 +248,7 @@ interface AdminLayoutProps {
 ```
 
 #### 2.2.2 Registration Approval (src/app/(dashboard)/admin/users/pending/page.tsx)
+
 ```typescript
 interface PendingRegistration {
   id: string;
@@ -257,6 +270,7 @@ interface PendingRegistration {
 ### 2.3 Content Management System
 
 #### 2.3.1 Content Dashboard (src/app/(dashboard)/admin/content/page.tsx)
+
 ```typescript
 // Content Types Management:
 - News articles
@@ -276,6 +290,7 @@ interface PendingRegistration {
 ```
 
 #### 2.3.2 Media Management (src/app/(dashboard)/admin/media/page.tsx)
+
 ```typescript
 // Features:
 - File browser interface
@@ -290,6 +305,7 @@ interface PendingRegistration {
 ### 2.4 Analytics and Reporting
 
 #### 2.4.1 Analytics Dashboard (src/app/(dashboard)/admin/analytics/page.tsx)
+
 ```typescript
 interface AnalyticsData {
   // User Analytics
@@ -299,7 +315,7 @@ interface AnalyticsData {
     newRegistrations: number;
     userRetention: number;
   };
-  
+
   // Content Analytics
   contentMetrics: {
     articleViews: number;
@@ -307,7 +323,7 @@ interface AnalyticsData {
     galleryViews: number;
     downloadCount: number;
   };
-  
+
   // Engagement Analytics
   engagementMetrics: {
     forumPosts: number;
@@ -315,7 +331,7 @@ interface AnalyticsData {
     mentorshipRequests: number;
     jobApplications: number;
   };
-  
+
   // System Analytics
   systemMetrics: {
     pageLoadTime: number;
@@ -334,6 +350,7 @@ interface AnalyticsData {
 ```
 
 #### 2.4.2 Report Generation (src/components/features/admin/ReportGenerator.tsx)
+
 ```typescript
 // Report Types:
 - User activity reports
@@ -354,6 +371,7 @@ interface AnalyticsData {
 ### 2.5 System Configuration
 
 #### 2.5.1 Settings Management (src/app/(dashboard)/admin/settings/page.tsx)
+
 ```typescript
 interface SystemSettings {
   // General Settings
@@ -361,22 +379,22 @@ interface SystemSettings {
   siteDescription: string;
   contactEmail: string;
   socialLinks: SocialLink[];
-  
+
   // Registration Settings
   registrationEnabled: boolean;
   requireApproval: boolean;
   verificationRequired: boolean;
-  
+
   // Content Settings
   commentsEnabled: boolean;
   moderationEnabled: boolean;
   uploadLimits: UploadLimits;
-  
+
   // Email Settings
   emailProvider: string;
   emailTemplates: EmailTemplate[];
   notificationSettings: NotificationSettings;
-  
+
   // Security Settings
   passwordPolicy: PasswordPolicy;
   sessionTimeout: number;
@@ -389,6 +407,7 @@ interface SystemSettings {
 ### 3.1 Authentication and Authorization
 
 #### 3.1.1 Enhanced Security Features (src/lib/security/authentication.ts)
+
 ```typescript
 export const securityFeatures = {
   // Multi-factor authentication
@@ -397,14 +416,15 @@ export const securityFeatures = {
     verifyTOTP: (userId: number, token: string) => Promise<boolean>,
     generateBackupCodes: (userId: number) => Promise<string[]>,
   },
-  
+
   // Session management
   sessions: {
-    createSecureSession: (userId: number, deviceInfo: DeviceInfo) => Promise<Session>,
+    createSecureSession: (userId: number, deviceInfo: DeviceInfo) =>
+      Promise<Session>,
     invalidateAllSessions: (userId: number) => Promise<void>,
     detectSuspiciousActivity: (session: Session) => Promise<boolean>,
   },
-  
+
   // Password security
   passwords: {
     checkBreachedPassword: (password: string) => Promise<boolean>,
@@ -415,6 +435,7 @@ export const securityFeatures = {
 ```
 
 #### 3.1.2 Role-Based Access Control (src/lib/security/rbac.ts)
+
 ```typescript
 export interface Permission {
   resource: string;
@@ -435,9 +456,10 @@ export const rbac = {
   createRole: (role: Omit<Role, 'id'>) => Promise<Role>,
   assignRole: (userId: number, roleId: string) => Promise<void>,
   checkPermission: (userId: number, permission: Permission) => Promise<boolean>,
-  
+
   // Dynamic permissions
-  createPermission: (resource: string, action: string, conditions?: any) => Permission,
+  createPermission: (resource: string, action: string, conditions?: any) =>
+    Permission,
   evaluateConditions: (conditions: any, context: any) => boolean,
 };
 ```
@@ -445,16 +467,18 @@ export const rbac = {
 ### 3.2 Data Protection and Privacy
 
 #### 3.2.1 Data Encryption (src/lib/security/encryption.ts)
+
 ```typescript
 export const encryption = {
   // Data at rest
   encryptSensitiveData: (data: string, key?: string) => Promise<string>,
-  decryptSensitiveData: (encryptedData: string, key?: string) => Promise<string>,
-  
+  decryptSensitiveData: (encryptedData: string, key?: string) =>
+    Promise<string>,
+
   // Data in transit
   encryptApiPayload: (payload: any) => Promise<string>,
   decryptApiPayload: (encryptedPayload: string) => Promise<any>,
-  
+
   // File encryption
   encryptFile: (file: Buffer, key?: string) => Promise<Buffer>,
   decryptFile: (encryptedFile: Buffer, key?: string) => Promise<Buffer>,
@@ -462,20 +486,22 @@ export const encryption = {
 ```
 
 #### 3.2.2 Privacy Controls (src/lib/security/privacy.ts)
+
 ```typescript
 export const privacyControls = {
   // Data anonymization
   anonymizeUser: (userId: number) => Promise<void>,
   anonymizeUserData: (data: any) => any,
-  
+
   // Data export (GDPR compliance)
   exportUserData: (userId: number) => Promise<UserDataExport>,
-  
+
   // Data deletion
   deleteUserData: (userId: number, retentionPeriod?: number) => Promise<void>,
-  
+
   // Consent management
-  recordConsent: (userId: number, consentType: string, granted: boolean) => Promise<void>,
+  recordConsent: (userId: number, consentType: string, granted: boolean) =>
+    Promise<void>,
   checkConsent: (userId: number, consentType: string) => Promise<boolean>,
 };
 ```
@@ -483,19 +509,20 @@ export const privacyControls = {
 ### 3.3 Input Validation and Sanitization
 
 #### 3.3.1 Input Validation (src/lib/security/validation.ts)
+
 ```typescript
 export const inputValidation = {
   // XSS prevention
   sanitizeHtml: (html: string) => string,
   validateAndSanitizeInput: (input: string, type: InputType) => ValidationResult,
-  
+
   // SQL injection prevention
   sanitizeDatabaseQuery: (query: string, params: any[]) => { query: string; params: any[] },
-  
+
   // File upload validation
   validateFileUpload: (file: File, allowedTypes: string[], maxSize: number) => ValidationResult,
   scanFileForMalware: (file: Buffer) => Promise<ScanResult>,
-  
+
   // CSRF protection
   generateCSRFToken: () => string,
   validateCSRFToken: (token: string, sessionToken: string) => boolean,
@@ -505,19 +532,24 @@ export const inputValidation = {
 ### 3.4 Security Monitoring and Logging
 
 #### 3.4.1 Security Monitoring (src/lib/security/monitoring.ts)
+
 ```typescript
 export const securityMonitoring = {
   // Threat detection
-  detectBruteForceAttack: (ip: string, attempts: number, timeWindow: number) => boolean,
-  detectSuspiciousActivity: (userId: number, activity: ActivityLog) => Promise<ThreatLevel>,
-  
+  detectBruteForceAttack: (ip: string, attempts: number, timeWindow: number) =>
+    boolean,
+  detectSuspiciousActivity: (userId: number, activity: ActivityLog) =>
+    Promise<ThreatLevel>,
+
   // Rate limiting
-  checkRateLimit: (identifier: string, limit: number, window: number) => Promise<boolean>,
-  
+  checkRateLimit: (identifier: string, limit: number, window: number) =>
+    Promise<boolean>,
+
   // Security logging
   logSecurityEvent: (event: SecurityEvent) => Promise<void>,
-  generateSecurityReport: (startDate: Date, endDate: Date) => Promise<SecurityReport>,
-  
+  generateSecurityReport: (startDate: Date, endDate: Date) =>
+    Promise<SecurityReport>,
+
   // Real-time alerts
   sendSecurityAlert: (alert: SecurityAlert) => Promise<void>,
 };
@@ -528,6 +560,7 @@ export const securityMonitoring = {
 ### 4.1 Testing Strategy
 
 #### 4.1.1 Test Configuration (src/lib/testing/config.ts)
+
 ```typescript
 export const testConfig = {
   // Unit testing with Jest
@@ -543,14 +576,14 @@ export const testConfig = {
       },
     },
   },
-  
+
   // Integration testing
   integration: {
     testDatabase: 'test_ika_teuas',
     apiBaseUrl: 'http://localhost:3001',
     testUserCredentials: process.env.TEST_USER_CREDENTIALS,
   },
-  
+
   // E2E testing with Playwright
   e2e: {
     baseUrl: 'http://localhost:3000',
@@ -561,22 +594,24 @@ export const testConfig = {
 ```
 
 #### 4.1.2 Test Utilities (src/lib/testing/utils.ts)
+
 ```typescript
 export const testUtils = {
   // Mock data generators
   createMockUser: (overrides?: Partial<User>) => User,
   createMockArticle: (overrides?: Partial<Article>) => Article,
   createMockEvent: (overrides?: Partial<Event>) => Event,
-  
+
   // API testing helpers
   mockApiResponse: <T>(data: T, status?: number) => MockResponse<T>,
   createTestApiClient: () => TestApiClient,
-  
+
   // Component testing helpers
-  renderWithProviders: (component: ReactElement, options?: RenderOptions) => RenderResult,
+  renderWithProviders: (component: ReactElement, options?: RenderOptions) =>
+    RenderResult,
   fireEvent: typeof fireEventOriginal,
   waitFor: typeof waitForOriginal,
-  
+
   // Database testing helpers
   createTestDatabase: () => Promise<TestDatabase>,
   seedTestData: (db: TestDatabase) => Promise<void>,
@@ -587,6 +622,7 @@ export const testUtils = {
 ### 4.2 Automated Testing Suite
 
 #### 4.2.1 Component Tests (tests/components/)
+
 ```typescript
 // Example component test
 describe('AlumniCard', () => {
@@ -595,19 +631,19 @@ describe('AlumniCard', () => {
     const { getByText, getByRole } = testUtils.renderWithProviders(
       <AlumniCard alumni={mockAlumni} />
     );
-    
+
     expect(getByText(mockAlumni.fullName)).toBeInTheDocument();
     expect(getByRole('img')).toHaveAttribute('alt', expect.stringContaining(mockAlumni.fullName));
   });
-  
+
   it('handles connection requests correctly', async () => {
     const mockAlumni = testUtils.createMockUser();
     const onConnect = jest.fn();
-    
+
     const { getByRole } = testUtils.renderWithProviders(
       <AlumniCard alumni={mockAlumni} onConnect={onConnect} />
     );
-    
+
     fireEvent.click(getByRole('button', { name: /connect/i }));
     await waitFor(() => expect(onConnect).toHaveBeenCalledWith(mockAlumni.id));
   });
@@ -615,34 +651,35 @@ describe('AlumniCard', () => {
 ```
 
 #### 4.2.2 API Tests (tests/api/)
+
 ```typescript
 // Example API test
 describe('Alumni API', () => {
   let testDb: TestDatabase;
   let apiClient: TestApiClient;
-  
+
   beforeAll(async () => {
     testDb = await testUtils.createTestDatabase();
     apiClient = testUtils.createTestApiClient();
   });
-  
+
   afterAll(async () => {
     await testUtils.cleanupTestData(testDb);
   });
-  
+
   describe('GET /api/alumni', () => {
     it('returns paginated alumni list', async () => {
       const response = await apiClient.get('/api/alumni?page=1&limit=10');
-      
+
       expect(response.status).toBe(200);
       expect(response.data).toHaveProperty('data');
       expect(response.data).toHaveProperty('pagination');
       expect(Array.isArray(response.data.data)).toBe(true);
     });
-    
+
     it('filters alumni by graduation year', async () => {
       const response = await apiClient.get('/api/alumni?graduationYear=2020');
-      
+
       expect(response.status).toBe(200);
       response.data.data.forEach((alumni: User) => {
         expect(alumni.graduationYear).toBe(2020);
@@ -653,6 +690,7 @@ describe('Alumni API', () => {
 ```
 
 #### 4.2.3 E2E Tests (tests/e2e/)
+
 ```typescript
 // Example E2E test
 import { test, expect } from '@playwright/test';
@@ -660,26 +698,26 @@ import { test, expect } from '@playwright/test';
 test.describe('Alumni Registration Flow', () => {
   test('complete registration process', async ({ page }) => {
     await page.goto('/register');
-    
+
     // Step 1: Basic Information
     await page.fill('[name="email"]', 'test@alumni.com');
     await page.fill('[name="password"]', 'SecurePassword123!');
     await page.fill('[name="confirmPassword"]', 'SecurePassword123!');
     await page.fill('[name="fullName"]', 'Test Alumni');
     await page.click('button:has-text("Next")');
-    
+
     // Step 2: Academic Information
     await page.fill('[name="nim"]', '1234567890');
     await page.selectOption('[name="major"]', 'Teknik Elektro');
     await page.fill('[name="graduationYear"]', '2020');
     await page.click('button:has-text("Next")');
-    
+
     // Continue through all steps...
-    
+
     // Final submission
     await page.check('[name="termsAccepted"]');
     await page.click('button:has-text("Submit Registration")');
-    
+
     // Verify success
     await expect(page.locator('text=Registration Successful')).toBeVisible();
   });
@@ -691,6 +729,7 @@ test.describe('Alumni Registration Flow', () => {
 ### 5.1 Core Web Vitals Optimization
 
 #### 5.1.1 Performance Monitoring (src/lib/performance/monitoring.ts)
+
 ```typescript
 export const performanceMonitoring = {
   // Core Web Vitals tracking
@@ -699,12 +738,12 @@ export const performanceMonitoring = {
   trackCLS: () => void,
   trackFCP: () => void,
   trackTTFB: () => void,
-  
+
   // Custom metrics
   trackPageLoadTime: (route: string) => void,
   trackAPIResponseTime: (endpoint: string, duration: number) => void,
   trackBundleSize: (chunk: string, size: number) => void,
-  
+
   // Error tracking
   trackError: (error: Error, context?: any) => void,
   trackPerformanceIssue: (issue: PerformanceIssue) => void,
@@ -712,6 +751,7 @@ export const performanceMonitoring = {
 ```
 
 #### 5.1.2 Optimization Strategies
+
 ```typescript
 export const optimizations = {
   // Image optimization
@@ -721,21 +761,21 @@ export const optimizations = {
     lazyLoading: true,
     blurPlaceholders: true,
   },
-  
+
   // Code splitting
   codeSplitting: {
     routeBasedSplitting: true,
     componentLazyLoading: true,
     vendorSplitting: true,
   },
-  
+
   // Caching strategies
   caching: {
     staticAssets: 'max-age=31536000',
     apiResponses: 'max-age=300',
     dynamicContent: 'max-age=60',
   },
-  
+
   // Resource hints
   resourceHints: {
     preload: ['fonts', 'critical-css'],
@@ -750,6 +790,7 @@ export const optimizations = {
 ### 6.1 Build and Deployment Configuration
 
 #### 6.1.1 Production Build (next.config.js)
+
 ```javascript
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -758,18 +799,18 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
-  
+
   // Image optimization
   images: {
     domains: ['localhost', 'api.ikateuas.com'],
     formats: ['image/webp', 'image/avif'],
   },
-  
+
   // Bundle analysis
   bundleAnalyzer: {
     enabled: process.env.ANALYZE === 'true',
   },
-  
+
   // Security headers
   async headers() {
     return [
@@ -789,6 +830,7 @@ module.exports = nextConfig;
 ```
 
 #### 6.1.2 Environment Configuration
+
 ```bash
 # Production environment variables
 NEXT_PUBLIC_APP_URL=https://ikateuas.com
@@ -868,6 +910,7 @@ src/
 ## Deliverables Checklist
 
 ### Responsive Design (TECH-01)
+
 - [ ] Mobile-first component design
 - [ ] Touch and gesture support
 - [ ] Performance optimization for mobile
@@ -876,6 +919,7 @@ src/
 - [ ] Progressive web app features
 
 ### Admin Dashboard (TECH-02)
+
 - [ ] Comprehensive admin interface
 - [ ] User management system
 - [ ] Content management tools
@@ -884,6 +928,7 @@ src/
 - [ ] Role-based access control
 
 ### Security Implementation (TECH-03)
+
 - [ ] Authentication and authorization
 - [ ] Data encryption and privacy
 - [ ] Input validation and sanitization
@@ -892,6 +937,7 @@ src/
 - [ ] Regular security audits
 
 ### Testing and Quality Assurance
+
 - [ ] Comprehensive test suite
 - [ ] Automated testing pipeline
 - [ ] Performance testing
@@ -900,6 +946,7 @@ src/
 - [ ] Cross-platform testing
 
 ### Performance and Optimization
+
 - [ ] Core Web Vitals optimization
 - [ ] Bundle size optimization
 - [ ] Image and asset optimization
@@ -908,6 +955,7 @@ src/
 - [ ] Monitoring and alerting
 
 ### Documentation and Deployment
+
 - [ ] Technical documentation
 - [ ] User manuals
 - [ ] API documentation
@@ -916,6 +964,7 @@ src/
 - [ ] Maintenance procedures
 
 ## Success Criteria
+
 - All pages achieve Lighthouse scores > 90
 - Mobile experience is seamless across devices
 - Admin dashboard provides complete management capabilities
@@ -925,6 +974,7 @@ src/
 - Documentation is comprehensive and up-to-date
 
 ## Risk Mitigation
+
 - **Performance issues**: Continuous monitoring and optimization
 - **Security vulnerabilities**: Regular security audits and updates
 - **Browser compatibility**: Extensive cross-browser testing

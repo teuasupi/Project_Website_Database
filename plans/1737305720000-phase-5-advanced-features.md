@@ -5,8 +5,10 @@
 **Phase:** 5 of 6
 **Estimated Time:** 3-4 days
 **Dependencies:** Phase 1-4 must be completed
+**Status:** Draft📝
 
 ## Overview
+
 This phase implements advanced features including FEAT-09 (Discussion Forum) and FEAT-10 (Scholarship and Endowment Portal), along with additional enhancements like job board, event management, and advanced networking features.
 
 ## 1. Discussion Forum System (FEAT-09)
@@ -14,6 +16,7 @@ This phase implements advanced features including FEAT-09 (Discussion Forum) and
 ### 1.1 Forum Architecture Strategy
 
 #### 1.1.1 Hybrid Forum Approach
+
 ```typescript
 // Strategy: Internal + External Integration
 export interface ForumStrategy {
@@ -45,6 +48,7 @@ export interface ExternalPlatform {
 ```
 
 #### 1.1.2 Internal Discussion Types
+
 ```typescript
 export interface Discussion {
   id: number;
@@ -54,19 +58,24 @@ export interface Discussion {
   author: AlumniProfile;
   category: DiscussionCategory;
   tags: string[];
-  type: 'announcement' | 'question' | 'discussion' | 'networking' | 'opportunity';
+  type:
+    | 'announcement'
+    | 'question'
+    | 'discussion'
+    | 'networking'
+    | 'opportunity';
   status: 'active' | 'closed' | 'pinned' | 'archived';
-  
+
   // Engagement
   viewCount: number;
   replyCount: number;
   likeCount: number;
-  
+
   // Moderation
   isPinned: boolean;
   isLocked: boolean;
   isModerated: boolean;
-  
+
   // Metadata
   lastActivityAt: string;
   createdAt: string;
@@ -103,6 +112,7 @@ export interface DiscussionReply {
 ### 1.2 Forum Implementation
 
 #### 1.2.1 Forum Hub Page (src/app/forum/page.tsx)
+
 ```typescript
 // Features:
 - External platform directory
@@ -114,6 +124,7 @@ export interface DiscussionReply {
 ```
 
 #### 1.2.2 External Platform Integration (src/components/features/forum/ExternalPlatforms.tsx)
+
 ```typescript
 interface ExternalPlatformsProps {
   platforms: ExternalPlatform[];
@@ -132,6 +143,7 @@ interface ExternalPlatformsProps {
 #### 1.2.3 Internal Discussions
 
 ##### Discussion Board (src/app/forum/discussions/page.tsx)
+
 ```typescript
 // Features:
 - Category-based navigation
@@ -143,6 +155,7 @@ interface ExternalPlatformsProps {
 ```
 
 ##### Discussion Thread (src/app/forum/discussions/[id]/page.tsx)
+
 ```typescript
 // Features:
 - Thread content and replies
@@ -156,6 +169,7 @@ interface ExternalPlatformsProps {
 ##### Discussion Components
 
 ###### Discussion Card (src/components/features/forum/DiscussionCard.tsx)
+
 ```typescript
 interface DiscussionCardProps {
   discussion: Discussion;
@@ -173,6 +187,7 @@ interface DiscussionCardProps {
 ```
 
 ###### Discussion Editor (src/components/features/forum/DiscussionEditor.tsx)
+
 ```typescript
 // Features:
 - Rich text editor
@@ -186,6 +201,7 @@ interface DiscussionCardProps {
 ### 1.3 Community Moderation
 
 #### 1.3.1 Moderation System (src/components/features/forum/ModerationTools.tsx)
+
 ```typescript
 interface ModerationAction {
   type: 'pin' | 'lock' | 'archive' | 'delete' | 'move' | 'merge';
@@ -208,6 +224,7 @@ interface ModerationAction {
 ### 2.1 Scholarship System Architecture
 
 #### 2.1.1 Scholarship Data Types (src/types/scholarships.ts)
+
 ```typescript
 export interface Scholarship {
   id: number;
@@ -216,7 +233,7 @@ export interface Scholarship {
   overview: string;
   requirements: ScholarshipRequirement[];
   benefits: ScholarshipBenefit[];
-  
+
   // Application Details
   applicationDeadline: string;
   startDate: string;
@@ -224,23 +241,23 @@ export interface Scholarship {
   amount: number;
   currency: string;
   numberOfRecipients: number;
-  
+
   // Eligibility
   eligibilityCriteria: EligibilityCriteria;
   requiredDocuments: RequiredDocument[];
-  
+
   // Process
   applicationProcess: ApplicationStep[];
   selectionCriteria: SelectionCriteria[];
-  
+
   // Status
   status: 'draft' | 'open' | 'closed' | 'awarded' | 'archived';
   isRecurring: boolean;
   category: ScholarshipCategory;
-  
+
   // Contact
   contactPerson: ContactPerson;
-  
+
   // Metadata
   createdAt: string;
   updatedAt: string;
@@ -253,25 +270,31 @@ export interface ScholarshipApplication {
   scholarship: Scholarship;
   applicantId: number;
   applicant: AlumniProfile;
-  
+
   // Application Data
   personalStatement: string;
   academicGoals: string;
   financialNeed?: string;
   references: Reference[];
   documents: ApplicationDocument[];
-  
+
   // Status
-  status: 'draft' | 'submitted' | 'under-review' | 'shortlisted' | 'approved' | 'rejected';
+  status:
+    | 'draft'
+    | 'submitted'
+    | 'under-review'
+    | 'shortlisted'
+    | 'approved'
+    | 'rejected';
   submittedAt?: string;
   reviewedAt?: string;
   decision?: string;
-  
+
   // Scoring
   scores: ApplicationScore[];
   totalScore?: number;
   ranking?: number;
-  
+
   createdAt: string;
   updatedAt: string;
 }
@@ -284,58 +307,59 @@ export interface EndowmentFund {
   targetAmount: number;
   currentAmount: number;
   currency: string;
-  
+
   // Campaign Details
   campaignStart: string;
   campaignEnd?: string;
   isActive: boolean;
-  
+
   // Recognition
   donorLevels: DonorLevel[];
   recognitionWall: boolean;
-  
+
   // Transparency
   usageReports: UsageReport[];
   impactMetrics: ImpactMetric[];
-  
+
   createdAt: string;
   updatedAt: string;
 }
 ```
 
 #### 2.1.2 Donation System Types
+
 ```typescript
 export interface Donation {
   id: number;
   donorId?: number;
   donor?: AlumniProfile;
-  
+
   // Donation Details
   amount: number;
   currency: string;
   isRecurring: boolean;
   frequency?: 'monthly' | 'quarterly' | 'annually';
-  
+
   // Targeting
   fundId?: number;
   fund?: EndowmentFund;
   scholarshipId?: number;
   scholarship?: Scholarship;
-  
+
   // Recognition
   isAnonymous: boolean;
   displayName?: string;
   message?: string;
-  
+
   // Payment
   paymentMethod: string;
   transactionId: string;
   status: 'pending' | 'completed' | 'failed' | 'refunded';
-  
+
   // Tax
   taxReceiptRequested: boolean;
   taxReceiptSent?: boolean;
-  
+
   createdAt: string;
   completedAt?: string;
 }
@@ -354,6 +378,7 @@ export interface DonorLevel {
 ### 2.2 Scholarship Portal Implementation
 
 #### 2.2.1 Scholarship Listing (src/app/scholarships/page.tsx)
+
 ```typescript
 // Features:
 - Available scholarships grid
@@ -365,6 +390,7 @@ export interface DonorLevel {
 ```
 
 #### 2.2.2 Scholarship Detail (src/app/scholarships/[slug]/page.tsx)
+
 ```typescript
 // Features:
 - Complete scholarship information
@@ -376,6 +402,7 @@ export interface DonorLevel {
 ```
 
 #### 2.2.3 Application System (src/app/scholarships/[slug]/apply/page.tsx)
+
 ```typescript
 // Features:
 - Multi-step application form
@@ -389,6 +416,7 @@ export interface DonorLevel {
 #### 2.2.4 Scholarship Components
 
 ##### Scholarship Card (src/components/features/scholarships/ScholarshipCard.tsx)
+
 ```typescript
 interface ScholarshipCardProps {
   scholarship: Scholarship;
@@ -405,6 +433,7 @@ interface ScholarshipCardProps {
 ```
 
 ##### Application Form (src/components/features/scholarships/ApplicationForm.tsx)
+
 ```typescript
 // Features:
 - Progressive form steps
@@ -418,6 +447,7 @@ interface ScholarshipCardProps {
 ### 2.3 Endowment and Donation System
 
 #### 2.3.1 Donation Portal (src/app/scholarships/donate/page.tsx)
+
 ```typescript
 // Features:
 - Fund selection
@@ -429,6 +459,7 @@ interface ScholarshipCardProps {
 ```
 
 #### 2.3.2 Donor Recognition (src/app/scholarships/donors/page.tsx)
+
 ```typescript
 // Features:
 - Donor wall of fame
@@ -440,6 +471,7 @@ interface ScholarshipCardProps {
 ```
 
 #### 2.3.3 Fund Management (src/components/features/scholarships/FundManagement.tsx)
+
 ```typescript
 // Features:
 - Fund progress tracking
@@ -455,6 +487,7 @@ interface ScholarshipCardProps {
 ### 3.1 Job Board Architecture
 
 #### 3.1.1 Job System Types (src/types/jobs.ts)
+
 ```typescript
 export interface JobPosting {
   id: number;
@@ -464,35 +497,35 @@ export interface JobPosting {
   description: string;
   requirements: string[];
   responsibilities: string[];
-  
+
   // Job Details
   location: string;
   workType: 'remote' | 'on-site' | 'hybrid';
   employmentType: 'full-time' | 'part-time' | 'contract' | 'internship';
   experienceLevel: 'entry' | 'mid' | 'senior' | 'executive';
-  
+
   // Compensation
   salaryMin?: number;
   salaryMax?: number;
   currency: string;
   benefits?: string[];
-  
+
   // Application
   applicationUrl?: string;
   applicationEmail?: string;
   applicationDeadline?: string;
-  
+
   // Metadata
   postedById: number;
   postedBy: AlumniProfile;
   category: JobCategory;
   skills: string[];
-  
+
   // Status
   status: 'active' | 'filled' | 'expired' | 'draft';
   viewCount: number;
   applicationCount: number;
-  
+
   createdAt: string;
   updatedAt: string;
   expiresAt: string;
@@ -504,18 +537,25 @@ export interface JobApplication {
   job: JobPosting;
   applicantId: number;
   applicant: AlumniProfile;
-  
+
   coverLetter?: string;
   resume?: string;
   additionalDocuments?: string[];
-  
-  status: 'submitted' | 'viewed' | 'shortlisted' | 'interviewed' | 'offered' | 'rejected';
+
+  status:
+    | 'submitted'
+    | 'viewed'
+    | 'shortlisted'
+    | 'interviewed'
+    | 'offered'
+    | 'rejected';
   appliedAt: string;
   lastUpdated: string;
 }
 ```
 
 #### 3.1.2 Job Board Implementation (src/app/jobs/page.tsx)
+
 ```typescript
 // Features:
 - Job search and filtering
@@ -531,6 +571,7 @@ export interface JobApplication {
 ### 4.1 Advanced Event Features
 
 #### 4.1.1 Event Registration System (src/components/features/events/EventRegistration.tsx)
+
 ```typescript
 // Features:
 - Online registration forms
@@ -542,6 +583,7 @@ export interface JobApplication {
 ```
 
 #### 4.1.2 Event Networking (src/components/features/events/EventNetworking.tsx)
+
 ```typescript
 // Features:
 - Attendee directory
@@ -556,18 +598,19 @@ export interface JobApplication {
 ### 5.1 AI-Powered Recommendations
 
 #### 5.1.1 Recommendation Engine (src/lib/recommendations/engine.ts)
+
 ```typescript
 interface RecommendationEngine {
   // Alumni Recommendations
   suggestConnections: (userId: number) => Promise<AlumniProfile[]>;
   suggestMentors: (userId: number, areas: string[]) => Promise<AlumniProfile[]>;
   suggestMentees: (mentorId: number) => Promise<AlumniProfile[]>;
-  
+
   // Content Recommendations
   suggestArticles: (userId: number) => Promise<AlumniArticle[]>;
   suggestEvents: (userId: number) => Promise<Event[]>;
   suggestJobs: (userId: number) => Promise<JobPosting[]>;
-  
+
   // Learning Recommendations
   suggestSkills: (userId: number) => Promise<string[]>;
   suggestCourses: (userId: number) => Promise<Course[]>;
@@ -577,6 +620,7 @@ interface RecommendationEngine {
 ### 5.2 Advanced Search Features
 
 #### 5.2.1 Global Search Enhancement (src/components/common/AdvancedSearch.tsx)
+
 ```typescript
 // Features:
 - Faceted search across all content types
@@ -672,6 +716,7 @@ src/
 ## Deliverables Checklist
 
 ### Discussion Forum (FEAT-09)
+
 - [ ] External platform integration hub
 - [ ] Internal discussion system
 - [ ] Community moderation tools
@@ -679,6 +724,7 @@ src/
 - [ ] Search and categorization
 
 ### Scholarship Portal (FEAT-10)
+
 - [ ] Scholarship listing and details
 - [ ] Application management system
 - [ ] Document upload and verification
@@ -687,6 +733,7 @@ src/
 - [ ] Impact tracking and reporting
 
 ### Job Board
+
 - [ ] Job posting and browsing
 - [ ] Application tracking system
 - [ ] Company profiles
@@ -694,6 +741,7 @@ src/
 - [ ] Career services integration
 
 ### Advanced Features
+
 - [ ] AI-powered recommendations
 - [ ] Enhanced search capabilities
 - [ ] Event networking tools
@@ -701,6 +749,7 @@ src/
 - [ ] Performance optimization
 
 ### Integration Features
+
 - [ ] Payment gateway integration
 - [ ] Email notification system
 - [ ] Calendar integration
@@ -708,6 +757,7 @@ src/
 - [ ] Mobile app readiness
 
 ## Success Criteria
+
 - High user engagement with forum features
 - Successful scholarship applications and donations
 - Active job board usage
@@ -716,6 +766,7 @@ src/
 - Strong community participation
 
 ## Risk Mitigation
+
 - **External platform dependencies**: Backup internal solutions
 - **Payment security**: PCI compliance and security audits
 - **Content moderation**: Automated tools and human oversight

@@ -1,12 +1,14 @@
 # Phase 4 Detailed Plan: Alumni Features
 
 **Date:** July 19, 2025
-**Author:** Claude
+**Author:** Ramdan
 **Phase:** 4 of 6
 **Estimated Time:** 5-6 days
 **Dependencies:** Phase 1 (Infrastructure), Phase 2 (Layout), Phase 3 (Content Management) must be completed
+**Status:** Draft📝
 
 ## Overview
+
 This phase implements the core alumni-focused features as defined in PRD features FEAT-06 (Alumni Database & Profiles), FEAT-07 (Member Registration), and FEAT-08 (Alumni Blog & Articles). These are the most complex features requiring sophisticated user management, profile systems, and content creation capabilities.
 
 ## 1. Alumni Registration System (FEAT-07)
@@ -14,6 +16,7 @@ This phase implements the core alumni-focused features as defined in PRD feature
 ### 1.1 Registration Architecture
 
 #### 1.1.1 Registration Data Types (src/types/registration.ts)
+
 ```typescript
 export interface RegistrationStep {
   id: string;
@@ -27,7 +30,15 @@ export interface RegistrationStep {
 
 export interface FormField {
   name: string;
-  type: 'text' | 'email' | 'password' | 'select' | 'textarea' | 'file' | 'date' | 'number';
+  type:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'select'
+    | 'textarea'
+    | 'file'
+    | 'date'
+    | 'number';
   label: string;
   placeholder?: string;
   options?: { value: string; label: string }[];
@@ -43,7 +54,7 @@ export interface RegistrationData {
   password: string;
   confirmPassword: string;
   fullName: string;
-  
+
   // Step 2: Academic Information
   nim: string;
   major: string;
@@ -54,7 +65,7 @@ export interface RegistrationData {
     advisor: string;
     year: number;
   };
-  
+
   // Step 3: Personal Information
   dateOfBirth?: string;
   gender?: 'male' | 'female' | 'other' | 'prefer-not-to-say';
@@ -66,7 +77,7 @@ export interface RegistrationData {
     postalCode: string;
     country: string;
   };
-  
+
   // Step 4: Professional Information
   currentCompany?: string;
   position?: string;
@@ -74,7 +85,7 @@ export interface RegistrationData {
   workExperience?: WorkExperience[];
   skills?: string[];
   linkedinUrl?: string;
-  
+
   // Step 5: Additional Information
   profilePhoto?: File;
   resume?: File;
@@ -82,7 +93,7 @@ export interface RegistrationData {
   willingToMentor?: boolean;
   seekingMentorship?: boolean;
   privacySettings: PrivacySettings;
-  
+
   // Step 6: Verification
   termsAccepted: boolean;
   privacyPolicyAccepted: boolean;
@@ -110,6 +121,7 @@ export interface PrivacySettings {
 ```
 
 #### 1.1.2 Multi-Step Registration Form (src/app/(auth)/register/page.tsx)
+
 ```typescript
 // Features:
 - 6-step progressive registration
@@ -125,6 +137,7 @@ export interface PrivacySettings {
 #### 1.1.3 Registration Components
 
 ##### Registration Wizard (src/components/features/registration/RegistrationWizard.tsx)
+
 ```typescript
 interface RegistrationWizardProps {
   steps: RegistrationStep[];
@@ -144,6 +157,7 @@ interface RegistrationWizardProps {
 ```
 
 ##### Step Components
+
 ```typescript
 // BasicInfoStep.tsx - Step 1
 - Email and password setup
@@ -185,6 +199,7 @@ interface RegistrationWizardProps {
 ```
 
 #### 1.1.4 Verification System (src/components/features/registration/VerificationSystem.tsx)
+
 ```typescript
 // Features:
 - Email verification with token
@@ -196,21 +211,26 @@ interface RegistrationWizardProps {
 ```
 
 ### 1.2 Registration API Integration (src/lib/api/registration.ts)
+
 ```typescript
 export const registrationApi = {
   // Registration flow
   checkEmailAvailability: (email: string) => Promise<{ available: boolean }>,
-  verifyNIM: (nim: string, graduationYear: number) => Promise<{ valid: boolean }>,
-  uploadDocument: (file: File, type: 'resume' | 'photo' | 'verification') => Promise<{ url: string }>,
+  verifyNIM: (nim: string, graduationYear: number) =>
+    Promise<{ valid: boolean }>,
+  uploadDocument: (file: File, type: 'resume' | 'photo' | 'verification') =>
+    Promise<{ url: string }>,
   saveDraft: (data: Partial<RegistrationData>) => Promise<void>,
   loadDraft: (email: string) => Promise<Partial<RegistrationData>>,
-  submitRegistration: (data: RegistrationData) => Promise<{ id: string; status: string }>,
-  
+  submitRegistration: (data: RegistrationData) =>
+    Promise<{ id: string; status: string }>,
+
   // Verification
   sendVerificationEmail: (email: string) => Promise<void>,
   verifyEmail: (token: string) => Promise<{ success: boolean }>,
-  checkVerificationStatus: (registrationId: string) => Promise<VerificationStatus>,
-  
+  checkVerificationStatus: (registrationId: string) =>
+    Promise<VerificationStatus>,
+
   // Admin
   getPendingRegistrations: () => Promise<PendingRegistration[]>,
   approveRegistration: (id: string) => Promise<void>,
@@ -223,6 +243,7 @@ export const registrationApi = {
 ### 2.1 Profile System Architecture
 
 #### 2.1.1 Extended User Profile Types (src/types/alumni.ts)
+
 ```typescript
 export interface AlumniProfile extends User {
   // Academic Information
@@ -232,7 +253,7 @@ export interface AlumniProfile extends User {
   gpa?: number;
   thesis?: ThesisInfo;
   academicAchievements?: Achievement[];
-  
+
   // Personal Information
   dateOfBirth?: string;
   gender?: string;
@@ -240,7 +261,7 @@ export interface AlumniProfile extends User {
   bio?: string;
   interests: string[];
   languages: Language[];
-  
+
   // Professional Information
   currentCompany?: string;
   position?: string;
@@ -248,23 +269,23 @@ export interface AlumniProfile extends User {
   workExperience: WorkExperience[];
   skills: Skill[];
   certifications: Certification[];
-  
+
   // Contact & Social
   socialLinks: SocialLink[];
   website?: string;
   linkedinUrl?: string;
-  
+
   // Settings & Preferences
   privacySettings: PrivacySettings;
   mentorshipInfo: MentorshipInfo;
-  
+
   // System Information
   profileCompleteness: number;
   lastLoginAt?: string;
   verificationStatus: 'pending' | 'verified' | 'rejected';
   accountStatus: 'active' | 'inactive' | 'suspended';
   joinedAt: string;
-  
+
   // Statistics
   profileViews: number;
   connectionsCount: number;
@@ -305,6 +326,7 @@ export interface Achievement {
 #### 2.1.2 Alumni Directory System
 
 ##### Directory Listing (src/app/alumni/page.tsx)
+
 ```typescript
 // Features:
 - Advanced search and filtering
@@ -317,6 +339,7 @@ export interface Achievement {
 ```
 
 ##### Profile Filters (src/components/features/alumni/AlumniFilters.tsx)
+
 ```typescript
 interface AlumniFiltersProps {
   filters: AlumniFilter;
@@ -350,6 +373,7 @@ export interface AlumniFilter {
 ```
 
 ##### Alumni Cards (src/components/features/alumni/AlumniCard.tsx)
+
 ```typescript
 interface AlumniCardProps {
   alumni: AlumniProfile;
@@ -371,6 +395,7 @@ interface AlumniCardProps {
 #### 2.1.3 Individual Profile Pages
 
 ##### Public Profile (src/app/alumni/[id]/page.tsx)
+
 ```typescript
 // Sections:
 1. Profile Header (photo, name, title, contact)
@@ -394,6 +419,7 @@ interface AlumniCardProps {
 ##### Profile Components
 
 ###### Profile Header (src/components/features/alumni/ProfileHeader.tsx)
+
 ```typescript
 interface ProfileHeaderProps {
   profile: AlumniProfile;
@@ -414,6 +440,7 @@ interface ProfileHeaderProps {
 ```
 
 ###### Experience Timeline (src/components/features/alumni/ExperienceTimeline.tsx)
+
 ```typescript
 // Features:
 - Chronological work experience
@@ -425,6 +452,7 @@ interface ProfileHeaderProps {
 ```
 
 ###### Skills Matrix (src/components/features/alumni/SkillsMatrix.tsx)
+
 ```typescript
 // Features:
 - Categorized skills display
@@ -438,6 +466,7 @@ interface ProfileHeaderProps {
 #### 2.1.4 Profile Management
 
 ##### Edit Profile (src/app/alumni/edit/page.tsx)
+
 ```typescript
 // Features:
 - Tabbed editing interface
@@ -450,6 +479,7 @@ interface ProfileHeaderProps {
 ```
 
 ##### Profile Settings (src/components/features/alumni/ProfileSettings.tsx)
+
 ```typescript
 // Settings Categories:
 1. Privacy & Visibility
@@ -472,6 +502,7 @@ interface ProfileHeaderProps {
 ### 3.1 Article System Architecture
 
 #### 3.1.1 Article Types (src/types/articles.ts)
+
 ```typescript
 export interface AlumniArticle {
   id: number;
@@ -480,43 +511,43 @@ export interface AlumniArticle {
   content: string;
   excerpt: string;
   featuredImage?: string;
-  
+
   // Author Information
   authorId: number;
   author: AlumniProfile;
   coAuthors?: AlumniProfile[];
-  
+
   // Content Metadata
   category: ArticleCategory;
   tags: string[];
   readingTime: number;
   wordCount: number;
-  
+
   // Publication Status
   status: 'draft' | 'review' | 'published' | 'archived';
   publishedAt?: string;
   lastModifiedAt: string;
-  
+
   // Engagement Metrics
   viewCount: number;
   likeCount: number;
   commentCount: number;
   shareCount: number;
-  
+
   // Content Features
   tableOfContents?: TOCItem[];
   relatedArticles?: number[];
-  
+
   // SEO & Social
   metaDescription?: string;
   socialImage?: string;
   canonicalUrl?: string;
-  
+
   // Permissions
   allowComments: boolean;
   allowSharing: boolean;
   requiresLogin: boolean;
-  
+
   createdAt: string;
   updatedAt: string;
 }
@@ -557,6 +588,7 @@ export interface ArticleComment {
 #### 3.1.2 Article Management System
 
 ##### Article Editor (src/app/alumni/articles/create/page.tsx)
+
 ```typescript
 // Features:
 - Rich text editor with markdown support
@@ -570,6 +602,7 @@ export interface ArticleComment {
 ```
 
 ##### Article Dashboard (src/app/alumni/articles/dashboard/page.tsx)
+
 ```typescript
 // Features:
 - Personal article library
@@ -583,6 +616,7 @@ export interface ArticleComment {
 #### 3.1.3 Article Components
 
 ##### Article Editor Component (src/components/features/articles/ArticleEditor.tsx)
+
 ```typescript
 interface ArticleEditorProps {
   article?: Partial<AlumniArticle>;
@@ -602,6 +636,7 @@ interface ArticleEditorProps {
 ```
 
 ##### Article Card (src/components/features/articles/ArticleCard.tsx)
+
 ```typescript
 interface ArticleCardProps {
   article: AlumniArticle;
@@ -621,6 +656,7 @@ interface ArticleCardProps {
 ```
 
 ##### Article Reader (src/app/alumni/articles/[slug]/page.tsx)
+
 ```typescript
 // Features:
 - Optimized reading experience
@@ -636,6 +672,7 @@ interface ArticleCardProps {
 #### 3.1.4 Article Discovery
 
 ##### Article Feed (src/app/alumni/articles/page.tsx)
+
 ```typescript
 // Features:
 - Personalized article feed
@@ -648,6 +685,7 @@ interface ArticleCardProps {
 ```
 
 ##### Article Search (src/components/features/articles/ArticleSearch.tsx)
+
 ```typescript
 // Features:
 - Full-text search
@@ -663,6 +701,7 @@ interface ArticleCardProps {
 ### 4.1 Alumni Connections
 
 #### 4.1.1 Connection System (src/types/connections.ts)
+
 ```typescript
 export interface Connection {
   id: number;
@@ -685,6 +724,7 @@ export interface ConnectionRequest {
 #### 4.1.2 Networking Components
 
 ##### Connection Button (src/components/features/networking/ConnectionButton.tsx)
+
 ```typescript
 // Features:
 - Connect/disconnect functionality
@@ -694,6 +734,7 @@ export interface ConnectionRequest {
 ```
 
 ##### Network Overview (src/components/features/networking/NetworkOverview.tsx)
+
 ```typescript
 // Features:
 - Connections statistics
@@ -706,6 +747,7 @@ export interface ConnectionRequest {
 ### 4.2 Mentorship System
 
 #### 4.2.1 Mentorship Types (src/types/mentorship.ts)
+
 ```typescript
 export interface MentorshipRequest {
   id: number;
@@ -735,6 +777,7 @@ export interface MentorshipSession {
 #### 4.2.2 Mentorship Components
 
 ##### Mentor Card (src/components/features/mentorship/MentorCard.tsx)
+
 ```typescript
 // Features:
 - Mentor profile summary
@@ -745,6 +788,7 @@ export interface MentorshipSession {
 ```
 
 ##### Mentorship Dashboard (src/components/features/mentorship/MentorshipDashboard.tsx)
+
 ```typescript
 // Features:
 - Active mentorships
@@ -844,6 +888,7 @@ src/
 ## Deliverables Checklist
 
 ### Registration System (FEAT-07)
+
 - [ ] Multi-step registration wizard
 - [ ] Academic verification system
 - [ ] Document upload functionality
@@ -852,6 +897,7 @@ src/
 - [ ] Registration analytics
 
 ### Alumni Directory (FEAT-06)
+
 - [ ] Searchable alumni database
 - [ ] Advanced filtering system
 - [ ] Individual profile pages
@@ -860,6 +906,7 @@ src/
 - [ ] Connection system
 
 ### Article System (FEAT-08)
+
 - [ ] Article creation and editing
 - [ ] Publication workflow
 - [ ] Article discovery and search
@@ -868,6 +915,7 @@ src/
 - [ ] Content analytics
 
 ### Networking Features
+
 - [ ] Alumni connections
 - [ ] Mentorship system
 - [ ] Professional networking
@@ -875,6 +923,7 @@ src/
 - [ ] Experience sharing
 
 ### Admin Management
+
 - [ ] User approval system
 - [ ] Profile moderation
 - [ ] Content management
@@ -882,6 +931,7 @@ src/
 - [ ] Bulk operations
 
 ## Success Criteria
+
 - Registration completion rate > 80%
 - Profile completeness average > 70%
 - Active user engagement with directory
@@ -890,6 +940,7 @@ src/
 - Admin efficiency in user management
 
 ## Risk Mitigation
+
 - **Privacy concerns**: Robust privacy controls and settings
 - **Profile completeness**: Gamification and incentives
 - **Content quality**: Moderation and editorial process
