@@ -7,55 +7,55 @@ interface MissionVisionProps {
 
 export function MissionVision({ className = '' }: MissionVisionProps) {
   const mission = {
-    title: 'Our Mission',
+    title: 'Misi Kami',
     icon: Target,
     content:
-      'To build and strengthen the network of Teknik Elektro UPI alumni, fostering professional growth, knowledge sharing, and meaningful connections that drive innovation in electrical engineering and contribute to society.',
+      'Membangun dan memperkuat jaringan alumni Teknik Elektro UPI, mendorong pertumbuhan profesional, berbagi pengetahuan, dan koneksi bermakna yang mendorong inovasi dalam teknik elektro dan berkontribusi kepada masyarakat.',
     points: [
-      'Connect alumni across generations and geographical boundaries',
-      'Facilitate knowledge transfer and professional development',
-      'Support current students through mentorship and guidance',
-      'Promote excellence in electrical engineering education and practice',
+      'Menghubungkan alumni lintas generasi dan batas geografis',
+      'Memfasilitasi transfer pengetahuan dan pengembangan profesional',
+      'Mendukung mahasiswa saat ini melalui mentoring dan bimbingan',
+      'Mempromosikan keunggulan dalam pendidikan dan praktik teknik elektro',
     ],
   };
 
   const vision = {
-    title: 'Our Vision',
+    title: 'Visi Kami',
     icon: Eye,
     content:
-      'To be the leading alumni network that empowers electrical engineering professionals to create positive impact in technology, education, and society while maintaining the highest standards of excellence and integrity.',
+      'Menjadi jaringan alumni terdepan yang memberdayakan profesional teknik elektro untuk menciptakan dampak positif dalam teknologi, pendidikan, dan masyarakat sambil mempertahankan standar keunggulan dan integritas tertinggi.',
     points: [
-      'Leading platform for electrical engineering professionals',
-      'Bridge between academia and industry innovation',
-      'Catalyst for technological advancement in Indonesia',
-      'Symbol of excellence in engineering education',
+      'Platform terdepan untuk profesional teknik elektro',
+      'Jembatan antara akademia dan inovasi industri',
+      'Katalis untuk kemajuan teknologi di Indonesia',
+      'Simbol keunggulan dalam pendidikan teknik',
     ],
   };
 
   const values = [
     {
-      title: 'Excellence',
+      title: 'Keunggulan',
       icon: Target,
       description:
-        'We strive for the highest standards in everything we do, from professional achievements to community service.',
+        'Kami berusaha mencapai standar tertinggi dalam segala yang kami lakukan, dari pencapaian profesional hingga pelayanan masyarakat.',
     },
     {
-      title: 'Collaboration',
+      title: 'Kolaborasi',
       icon: Users,
       description:
-        "We believe in the power of working together, sharing knowledge, and supporting each other's growth.",
+        'Kami percaya pada kekuatan bekerja sama, berbagi pengetahuan, dan saling mendukung pertumbuhan satu sama lain.',
     },
     {
-      title: 'Innovation',
+      title: 'Inovasi',
       icon: Eye,
       description:
-        'We embrace creativity and forward-thinking approaches to solve complex engineering challenges.',
+        'Kami merangkul kreativitas dan pendekatan berpikiran maju untuk memecahkan tantangan teknik yang kompleks.',
     },
     {
-      title: 'Integrity',
+      title: 'Integritas',
       icon: Heart,
       description:
-        'We maintain the highest ethical standards and transparency in all our interactions and initiatives.',
+        'Kami mempertahankan standar etika tertinggi dan transparansi dalam semua interaksi dan inisiatif kami.',
     },
   ];
 
@@ -65,10 +65,10 @@ export function MissionVision({ className = '' }: MissionVisionProps) {
         {/* Section Header */}
         <div className="mb-12 text-center">
           <h2 className="text-foreground text-3xl font-bold md:text-4xl">
-            Mission & Vision
+            Misi & Visi
           </h2>
           <p className="text-muted-foreground mt-2">
-            Our guiding principles and aspirations for the future
+            Prinsip panduan dan aspirasi kami untuk masa depan
           </p>
         </div>
 
@@ -88,7 +88,7 @@ export function MissionVision({ className = '' }: MissionVisionProps) {
               <p className="text-muted-foreground mb-6">{mission.content}</p>
 
               <h4 className="text-foreground mb-4 text-lg font-semibold">
-                Key Focus Areas:
+                Area Fokus Utama:
               </h4>
               <ul className="space-y-2">
                 {mission.points.map((point, index) => (
@@ -117,7 +117,7 @@ export function MissionVision({ className = '' }: MissionVisionProps) {
               <p className="text-muted-foreground mb-6">{vision.content}</p>
 
               <h4 className="text-foreground mb-4 text-lg font-semibold">
-                Vision Elements:
+                Elemen Visi:
               </h4>
               <ul className="space-y-2">
                 {vision.points.map((point, index) => (
@@ -137,10 +137,10 @@ export function MissionVision({ className = '' }: MissionVisionProps) {
         <div>
           <div className="mb-8 text-center">
             <h3 className="text-foreground text-2xl font-bold md:text-3xl">
-              Our Core Values
+              Nilai-Nilai Inti Kami
             </h3>
             <p className="text-muted-foreground mt-2">
-              The principles that guide our community and actions
+              Prinsip-prinsip yang memandu komunitas dan tindakan kami
             </p>
           </div>
 

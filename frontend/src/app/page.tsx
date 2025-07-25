@@ -9,11 +9,11 @@ import { APP_CONFIG } from '@/lib/constants';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: `Home | ${APP_CONFIG.name}`,
-  description: `${APP_CONFIG.shortDescription}. Join our community of ${APP_CONFIG.fullName} graduates and connect with fellow electrical engineering professionals.`,
+  title: `Beranda | ${APP_CONFIG.name}`,
+  description: `${APP_CONFIG.shortDescription}. Bergabunglah dengan komunitas lulusan ${APP_CONFIG.fullName} dan terhubung dengan sesama profesional teknik elektro.`,
   openGraph: {
-    title: `${APP_CONFIG.name} - Alumni Network`,
-    description: `${APP_CONFIG.shortDescription}. Join our community of ${APP_CONFIG.fullName} graduates and connect with fellow electrical engineering professionals.`,
+    title: `${APP_CONFIG.name} - Jaringan Alumni`,
+    description: `${APP_CONFIG.shortDescription}. Bergabunglah dengan komunitas lulusan ${APP_CONFIG.fullName} dan terhubung dengan sesama profesional teknik elektro.`,
     url: APP_CONFIG.url,
     type: 'website',
     images: [
@@ -21,14 +21,14 @@ export const metadata: Metadata = {
         url: '/assets/hero/background.png',
         width: 1200,
         height: 630,
-        alt: `${APP_CONFIG.fullName} - Connect with Alumni`,
+        alt: `${APP_CONFIG.fullName} - Terhubung dengan Alumni`,
         type: 'image/png',
       },
     ],
   },
   twitter: {
-    title: `${APP_CONFIG.name} - Alumni Network`,
-    description: `${APP_CONFIG.shortDescription}. Join our community of ${APP_CONFIG.fullName} graduates.`,
+    title: `${APP_CONFIG.name} - Jaringan Alumni`,
+    description: `${APP_CONFIG.shortDescription}. Bergabunglah dengan komunitas lulusan ${APP_CONFIG.fullName}.`,
     images: ['/assets/hero/background.png'],
   },
 };
