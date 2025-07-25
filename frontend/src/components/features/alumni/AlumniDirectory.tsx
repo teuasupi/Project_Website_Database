@@ -23,13 +23,6 @@ export function AlumniDirectory() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-8 text-center">
-        <h1 className="mb-4 text-4xl font-bold">Direktori Alumni</h1>
-        <p className="text-muted-foreground text-lg">
-          Temukan dan terhubung dengan alumni Universitas Teuku Umar
-        </p>
-      </div>
-
       <AlumniFilters
         searchQuery={searchQuery}
         selectedYear={selectedYear}
