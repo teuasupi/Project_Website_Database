@@ -4,7 +4,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { APP_CONFIG } from '@/lib/constants';
 import { ROUTES } from '@/lib/constants';
 import LoginForm from './components/LoginForm';
-import { RootLayout } from '@/components/layout/RootLayout';
 import Image from 'next/image';
 import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 
@@ -16,7 +15,7 @@ export default function LoginPage() {
   ];
 
   return (
-    <RootLayout>
+    <>
       <div className="min-h-screen bg-gradient-to-br from-[#F8F9FB] via-white to-[#F8F9FB]">
         <div className="flex min-h-[calc(100vh-80px)]">
           {/* Left Side - Login Form */}
@@ -108,6 +107,6 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-    </RootLayout>
+    </>
   );
 }

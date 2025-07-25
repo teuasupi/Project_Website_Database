@@ -1,4 +1,3 @@
-import { RootLayout } from '@/components/layout/RootLayout';
 import { MissionVision } from '@/components/features/about/MissionVision';
 import { LeadershipTeam } from '@/components/features/about/LeadershipTeam';
 import { OrganizationOverview } from '@/components/features/about/OrganizationOverview';
@@ -20,7 +19,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <RootLayout>
+    <>
       <PageHeader
         title="Tentang IKA TEUAS UPI"
         subtitle="Menghubungkan generasi keunggulan teknik elektro sejak 1963"
@@ -33,6 +32,6 @@ export default function AboutPage() {
       <HistoryTimeline />
       <ProgramOverview />
       <CallToAction />
-    </RootLayout>
+    </>
   );
 }

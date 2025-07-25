@@ -1,4 +1,3 @@
-import { RootLayout } from '@/components/layout/RootLayout';
 import { HeroSection } from '@/components/common/HeroSection';
 import { LatestNews } from '@/components/features/news/LatestNews';
 import { FeaturedAlumni } from '@/components/features/alumni/FeaturedAlumni';
@@ -35,7 +34,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <RootLayout>
+    <>
       <HeroSection />
       <AboutSection />
       <Separator />
@@ -44,6 +43,6 @@ export default function Home() {
       <FeaturedAlumni />
       <Separator />
       <LatestNews />
-    </RootLayout>
+    </>
   );
 }

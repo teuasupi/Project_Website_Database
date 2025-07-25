@@ -1,4 +1,3 @@
-import { RootLayout } from '@/components/layout/RootLayout';
 import { PageHeader } from '@/components/common/PageHeader';
 import { ContactForm } from '@/components/features/contact/ContactForm';
 import { OfficeLocation } from '@/components/features/contact/OfficeLocation';
@@ -12,7 +11,7 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <RootLayout>
+    <>
       {/* Page Header */}
       <PageHeader
         title="Hubungi Kami"
@@ -30,6 +29,6 @@ export default function ContactPage() {
 
       {/* Office Location Section */}
       <OfficeLocation />
-    </RootLayout>
+    </>
   );
 }
