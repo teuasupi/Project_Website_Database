@@ -121,14 +121,18 @@ export function AlumniPagination({
               }`}
             />
           </PaginationItem>
-          
+
           {generatePaginationItems()}
-          
+
           <PaginationItem>
             <PaginationNext
-              onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
+              onClick={() =>
+                onPageChange(Math.min(totalPages, currentPage + 1))
+              }
               className={`cursor-pointer ${
-                currentPage === totalPages ? 'pointer-events-none opacity-50' : ''
+                currentPage === totalPages
+                  ? 'pointer-events-none opacity-50'
+                  : ''
               }`}
             />
           </PaginationItem>

@@ -77,15 +77,17 @@ export const API_ENDPOINTS = {
     DIRECTORY: '/api/alumni/directory',
     SEARCH: '/api/alumni/search',
     FEATURED: '/api/alumni/featured',
-    
+
     // Connections
     CONNECTIONS: '/api/alumni/connections',
     CONNECT: '/api/alumni/connect',
     DISCONNECT: (id: number) => `/api/alumni/connections/${id}`,
     CONNECTION_REQUESTS: '/api/alumni/connection-requests',
-    ACCEPT_CONNECTION: (id: number) => `/api/alumni/connection-requests/${id}/accept`,
-    DECLINE_CONNECTION: (id: number) => `/api/alumni/connection-requests/${id}/decline`,
-    
+    ACCEPT_CONNECTION: (id: number) =>
+      `/api/alumni/connection-requests/${id}/accept`,
+    DECLINE_CONNECTION: (id: number) =>
+      `/api/alumni/connection-requests/${id}/decline`,
+
     // Articles
     ARTICLES: {
       BASE: '/api/alumni/articles',
@@ -99,16 +101,16 @@ export const API_ENDPOINTS = {
       UNLIKE: (id: number) => `/api/alumni/articles/${id}/unlike`,
       COMMENTS: (id: number) => `/api/alumni/articles/${id}/comments`,
       ADD_COMMENT: (id: number) => `/api/alumni/articles/${id}/comments`,
-      UPDATE_COMMENT: (articleId: number, commentId: number) => 
+      UPDATE_COMMENT: (articleId: number, commentId: number) =>
         `/api/alumni/articles/${articleId}/comments/${commentId}`,
-      DELETE_COMMENT: (articleId: number, commentId: number) => 
+      DELETE_COMMENT: (articleId: number, commentId: number) =>
         `/api/alumni/articles/${articleId}/comments/${commentId}`,
       CATEGORIES: '/api/alumni/articles/categories',
       MY_ARTICLES: '/api/alumni/articles/my-articles',
       DRAFTS: '/api/alumni/articles/drafts',
       SAVE_DRAFT: '/api/alumni/articles/save-draft',
     },
-    
+
     // Mentorship
     MENTORSHIP: {
       MENTORS: '/api/alumni/mentorship/mentors',
@@ -118,12 +120,16 @@ export const API_ENDPOINTS = {
       SESSIONS: '/api/alumni/mentorship/sessions',
       SCHEDULE_SESSION: '/api/alumni/mentorship/sessions',
       UPDATE_SESSION: (id: number) => `/api/alumni/mentorship/sessions/${id}`,
-      CANCEL_SESSION: (id: number) => `/api/alumni/mentorship/sessions/${id}/cancel`,
-      COMPLETE_SESSION: (id: number) => `/api/alumni/mentorship/sessions/${id}/complete`,
-      ACCEPT_REQUEST: (id: number) => `/api/alumni/mentorship/requests/${id}/accept`,
-      DECLINE_REQUEST: (id: number) => `/api/alumni/mentorship/requests/${id}/decline`,
+      CANCEL_SESSION: (id: number) =>
+        `/api/alumni/mentorship/sessions/${id}/cancel`,
+      COMPLETE_SESSION: (id: number) =>
+        `/api/alumni/mentorship/sessions/${id}/complete`,
+      ACCEPT_REQUEST: (id: number) =>
+        `/api/alumni/mentorship/requests/${id}/accept`,
+      DECLINE_REQUEST: (id: number) =>
+        `/api/alumni/mentorship/requests/${id}/decline`,
     },
-    
+
     // Profile Management
     UPLOAD_PHOTO: '/api/alumni/upload-photo',
     UPLOAD_RESUME: '/api/alumni/upload-resume',
@@ -135,7 +141,7 @@ export const API_ENDPOINTS = {
     ADD_SKILL: '/api/alumni/skills',
     UPDATE_SKILL: (id: string) => `/api/alumni/skills/${id}`,
     DELETE_SKILL: (id: string) => `/api/alumni/skills/${id}`,
-    ENDORSE_SKILL: (alumniId: number, skillId: string) => 
+    ENDORSE_SKILL: (alumniId: number, skillId: string) =>
       `/api/alumni/${alumniId}/skills/${skillId}/endorse`,
   },
 

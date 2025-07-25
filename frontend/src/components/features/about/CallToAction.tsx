@@ -15,8 +15,8 @@ export function CallToAction({ className = '' }: CallToActionProps) {
             Bergabunglah dengan Komunitas Kami
           </h2>
           <p className="text-muted-foreground mb-8">
-            Jadilah bagian dari jaringan profesional teknik elektro yang berkembang.
-            Terhubung, belajar, dan berkembang bersama kami.
+            Jadilah bagian dari jaringan profesional teknik elektro yang
+            berkembang. Terhubung, belajar, dan berkembang bersama kami.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Button size="lg" asChild>

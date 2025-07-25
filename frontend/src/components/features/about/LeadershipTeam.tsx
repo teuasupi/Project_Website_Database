@@ -137,7 +137,8 @@ export function LeadershipTeam({ className = '' }: LeadershipTeamProps) {
             Tim Kepemimpinan
           </h2>
           <p className="text-muted-foreground mt-2">
-            Temui para profesional berdedikasi yang memimpin komunitas alumni kami
+            Temui para profesional berdedikasi yang memimpin komunitas alumni
+            kami
           </p>
         </div>
 

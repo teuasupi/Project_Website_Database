@@ -30,8 +30,8 @@ export function OfficeLocation() {
             ></iframe>
           </div>
           <p className="text-muted-foreground mt-4 text-center text-sm">
-            Kantor alumni terletak di gedung administrasi utama.
-            Cari papan nama IKA TEUAS.
+            Kantor alumni terletak di gedung administrasi utama. Cari papan nama
+            IKA TEUAS.
           </p>
         </div>
       </div>

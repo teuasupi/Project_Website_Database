@@ -53,7 +53,9 @@ export function AlumniDirectory() {
       {filteredAlumni.length === 0 && (
         <div className="py-12 text-center">
           <Users className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
-          <h3 className="mb-2 text-lg font-semibold">Tidak ada alumni ditemukan</h3>
+          <h3 className="mb-2 text-lg font-semibold">
+            Tidak ada alumni ditemukan
+          </h3>
           <p className="text-muted-foreground">
             Coba ubah kriteria pencarian atau filter Anda
           </p>

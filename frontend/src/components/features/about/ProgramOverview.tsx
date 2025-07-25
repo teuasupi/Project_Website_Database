@@ -100,8 +100,8 @@ export function ProgramOverview({ className = '' }: ProgramOverviewProps) {
               </h3>
               <p className="text-muted-foreground mb-4">
                 Kemitraan kuat kami dengan Universitas Pendidikan Indonesia
-                memastikan kolaborasi berkelanjutan dalam penelitian, pendidikan, dan
-                inisiatif pengembangan profesional.
+                memastikan kolaborasi berkelanjutan dalam penelitian,
+                pendidikan, dan inisiatif pengembangan profesional.
               </p>
               <Button variant="outline" asChild>
                 <Link

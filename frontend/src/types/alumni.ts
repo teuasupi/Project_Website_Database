@@ -282,7 +282,15 @@ export interface RegistrationStep {
 
 export interface FormField {
   name: string;
-  type: 'text' | 'email' | 'password' | 'select' | 'textarea' | 'file' | 'date' | 'number';
+  type:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'select'
+    | 'textarea'
+    | 'file'
+    | 'date'
+    | 'number';
   label: string;
   placeholder?: string;
   options?: { value: string; label: string }[];

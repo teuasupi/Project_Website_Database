@@ -49,19 +49,19 @@ export function AlumniStats({ className = '' }: AlumniStatsProps) {
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <Card key={index} className="border-0 bg-muted/30 text-center">
+              <Card key={index} className="bg-muted/30 border-0 text-center">
                 <CardContent className="p-6">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                    <Icon className="h-8 w-8 text-primary" />
+                  <div className="bg-primary/10 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
+                    <Icon className="text-primary h-8 w-8" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-3xl font-bold text-foreground">
+                    <h3 className="text-foreground text-3xl font-bold">
                       {stat.value}
                     </h3>
-                    <p className="text-lg font-semibold text-foreground">
+                    <p className="text-foreground text-lg font-semibold">
                       {stat.label}
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground text-sm">
                       {stat.description}
                     </p>
                   </div>

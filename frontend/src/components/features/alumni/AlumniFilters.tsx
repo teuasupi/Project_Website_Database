@@ -9,11 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Search, Filter, Users } from 'lucide-react';
-import {
-  GRADUATION_YEARS,
-  LOCATIONS,
-  COMPANIES,
-} from '@/lib/constants/alumni';
+import { GRADUATION_YEARS, LOCATIONS, COMPANIES } from '@/lib/constants/alumni';
 
 interface AlumniFiltersProps {
   searchQuery: string;
@@ -116,9 +112,7 @@ export function AlumniFilters({
             </Select>
           </div>
           <div>
-            <label className="mb-2 block text-sm font-medium">
-              Perusahaan
-            </label>
+            <label className="mb-2 block text-sm font-medium">Perusahaan</label>
             <Select
               value={selectedCompany}
               onValueChange={(value) => onFilterChange('company', value)}

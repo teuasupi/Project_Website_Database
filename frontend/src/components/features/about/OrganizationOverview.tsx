@@ -8,7 +8,9 @@ interface OrganizationOverviewProps {
   className?: string;
 }
 
-export function OrganizationOverview({ className = '' }: OrganizationOverviewProps) {
+export function OrganizationOverview({
+  className = '',
+}: OrganizationOverviewProps) {
   const stats = [
     {
       icon: Users,
@@ -47,26 +49,25 @@ export function OrganizationOverview({ className = '' }: OrganizationOverviewPro
             <div className="text-muted-foreground space-y-4">
               <p>
                 IKA TEUAS UPI (Ikatan Keluarga Alumni Teknik Elektro UPI) adalah
-                asosiasi alumni resmi dari jurusan Teknik Elektro
-                di Universitas Pendidikan Indonesia. Selama lebih dari enam
-                dekade, kami telah menghubungkan para lulusan, memupuk
-                hubungan profesional, dan berkontribusi pada kemajuan
-                pendidikan teknik elektro.
+                asosiasi alumni resmi dari jurusan Teknik Elektro di Universitas
+                Pendidikan Indonesia. Selama lebih dari enam dekade, kami telah
+                menghubungkan para lulusan, memupuk hubungan profesional, dan
+                berkontribusi pada kemajuan pendidikan teknik elektro.
               </p>
               <p>
                 Jaringan kami tersebar di seluruh Indonesia dan internasional,
-                menyatukan para profesional dari berbagai industri
-                termasuk teknologi, energi, telekomunikasi, pendidikan,
-                dan kewirausahaan. Kami berfungsi sebagai jembatan antara akademia
-                dan industri, memfasilitasi transfer pengetahuan dan pengembangan
-                profesional.
+                menyatukan para profesional dari berbagai industri termasuk
+                teknologi, energi, telekomunikasi, pendidikan, dan
+                kewirausahaan. Kami berfungsi sebagai jembatan antara akademia
+                dan industri, memfasilitasi transfer pengetahuan dan
+                pengembangan profesional.
               </p>
               <p>
                 Melalui berbagai program dan inisiatif kami, kami mendukung
                 mahasiswa saat ini, lulusan baru, dan profesional berpengalaman
-                dalam perjalanan karir mereka sambil mempertahankan
-                ikatan kuat dengan alma mater kami dan berkontribusi pada komunitas
-                teknik yang lebih luas.
+                dalam perjalanan karir mereka sambil mempertahankan ikatan kuat
+                dengan alma mater kami dan berkontribusi pada komunitas teknik
+                yang lebih luas.
               </p>
             </div>
 
