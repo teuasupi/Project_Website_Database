@@ -4,10 +4,10 @@ export function OfficeLocation() {
       <div className="container mx-auto px-4">
         <div className="mb-12 text-center">
           <h2 className="text-foreground mb-4 text-3xl font-bold md:text-4xl">
-            Visit Our Office
+            Kunjungi Kantor Kami
           </h2>
           <p className="text-muted-foreground">
-            Faculty of Technology And Vocational Education
+            Fakultas Pendidikan Teknologi dan Kejuruan
             <br />
             Universitas Pendidikan Indonesia
             <br />
@@ -30,8 +30,8 @@ export function OfficeLocation() {
             ></iframe>
           </div>
           <p className="text-muted-foreground mt-4 text-center text-sm">
-            The alumni office is located in the main administration building.
-            Look for the IKA TEUAS signage.
+            Kantor alumni terletak di gedung administrasi utama.
+            Cari papan nama IKA TEUAS.
           </p>
         </div>
       </div>

@@ -5,9 +5,9 @@ import { OfficeLocation } from '@/components/features/contact/OfficeLocation';
 import { Separator } from '@/components/ui/separator';
 
 export const metadata = {
-  title: 'Contact Us',
+  title: 'Hubungi Kami',
   description:
-    'Get in touch with IKA TEUAS UPI. Find our contact information, alumni services, and office locations.',
+    'Hubungi IKA TEUAS UPI. Temukan informasi kontak kami, layanan alumni, dan lokasi kantor.',
 };
 
 export default function ContactPage() {
@@ -15,11 +15,11 @@ export default function ContactPage() {
     <RootLayout>
       {/* Page Header */}
       <PageHeader
-        title="Contact Us"
-        subtitle="Get in touch with IKA TEUAS UPI"
+        title="Hubungi Kami"
+        subtitle="Hubungi IKA TEUAS UPI"
         breadcrumbs={[
-          { label: 'Home', href: '/' },
-          { label: 'Contact', current: true },
+          { label: 'Beranda', href: '/' },
+          { label: 'Kontak', current: true },
         ]}
       />
 
