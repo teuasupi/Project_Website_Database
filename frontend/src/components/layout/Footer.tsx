@@ -22,7 +22,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-gray-800 bg-gradient-to-br from-[#1a1825] via-[#212025] to-[#252030]">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
           {/* Organization Info - Left Side */}
