@@ -13,7 +13,11 @@ import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { ROUTES, APP_CONFIG } from '@/lib/constants';
 import { MOCK_MEDIA_ALBUMS, MOCK_MEDIA_ITEMS } from '@/lib/constants/content';
-import { AlbumHeader, MediaGrid, RelatedAlbums } from '@/components/features/gallery';
+import {
+  AlbumHeader,
+  MediaGrid,
+  RelatedAlbums,
+} from '@/components/features/gallery';
 
 interface AlbumDetailPageProps {
   params: {
@@ -111,10 +115,10 @@ export default function AlbumDetailPage({ params }: AlbumDetailPageProps) {
       </div>
 
       {/* Album Header */}
-      <AlbumHeader 
-        album={album} 
-        photoCount={photoCount} 
-        videoCount={videoCount} 
+      <AlbumHeader
+        album={album}
+        photoCount={photoCount}
+        videoCount={videoCount}
       />
 
       {/* Media Grid */}

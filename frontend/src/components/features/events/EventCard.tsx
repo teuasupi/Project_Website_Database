@@ -150,9 +150,7 @@ export function EventCard({ event }: EventCardProps) {
         {/* Actions */}
         <div className="flex gap-2">
           <Button variant="outline" size="sm" className="flex-1" asChild>
-            <Link href={ROUTES.EVENTS.DETAIL(event.slug)}>
-              Lihat Detail
-            </Link>
+            <Link href={ROUTES.EVENTS.DETAIL(event.slug)}>Lihat Detail</Link>
           </Button>
 
           {event.requiresRegistration &&

@@ -2,13 +2,7 @@ import { MediaAlbum } from '@/types/content';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import {
-  Calendar,
-  Eye,
-  Download,
-  ExternalLink,
-  User,
-} from 'lucide-react';
+import { Calendar, Eye, Download, ExternalLink, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/constants';
@@ -109,9 +103,7 @@ export function MediaCard({ album }: MediaCardProps) {
           {/* Actions */}
           <div className="flex items-center gap-2 pt-2">
             <Button asChild size="sm" className="flex-1">
-              <Link href={ROUTES.GALLERY.ALBUM(album.slug)}>
-                Lihat Detail
-              </Link>
+              <Link href={ROUTES.GALLERY.ALBUM(album.slug)}>Lihat Detail</Link>
             </Button>
 
             <Button variant="outline" size="sm">
