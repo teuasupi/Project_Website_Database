@@ -67,7 +67,7 @@ export function Footer() {
 
           {/* Navigation Sections - Grid Layout */}
           <div className="flex-grow">
-            <div className="grid gap-8 lg:grid-cols-4 lg:gap-6">
+            <div className="grid gap-8 sm:grid-cols-2 lg:gap-6 xl:grid-cols-4">
               {/* About Section */}
               <div>
                 <h3 className="border-primary/30 relative mb-6 flex items-center border-b pb-3 text-lg font-bold text-white">
