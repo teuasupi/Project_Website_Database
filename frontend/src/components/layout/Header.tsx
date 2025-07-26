@@ -211,7 +211,7 @@ export function Header() {
           ) : (
             <div className="hidden sm:flex">
               <Button asChild>
-                <Link href={ROUTES.REGISTER}>Join Alumni</Link>
+                <Link href={ROUTES.LOGIN}>Join Alumni</Link>
               </Button>
             </div>
           )}
