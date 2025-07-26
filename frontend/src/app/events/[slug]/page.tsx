@@ -30,16 +30,17 @@ import { ROUTES, APP_CONFIG } from '@/lib/constants';
 import { MOCK_EVENTS } from '@/lib/constants/content';
 
 interface EventDetailPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({
   params,
 }: EventDetailPageProps): Promise<Metadata> {
   // In real implementation, this would fetch from API
-  const event = MOCK_EVENTS.find((e) => e.slug === params.slug);
+  const { slug } = await params;
+  const event = MOCK_EVENTS.find((e) => e.slug === slug);
 
   if (!event) {
     return {
@@ -59,9 +60,12 @@ export async function generateMetadata({
   };
 }
 
-export default function EventDetailPage({ params }: EventDetailPageProps) {
+export default async function EventDetailPage({
+  params,
+}: EventDetailPageProps) {
   // In real implementation, this would fetch from API
-  const event = MOCK_EVENTS.find((e) => e.slug === params.slug);
+  const { slug } = await params;
+  const event = MOCK_EVENTS.find((e) => e.slug === slug);
 
   if (!event) {
     notFound();

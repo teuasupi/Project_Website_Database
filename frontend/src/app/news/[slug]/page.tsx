@@ -18,16 +18,17 @@ import { ROUTES, APP_CONFIG } from '@/lib/constants';
 import { MOCK_NEWS_ARTICLES } from '@/lib/constants/content';
 
 interface NewsDetailPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({
   params,
 }: NewsDetailPageProps): Promise<Metadata> {
   // In real implementation, this would fetch from API
-  const article = MOCK_NEWS_ARTICLES.find((a) => a.slug === params.slug);
+  const { slug } = await params;
+  const article = MOCK_NEWS_ARTICLES.find((a) => a.slug === slug);
 
   if (!article) {
     return {
@@ -49,9 +50,10 @@ export async function generateMetadata({
   };
 }
 
-export default function NewsDetailPage({ params }: NewsDetailPageProps) {
+export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
   // In real implementation, this would fetch from API
-  const article = MOCK_NEWS_ARTICLES.find((a) => a.slug === params.slug);
+  const { slug } = await params;
+  const article = MOCK_NEWS_ARTICLES.find((a) => a.slug === slug);
 
   if (!article) {
     notFound();

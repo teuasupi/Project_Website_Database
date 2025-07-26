@@ -20,16 +20,17 @@ import {
 } from '@/components/features/gallery';
 
 interface AlbumDetailPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({
   params,
 }: AlbumDetailPageProps): Promise<Metadata> {
   // In real implementation, this would fetch from API
-  const album = MOCK_MEDIA_ALBUMS.find((a) => a.slug === params.slug);
+  const { slug } = await params;
+  const album = MOCK_MEDIA_ALBUMS.find((a) => a.slug === slug);
 
   if (!album) {
     return {
@@ -49,9 +50,12 @@ export async function generateMetadata({
   };
 }
 
-export default function AlbumDetailPage({ params }: AlbumDetailPageProps) {
+export default async function AlbumDetailPage({
+  params,
+}: AlbumDetailPageProps) {
   // In real implementation, this would fetch from API
-  const album = MOCK_MEDIA_ALBUMS.find((a) => a.slug === params.slug);
+  const { slug } = await params;
+  const album = MOCK_MEDIA_ALBUMS.find((a) => a.slug === slug);
 
   if (!album) {
     notFound();
