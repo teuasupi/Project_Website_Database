@@ -11,15 +11,20 @@ interface NewsPageContentProps {
   categories: NewsCategory[];
 }
 
-export function NewsPageContent({ newsArticles, categories }: NewsPageContentProps) {
-  const [selectedFilters, setSelectedFilters] = useState<Partial<NewsFilter>>({});
-  
+export function NewsPageContent({
+  newsArticles,
+  categories,
+}: NewsPageContentProps) {
+  const [selectedFilters, setSelectedFilters] = useState<Partial<NewsFilter>>(
+    {}
+  );
+
   const featuredArticle = newsArticles[0];
-  
+
   // Filter articles based on selected filters
   const filteredArticles = useMemo(() => {
     let filtered = newsArticles.slice(1); // Exclude featured article
-    
+
     // Apply search filter
     if (selectedFilters.search) {
       const searchTerm = selectedFilters.search.toLowerCase();
@@ -30,14 +35,14 @@ export function NewsPageContent({ newsArticles, categories }: NewsPageContentPro
           article.content.toLowerCase().includes(searchTerm)
       );
     }
-    
+
     // Apply category filter
     if (selectedFilters.category) {
       filtered = filtered.filter(
         (article) => article.category.slug === selectedFilters.category
       );
     }
-    
+
     // Apply date range filter
     if (selectedFilters.dateFrom && selectedFilters.dateFrom.trim() !== '') {
       const fromDate = new Date(selectedFilters.dateFrom as string);
@@ -47,7 +52,7 @@ export function NewsPageContent({ newsArticles, categories }: NewsPageContentPro
         );
       }
     }
-    
+
     if (selectedFilters.dateTo && selectedFilters.dateTo.trim() !== '') {
       const toDate = new Date(selectedFilters.dateTo as string);
       if (!isNaN(toDate.getTime())) {
@@ -56,7 +61,7 @@ export function NewsPageContent({ newsArticles, categories }: NewsPageContentPro
         );
       }
     }
-    
+
     return filtered;
   }, [newsArticles, selectedFilters]);
 
@@ -92,7 +97,8 @@ export function NewsPageContent({ newsArticles, categories }: NewsPageContentPro
               </p>
               {Object.keys(selectedFilters).length > 0 && (
                 <p className="text-muted-foreground mt-2 text-sm">
-                  Menampilkan {filteredArticles.length} dari {newsArticles.length - 1} berita
+                  Menampilkan {filteredArticles.length} dari{' '}
+                  {newsArticles.length - 1} berita
                 </p>
               )}
             </div>

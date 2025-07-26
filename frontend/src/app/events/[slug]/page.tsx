@@ -89,10 +89,22 @@ export default function EventDetailPage({ params }: EventDetailPageProps) {
   const getStatusBadge = () => {
     switch (event.status) {
       case 'upcoming':
-        return <Badge className="bg-blue-500 text-white">Mendatang</Badge>;
+        return (
+          <Badge
+            variant="default"
+            className="bg-primary text-primary-foreground"
+          >
+            Mendatang
+          </Badge>
+        );
       case 'ongoing':
         return (
-          <Badge className="bg-green-500 text-white">Sedang Berlangsung</Badge>
+          <Badge
+            variant="default"
+            className="bg-success text-success-foreground"
+          >
+            Sedang Berlangsung
+          </Badge>
         );
       case 'completed':
         return <Badge variant="secondary">Selesai</Badge>;
@@ -154,10 +166,7 @@ export default function EventDetailPage({ params }: EventDetailPageProps) {
                 <div className="flex items-center gap-3">
                   <Badge
                     variant="outline"
-                    style={{
-                      borderColor: event.category.color,
-                      color: event.category.color,
-                    }}
+                    className="border-primary text-primary"
                   >
                     {event.category.name}
                   </Badge>
@@ -249,7 +258,7 @@ export default function EventDetailPage({ params }: EventDetailPageProps) {
           <div className="lg:col-span-1">
             <div className="space-y-6">
               {/* Event Details Card */}
-              <Card>
+              <Card className="p-0">
                 <CardContent className="p-6">
                   <h3 className="mb-4 text-lg font-semibold">Detail Acara</h3>
                   <div className="space-y-4">
@@ -367,7 +376,7 @@ export default function EventDetailPage({ params }: EventDetailPageProps) {
               </Card>
 
               {/* Organizer Info */}
-              <Card>
+              <Card className="p-0">
                 <CardContent className="p-6">
                   <h3 className="mb-4 text-lg font-semibold">Penyelenggara</h3>
                   <div className="space-y-3">

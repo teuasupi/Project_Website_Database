@@ -90,7 +90,7 @@ export function MediaHeroSection({ featuredAlbum }: MediaHeroSectionProps) {
 
           {/* Featured Image/Video */}
           <div className="relative">
-            <Card className="overflow-hidden shadow-2xl">
+            <Card className="overflow-hidden p-0 shadow-2xl">
               <CardContent className="p-0">
                 <div className="relative h-64 md:h-80 lg:h-96">
                   <Image
@@ -103,20 +103,6 @@ export function MediaHeroSection({ featuredAlbum }: MediaHeroSectionProps) {
                     className="object-cover"
                     priority
                   />
-
-                  {/* Overlay for video albums */}
-                  {videoCount > 0 && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                      <div className="rounded-full bg-white/90 p-4 backdrop-blur-sm">
-                        <Play className="text-primary h-8 w-8" />
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Item count overlay */}
-                  <div className="absolute top-4 right-4 rounded-full bg-black/70 px-3 py-1 text-sm font-medium text-white backdrop-blur-sm">
-                    {totalItems} item{totalItems > 1 ? 's' : ''}
-                  </div>
                 </div>
               </CardContent>
             </Card>

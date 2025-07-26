@@ -55,7 +55,9 @@ export function EventsGrid({ events, isLoading = false }: EventsGridProps) {
 
     if (event.status === 'ongoing') {
       return (
-        <Badge className="bg-green-500 text-white">Sedang Berlangsung</Badge>
+        <Badge variant="default" className="bg-success text-success-foreground">
+          Sedang Berlangsung
+        </Badge>
       );
     }
 
@@ -68,144 +70,144 @@ export function EventsGrid({ events, isLoading = false }: EventsGridProps) {
     }
 
     if (isToday) {
-      return <Badge className="bg-orange-500 text-white">Hari Ini</Badge>;
+      return (
+        <Badge variant="default" className="bg-warning text-warning-foreground">
+          Hari Ini
+        </Badge>
+      );
     }
 
     if (isTomorrow) {
-      return <Badge className="bg-blue-500 text-white">Besok</Badge>;
+      return (
+        <Badge variant="default" className="bg-primary text-primary-foreground">
+          Besok
+        </Badge>
+      );
     }
 
-    return <Badge variant="outline">Mendatang</Badge>;
+    return (
+      <Badge className="bg-background/90 text-foreground">Mendatang</Badge>
+    );
   };
 
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
       {events.map((event) => {
         const eventDate = new Date(event.eventDate);
 
         return (
           <Card
             key={event.id}
-            className="group overflow-hidden transition-shadow duration-300 hover:shadow-lg"
+            className="group overflow-hidden p-0 transition-shadow duration-300 hover:shadow-lg"
           >
-            <Link href={ROUTES.EVENTS.DETAIL(event.slug)}>
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src={event.featuredImage || '/images/placeholder-event.jpg'}
-                  alt={event.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3">
-                  <Badge
-                    variant="secondary"
-                    className="bg-background/90 text-foreground"
-                    style={{ borderColor: event.category.color }}
-                  >
-                    {event.category.name}
-                  </Badge>
-                </div>
-                <div className="absolute top-3 right-3">
-                  {getStatusBadge(event)}
-                </div>
+            {/* Image */}
+            <div className="relative h-48 overflow-hidden">
+              <Image
+                src={event.featuredImage || '/images/placeholder-event.jpg'}
+                alt={event.title}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+              <div className="absolute top-3 right-3 flex items-center gap-1">
+                <Badge
+                  variant="secondary"
+                  className="bg-background/90 text-foregroun"
+                >
+                  {event.category.name}
+                </Badge>
+                {getStatusBadge(event)}
               </div>
+            </div>
 
-              {/* Content */}
-              <CardContent className="p-4">
-                <h3 className="text-foreground group-hover:text-primary mb-2 line-clamp-2 font-semibold transition-colors">
-                  {event.title}
-                </h3>
+            {/* Content */}
+            <CardContent className="p-4">
+              <h3 className="text-foreground group-hover:text-primary mb-2 line-clamp-2 font-semibold transition-colors">
+                {event.title}
+              </h3>
 
-                <p className="text-muted-foreground mb-4 line-clamp-2 text-sm">
-                  {event.shortDescription}
-                </p>
+              <p className="text-muted-foreground mb-4 line-clamp-2 text-sm">
+                {event.shortDescription}
+              </p>
 
-                {/* Event Details */}
-                <div className="text-muted-foreground mb-4 space-y-2 text-xs">
-                  <div className="flex items-center gap-1">
-                    <Calendar className="h-3 w-3" />
-                    <span>
-                      {eventDate.toLocaleDateString('id-ID', {
-                        weekday: 'short',
-                        day: 'numeric',
-                        month: 'short',
-                        year: 'numeric',
-                      })}
-                    </span>
-                    <Clock className="ml-2 h-3 w-3" />
-                    <span>
-                      {eventDate.toLocaleTimeString('id-ID', {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}{' '}
-                      WIB
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-1">
-                    <MapPin className="h-3 w-3" />
-                    <span className="line-clamp-1">{event.location}</span>
-                  </div>
-
-                  {event.maxAttendees && (
-                    <div className="flex items-center gap-1">
-                      <Users className="h-3 w-3" />
-                      <span>
-                        {event.currentAttendees || 0} / {event.maxAttendees}{' '}
-                        peserta
-                      </span>
-                    </div>
-                  )}
+              {/* Event Details */}
+              <div className="text-muted-foreground mb-4 space-y-2 text-xs">
+                <div className="flex items-center gap-1">
+                  <Calendar className="h-3 w-3" />
+                  <span>
+                    {eventDate.toLocaleDateString('id-ID', {
+                      weekday: 'short',
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                    })}
+                  </span>
+                  <Clock className="ml-2 h-3 w-3" />
+                  <span>
+                    {eventDate.toLocaleTimeString('id-ID', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}{' '}
+                    WIB
+                  </span>
                 </div>
 
-                {/* Price */}
-                {event.price !== undefined && (
-                  <div className="mb-4">
-                    {event.price === 0 ? (
-                      <Badge
-                        variant="secondary"
-                        className="bg-green-100 text-green-800"
-                      >
-                        Gratis
-                      </Badge>
-                    ) : (
-                      <span className="text-primary text-sm font-medium">
-                        {new Intl.NumberFormat('id-ID', {
-                          style: 'currency',
-                          currency: event.currency || 'IDR',
-                        }).format(event.price)}
-                      </span>
-                    )}
+                <div className="flex items-center gap-1">
+                  <MapPin className="h-3 w-3" />
+                  <span className="line-clamp-1">{event.location}</span>
+                </div>
+
+                {event.maxAttendees && (
+                  <div className="flex items-center gap-1">
+                    <Users className="h-3 w-3" />
+                    <span>
+                      {event.currentAttendees || 0} / {event.maxAttendees}{' '}
+                      peserta
+                    </span>
                   </div>
                 )}
+              </div>
 
-                {/* Actions */}
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="flex-1"
-                    asChild
-                  >
-                    <Link href={ROUTES.EVENTS.DETAIL(event.slug)}>
-                      Lihat Detail
-                    </Link>
-                  </Button>
-
-                  {event.requiresRegistration &&
-                    event.registrationUrl &&
-                    event.status === 'upcoming' && (
-                      <Button size="sm" asChild>
-                        <Link href={event.registrationUrl} target="_blank">
-                          Daftar
-                          <ExternalLink className="ml-1 h-3 w-3" />
-                        </Link>
-                      </Button>
-                    )}
+              {/* Price */}
+              {event.price !== undefined && (
+                <div className="mb-4">
+                  {event.price === 0 ? (
+                    <Badge
+                      variant="secondary"
+                      className="bg-success/10 text-success border-success/20"
+                    >
+                      Gratis
+                    </Badge>
+                  ) : (
+                    <span className="text-primary text-sm font-medium">
+                      {new Intl.NumberFormat('id-ID', {
+                        style: 'currency',
+                        currency: event.currency || 'IDR',
+                      }).format(event.price)}
+                    </span>
+                  )}
                 </div>
-              </CardContent>
-            </Link>
+              )}
+
+              {/* Actions */}
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm" className="flex-1" asChild>
+                  <Link href={ROUTES.EVENTS.DETAIL(event.slug)}>
+                    Lihat Detail
+                  </Link>
+                </Button>
+
+                {event.requiresRegistration &&
+                  event.registrationUrl &&
+                  event.status === 'upcoming' && (
+                    <Button size="sm" asChild>
+                      <Link href={event.registrationUrl} target="_blank">
+                        Daftar
+                        <ExternalLink className="ml-1 h-3 w-3" />
+                      </Link>
+                    </Button>
+                  )}
+              </div>
+            </CardContent>
           </Card>
         );
       })}

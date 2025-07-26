@@ -29,52 +29,57 @@ export function MediaPageContent({ albums }: MediaPageContentProps) {
     dateRange: {},
     creator: [],
   });
-  
+
   const featuredAlbum = albums[0];
-  
+
   // Filter albums based on selected filters
   const filteredAlbums = useMemo(() => {
     let filtered = albums.slice(1); // Exclude featured album
-    
+
     // Apply search filter
     if (selectedFilters.search) {
       const searchTerm = selectedFilters.search.toLowerCase();
       filtered = filtered.filter(
         (album) =>
           album.title.toLowerCase().includes(searchTerm) ||
-          (album.description && album.description.toLowerCase().includes(searchTerm)) ||
-          album.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+          (album.description &&
+            album.description.toLowerCase().includes(searchTerm)) ||
+          album.tags.some((tag) => tag.toLowerCase().includes(searchTerm))
       );
     }
-    
+
     // Apply type filter (this would need to be implemented based on album content)
     if (selectedFilters.type.length > 0) {
       // For now, we'll filter based on tags that might indicate type
-      filtered = filtered.filter(
-        (album) => selectedFilters.type.some(type => 
-          album.tags.some(tag => tag.toLowerCase().includes(type))
+      filtered = filtered.filter((album) =>
+        selectedFilters.type.some((type) =>
+          album.tags.some((tag) => tag.toLowerCase().includes(type))
         )
       );
     }
-    
+
     // Apply tag filter
     if (selectedFilters.tags.length > 0) {
-      filtered = filtered.filter(
-        (album) => selectedFilters.tags.some(filterTag => 
-          album.tags.some(tag => tag.toLowerCase().includes(filterTag.toLowerCase()))
+      filtered = filtered.filter((album) =>
+        selectedFilters.tags.some((filterTag) =>
+          album.tags.some((tag) =>
+            tag.toLowerCase().includes(filterTag.toLowerCase())
+          )
         )
       );
     }
-    
+
     // Apply creator filter
     if (selectedFilters.creator.length > 0) {
-      filtered = filtered.filter(
-        (album) => selectedFilters.creator.some(creatorFilter =>
-          album.creator?.fullName.toLowerCase().includes(creatorFilter.toLowerCase())
+      filtered = filtered.filter((album) =>
+        selectedFilters.creator.some((creatorFilter) =>
+          album.creator?.fullName
+            .toLowerCase()
+            .includes(creatorFilter.toLowerCase())
         )
       );
     }
-    
+
     // Apply date range filter
     if (selectedFilters.dateRange.from) {
       const fromDate = new Date(selectedFilters.dateRange.from);
@@ -84,7 +89,7 @@ export function MediaPageContent({ albums }: MediaPageContentProps) {
         );
       }
     }
-    
+
     if (selectedFilters.dateRange.to) {
       const toDate = new Date(selectedFilters.dateRange.to);
       if (!isNaN(toDate.getTime())) {
@@ -93,7 +98,7 @@ export function MediaPageContent({ albums }: MediaPageContentProps) {
         );
       }
     }
-    
+
     return filtered;
   }, [albums, selectedFilters]);
 
@@ -123,14 +128,15 @@ export function MediaPageContent({ albums }: MediaPageContentProps) {
               <p className="text-muted-foreground">
                 Jelajahi koleksi foto dan video kegiatan TEUAS UPI
               </p>
-              {(selectedFilters.search || 
-                selectedFilters.type.length > 0 || 
-                selectedFilters.tags.length > 0 || 
+              {(selectedFilters.search ||
+                selectedFilters.type.length > 0 ||
+                selectedFilters.tags.length > 0 ||
                 selectedFilters.creator.length > 0 ||
                 selectedFilters.dateRange.from ||
                 selectedFilters.dateRange.to) && (
                 <p className="text-muted-foreground mt-2 text-sm">
-                  Menampilkan {filteredAlbums.length} dari {albums.length - 1} album
+                  Menampilkan {filteredAlbums.length} dari {albums.length - 1}{' '}
+                  album
                 </p>
               )}
             </div>

@@ -347,14 +347,14 @@ export default function AlbumDetailPage({ params }: AlbumDetailPageProps) {
               Album Terkait
             </h2>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3 xl:grid-cols-4">
               {relatedAlbums.map((relatedAlbum) => (
                 <Link
                   key={relatedAlbum.id}
                   href={ROUTES.GALLERY.ALBUM(relatedAlbum.slug)}
                   className="group block"
                 >
-                  <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg">
+                  <Card className="overflow-hidden p-0 transition-all duration-300 hover:shadow-lg">
                     <CardContent className="p-0">
                       <div className="relative h-32 overflow-hidden">
                         <Image

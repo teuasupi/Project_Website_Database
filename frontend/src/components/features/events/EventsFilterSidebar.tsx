@@ -2,18 +2,12 @@ import { EventCategory, EventFilter } from '@/types/content';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+
 import { Separator } from '@/components/ui/separator';
-import { Search, Filter, X, Calendar, MapPin } from 'lucide-react';
+import { Search, Filter, X, Calendar } from 'lucide-react';
 import { useState } from 'react';
 
 interface EventsFilterSidebarProps {
@@ -45,18 +39,6 @@ export function EventsFilterSidebar({
     onFilterChange({ ...selectedFilters, status: newStatus });
   };
 
-  const handleLocationFilter = (location: string) => {
-    onFilterChange({ ...selectedFilters, location });
-  };
-
-  const handleRegistrationFilter = (requiresRegistration: boolean) => {
-    const newValue =
-      selectedFilters.requiresRegistration === requiresRegistration
-        ? undefined
-        : requiresRegistration;
-    onFilterChange({ ...selectedFilters, requiresRegistration: newValue });
-  };
-
   const clearFilters = () => {
     setSearchTerm('');
     onFilterChange({});
@@ -70,14 +52,6 @@ export function EventsFilterSidebar({
     { value: 'upcoming', label: 'Mendatang' },
     { value: 'ongoing', label: 'Sedang Berlangsung' },
     { value: 'completed', label: 'Selesai' },
-  ];
-
-  const commonLocations = [
-    'Bandung',
-    'Jakarta',
-    'Surabaya',
-    'Online',
-    'Hybrid',
   ];
 
   return (
@@ -136,58 +110,6 @@ export function EventsFilterSidebar({
         </CardContent>
       </Card>
 
-      {/* Status Filter */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-lg">Status Acara</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            {eventStatuses.map((status) => (
-              <Button
-                key={status.value}
-                variant={
-                  selectedFilters.status === status.value ? 'default' : 'ghost'
-                }
-                size="sm"
-                className="w-full justify-start"
-                onClick={() => handleStatusFilter(status.value)}
-              >
-                {status.label}
-              </Button>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Location Filter */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <MapPin className="h-5 w-5" />
-            Lokasi
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Select
-            value={selectedFilters.location || ''}
-            onValueChange={handleLocationFilter}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Pilih lokasi" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="">Semua Lokasi</SelectItem>
-              {commonLocations.map((location) => (
-                <SelectItem key={location} value={location}>
-                  {location}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </CardContent>
-      </Card>
-
       {/* Date Filter */}
       <Card>
         <CardHeader className="pb-3">
@@ -232,41 +154,10 @@ export function EventsFilterSidebar({
         </CardContent>
       </Card>
 
-      {/* Registration Filter */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle className="text-lg">Pendaftaran</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="requiresRegistration"
-                checked={selectedFilters.requiresRegistration === true}
-                onCheckedChange={() => handleRegistrationFilter(true)}
-              />
-              <Label htmlFor="requiresRegistration" className="text-sm">
-                Memerlukan Pendaftaran
-              </Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="noRegistration"
-                checked={selectedFilters.requiresRegistration === false}
-                onCheckedChange={() => handleRegistrationFilter(false)}
-              />
-              <Label htmlFor="noRegistration" className="text-sm">
-                Tanpa Pendaftaran
-              </Label>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Active Filters */}
       {hasActiveFilters && (
         <Card>
-          <CardHeader className="pb-3">
+          <CardHeader>
             <CardTitle className="text-lg">Filter Aktif</CardTitle>
           </CardHeader>
           <CardContent>

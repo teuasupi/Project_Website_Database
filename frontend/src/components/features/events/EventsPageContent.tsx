@@ -11,15 +11,20 @@ interface EventsPageContentProps {
   categories: EventCategory[];
 }
 
-export function EventsPageContent({ events, categories }: EventsPageContentProps) {
-  const [selectedFilters, setSelectedFilters] = useState<Partial<EventFilter>>({});
-  
+export function EventsPageContent({
+  events,
+  categories,
+}: EventsPageContentProps) {
+  const [selectedFilters, setSelectedFilters] = useState<Partial<EventFilter>>(
+    {}
+  );
+
   const featuredEvent = events[0];
-  
+
   // Filter events based on selected filters
   const filteredEvents = useMemo(() => {
     let filtered = events.slice(1); // Exclude featured event
-    
+
     // Apply search filter
     if (selectedFilters.search) {
       const searchTerm = selectedFilters.search.toLowerCase();
@@ -30,28 +35,30 @@ export function EventsPageContent({ events, categories }: EventsPageContentProps
           event.location.toLowerCase().includes(searchTerm)
       );
     }
-    
+
     // Apply category filter
     if (selectedFilters.category) {
       filtered = filtered.filter(
         (event) => event.category.slug === selectedFilters.category
       );
     }
-    
+
     // Apply status filter
     if (selectedFilters.status) {
       filtered = filtered.filter(
         (event) => event.status === selectedFilters.status
       );
     }
-    
+
     // Apply location filter
     if (selectedFilters.location) {
-      filtered = filtered.filter(
-        (event) => event.location.toLowerCase().includes(selectedFilters.location!.toLowerCase())
+      filtered = filtered.filter((event) =>
+        event.location
+          .toLowerCase()
+          .includes(selectedFilters.location!.toLowerCase())
       );
     }
-    
+
     // Apply date range filter
     if (selectedFilters.dateFrom && selectedFilters.dateFrom.trim() !== '') {
       const fromDate = new Date(selectedFilters.dateFrom as string);
@@ -61,7 +68,7 @@ export function EventsPageContent({ events, categories }: EventsPageContentProps
         );
       }
     }
-    
+
     if (selectedFilters.dateTo && selectedFilters.dateTo.trim() !== '') {
       const toDate = new Date(selectedFilters.dateTo as string);
       if (!isNaN(toDate.getTime())) {
@@ -70,14 +77,15 @@ export function EventsPageContent({ events, categories }: EventsPageContentProps
         );
       }
     }
-    
+
     // Apply registration required filter
     if (selectedFilters.requiresRegistration !== undefined) {
       filtered = filtered.filter(
-        (event) => event.requiresRegistration === selectedFilters.requiresRegistration
+        (event) =>
+          event.requiresRegistration === selectedFilters.requiresRegistration
       );
     }
-    
+
     return filtered;
   }, [events, selectedFilters]);
 
@@ -109,11 +117,13 @@ export function EventsPageContent({ events, categories }: EventsPageContentProps
                 Acara Mendatang
               </h2>
               <p className="text-muted-foreground">
-                Temukan dan ikuti berbagai acara menarik dari komunitas alumni TEUAS UPI
+                Temukan dan ikuti berbagai acara menarik dari komunitas alumni
+                TEUAS UPI
               </p>
               {Object.keys(selectedFilters).length > 0 && (
                 <p className="text-muted-foreground mt-2 text-sm">
-                  Menampilkan {filteredEvents.length} dari {events.length - 1} acara
+                  Menampilkan {filteredEvents.length} dari {events.length - 1}{' '}
+                  acara
                 </p>
               )}
             </div>

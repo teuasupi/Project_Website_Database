@@ -66,27 +66,12 @@ export function MediaGrid({ albums, loading = false }: MediaGridProps) {
 
   return (
     <div className="space-y-6" id="gallery">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-foreground text-2xl font-bold">Album Galeri</h2>
-          <p className="text-muted-foreground">
-            {albums.length} album tersedia
-          </p>
-        </div>
-
-        <Button variant="outline" size="sm">
-          <Download className="mr-2 h-4 w-4" />
-          Download Semua
-        </Button>
-      </div>
-
       {/* Albums Grid */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {albums.map((album) => (
           <Card
             key={album.id}
-            className="group overflow-hidden transition-all duration-300 hover:shadow-lg"
+            className="group overflow-hidden p-0 transition-all duration-300 hover:shadow-lg"
           >
             <CardContent className="p-0">
               {/* Album Cover */}

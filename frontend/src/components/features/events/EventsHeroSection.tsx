@@ -43,7 +43,7 @@ export function EventsHeroSection({ featuredEvent }: EventsHeroSectionProps) {
         </div>
 
         {/* Featured Event */}
-        <Card className="overflow-hidden shadow-lg transition-shadow duration-300 hover:shadow-xl">
+        <Card className="overflow-hidden p-0 shadow-lg transition-shadow duration-300 hover:shadow-xl">
           <div className="grid grid-cols-1 gap-0 lg:grid-cols-2">
             {/* Image */}
             <div className="relative h-64 lg:h-full">
