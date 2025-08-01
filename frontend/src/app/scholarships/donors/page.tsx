@@ -5,8 +5,7 @@ import type { Metadata } from 'next';
 import { APP_CONFIG } from '@/lib/constants';
 export const metadata: Metadata = {
   title: `Donasi | ${APP_CONFIG.name}`,
-  description:
-    'Dari Kita, Oleh Kita, Untuk Kemajuan Teknik Elektro UPI.',
+  description: 'Dari Kita, Oleh Kita, Untuk Kemajuan Teknik Elektro UPI.',
 };
 
 export default function DonationsDirectoryPage() {

@@ -81,7 +81,7 @@ export interface Event {
   currency?: string;
   category: EventCategory;
   tags: string[];
-  organizer: Organizer
+  organizer: Organizer;
   status: 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
   isPublic: boolean;
   requiresRegistration: boolean;

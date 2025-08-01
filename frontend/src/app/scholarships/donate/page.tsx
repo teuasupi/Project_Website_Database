@@ -5,28 +5,27 @@ import { DonationStats } from '@/components/features/scholarships/donate/Donatio
 import { DonationCTA } from '@/components/features/scholarships/donate/DonationCTA';
 import { APP_CONFIG } from '@/lib/constants';
 export const metadata: Metadata = {
-    title: `Donasi | ${APP_CONFIG.name}`,
-    description:
-        `Dari Kita, Oleh Kita, Untuk Kemajuan Teknik Elektro UPI.`,
+  title: `Donasi | ${APP_CONFIG.name}`,
+  description: `Dari Kita, Oleh Kita, Untuk Kemajuan Teknik Elektro UPI.`,
 };
 
 export default function DonationsDirectoryPage() {
-    const breadcrumbs = [
-        { label: 'Beranda', href: '/' },
-        { label: 'Beasiswa', href: '/scholarships' },
-        { label: 'Donasi', current: true },
-    ];
+  const breadcrumbs = [
+    { label: 'Beranda', href: '/' },
+    { label: 'Beasiswa', href: '/scholarships' },
+    { label: 'Donasi', current: true },
+  ];
 
-    return (
-        <>
-            <PageHeader
-                title="Direktori Donasi"
-                subtitle="Buka Jalan Bagi Mereka, Seperti Jalan Kita Dulu Dibukakan."
-                breadcrumbs={breadcrumbs}
-            />
-            <DonationStats />
-            <Separator />
-            <DonationCTA />
-        </>
-    );
+  return (
+    <>
+      <PageHeader
+        title="Direktori Donasi"
+        subtitle="Buka Jalan Bagi Mereka, Seperti Jalan Kita Dulu Dibukakan."
+        breadcrumbs={breadcrumbs}
+      />
+      <DonationStats />
+      <Separator />
+      <DonationCTA />
+    </>
+  );
 }

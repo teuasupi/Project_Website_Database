@@ -20,7 +20,13 @@ export function DonationCTA({ className = '' }: DonationCTAProps) {
               Uluran Tanganmu Dapat Mengubah Hidup Mereka
             </h2>
             <p className="text-muted-foreground mb-8 text-lg">
-              Dengan prinsip 'Dari Kita, Oleh Kita, Untuk Kemajuan Teknik Elektro UPI', Ikatan Alumni mengambil inisiatif untuk menciptakan dampak berkelanjutan. Kami percaya bahwa investasi pada sumber daya manusia adalah kunci kemajuan. Program beasiswa dan donasi ini dirancang dan dikelola secara profesional oleh tim alumni untuk memastikan setiap rupiah kontribusi tersalurkan secara efektif dan transparan.
+              Dengan prinsip 'Dari Kita, Oleh Kita, Untuk Kemajuan Teknik
+              Elektro UPI', Ikatan Alumni mengambil inisiatif untuk menciptakan
+              dampak berkelanjutan. Kami percaya bahwa investasi pada sumber
+              daya manusia adalah kunci kemajuan. Program beasiswa dan donasi
+              ini dirancang dan dikelola secara profesional oleh tim alumni
+              untuk memastikan setiap rupiah kontribusi tersalurkan secara
+              efektif dan transparan.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
               <Button size="lg" asChild>
@@ -37,10 +43,6 @@ export function DonationCTA({ className = '' }: DonationCTAProps) {
               </Button>
             </div>
           </div>
-
-
-
-
         </div>
       </div>
     </section>

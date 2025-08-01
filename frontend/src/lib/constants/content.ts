@@ -441,11 +441,13 @@ export const MOCK_MEDIA_ITEMS: MediaItem[] = [
 
 // Mock Scholarships
 export const MOCK_SCHOLARSHIP_CATEGORIES: EventCategory[] = [
-  { id: 1, 
-    name: 'Education Scholarship', 
-    slug: 'education-scholarship', 
-    color: '#3B82F6', 
-    icon: 'Tool' },
+  {
+    id: 1,
+    name: 'Education Scholarship',
+    slug: 'education-scholarship',
+    color: '#3B82F6',
+    icon: 'Tool',
+  },
   {
     id: 2,
     name: 'Internal Scholarship',
@@ -487,13 +489,13 @@ export const MOCK_SCHOLARSHIPS: Scholarship[] = [
     tags: ['beasiswa', 'prestasi', 'teknik elektro'],
     status: 'upcoming',
     requiresRegistration: true,
-    requirements:[
+    requirements: [
       'Mahasiswa aktif program S1 Teknik Elektro semester 5 atau 7',
       'IPK minimal 3.75 dari skala 4.00',
       'Tidak sedang menerima beasiswa lain',
       'Surat rekomendasi dari Ketua Program Studi',
       'Membuat esai 1000 kata tentang kontribusi di bidang teknologi',
-    ]
+    ],
   },
   {
     id: 2,
@@ -519,19 +521,20 @@ export const MOCK_SCHOLARSHIPS: Scholarship[] = [
     tags: ['beasiswa', 'prestasi', 'soshum'],
     status: 'upcoming',
     requiresRegistration: true,
-    requirements:[
+    requirements: [
       'Mahasiswa aktif program S1 Teknik Elektro semester 5 atau 7',
       'IPK minimal 3.75 dari skala 4.00',
       'Tidak sedang menerima beasiswa lain',
       'Surat rekomendasi dari Ketua Program Studi',
       'Membuat esai 1000 kata tentang kontribusi di bidang teknologi',
-    ]
+    ],
   },
   {
     id: 3,
     title: 'Beasiswa Kemitraan Industri 2024',
     description: `Beasiswa parsial dari perusahaan mitra bagi mahasiswa tingkat akhir. Nilai beasiswa hingga 7 juta rupiah.`,
-    shortDescription: 'Beasiswa dari perusahaan mitra untuk mahasiswa tingkat akhir.',
+    shortDescription:
+      'Beasiswa dari perusahaan mitra untuk mahasiswa tingkat akhir.',
     scholarshipType: 'partial',
     eventDate: '2024-04-05T10:00:00Z',
     endDate: '2024-04-05T15:00:00Z',
@@ -551,19 +554,20 @@ export const MOCK_SCHOLARSHIPS: Scholarship[] = [
     tags: ['beasiswa', 'prestasi', 'umum'],
     status: 'upcoming',
     requiresRegistration: true,
-    requirements:[
+    requirements: [
       'Mahasiswa aktif program S1 Teknik Elektro semester 5 atau 7',
       'IPK minimal 3.75 dari skala 4.00',
       'Tidak sedang menerima beasiswa lain',
       'Surat rekomendasi dari Ketua Program Studi',
       'Membuat esai 1000 kata tentang kontribusi di bidang teknologi',
-    ]
+    ],
   },
   {
     id: 4,
     title: 'Beasiswa Kemitraan Industri 2023',
     description: `Beasiswa parsial dari perusahaan mitra bagi mahasiswa tingkat akhir. Nilai beasiswa hingga 7 juta rupiah.`,
-    shortDescription: 'Beasiswa dari perusahaan mitra untuk mahasiswa tingkat akhir.',
+    shortDescription:
+      'Beasiswa dari perusahaan mitra untuk mahasiswa tingkat akhir.',
     scholarshipType: 'partial',
     eventDate: '2024-04-05T10:00:00Z',
     endDate: '2024-04-05T15:00:00Z',
@@ -583,12 +587,12 @@ export const MOCK_SCHOLARSHIPS: Scholarship[] = [
     tags: ['beasiswa', 'prestasi', 'umum'],
     status: 'completed',
     requiresRegistration: true,
-    requirements:[
+    requirements: [
       'Mahasiswa aktif program S1 Teknik Elektro semester 5 atau 7',
       'IPK minimal 3.75 dari skala 4.00',
       'Tidak sedang menerima beasiswa lain',
       'Surat rekomendasi dari Ketua Program Studi',
       'Membuat esai 1000 kata tentang kontribusi di bidang teknologi',
-    ]
+    ],
   },
 ];

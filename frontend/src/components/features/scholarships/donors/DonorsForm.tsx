@@ -7,11 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 
-import {
-  Send,
-  CheckCircle,
-  AlertCircle,
-} from 'lucide-react';
+import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { logger } from '@teuas/shared/utils';
 
 interface DonateFormData {
@@ -33,13 +29,14 @@ export function DonorsForm() {
     message: '',
     category: 'general',
     amount: 0,
-    amountOptions: [10000, 25000, 50000, 100000, 250000, 500000, 1000000, 2000000],
+    amountOptions: [
+      10000, 25000, 50000, 100000, 250000, 500000, 1000000, 2000000,
+    ],
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     'idle' | 'success' | 'error'
   >('idle');
-
 
   const handleInputChange = (field: keyof DonateFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -69,7 +66,9 @@ export function DonorsForm() {
         message: '',
         category: 'general',
         amount: formData.amount, // Keep the last selected amount
-        amountOptions: [10000, 25000, 50000, 100000, 250000, 500000, 1000000, 2000000],
+        amountOptions: [
+          10000, 25000, 50000, 100000, 250000, 500000, 1000000, 2000000,
+        ],
       });
     } catch (error) {
       logger.error('Error submitting form:', error);
@@ -80,7 +79,11 @@ export function DonorsForm() {
   };
 
   const isFormValid =
-    formData.name && formData.email && formData.message && formData.amount && formData.screenshotDonate;
+    formData.name &&
+    formData.email &&
+    formData.message &&
+    formData.amount &&
+    formData.screenshotDonate;
 
   return (
     <section className="py-16">
@@ -88,7 +91,8 @@ export function DonorsForm() {
         <div className="mb-8 text-center">
           <h2 className="mb-4 text-3xl font-bold">Form Donasi</h2>
           <p className="text-muted-foreground mx-auto max-w-2xl">
-            Berapapun donasi yang diberikan sangat berarti bagi yang akan menerimanya nanti 😁
+            Berapapun donasi yang diberikan sangat berarti bagi yang akan
+            menerimanya nanti 😁
           </p>
         </div>
 
@@ -160,7 +164,7 @@ export function DonorsForm() {
                       placeholder="Masukkan jumlah donasi..."
                       required
                     />
-                    <Card className='gap-2 overflow-auto sm:items-center'>
+                    <Card className="gap-2 overflow-auto sm:items-center">
                       <CardContent className="flex items-center justify-between gap-2">
                         {formData.amountOptions.map((amount) => (
                           <Button
@@ -173,9 +177,7 @@ export function DonorsForm() {
                               currency: 'IDR',
                             })}
                           </Button>
-                        )
-                        )
-                        }
+                        ))}
                       </CardContent>
                     </Card>
                   </div>
@@ -242,8 +244,6 @@ export function DonorsForm() {
               </CardContent>
             </Card>
           </div>
-
-
         </div>
       </div>
     </section>
