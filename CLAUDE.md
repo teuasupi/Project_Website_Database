@@ -1,14 +1,14 @@
 # Project Guide: IKA TEUAS UPI Website
 
-**Version:** 2.0  
-**Date:** August 3, 2025  
-**Last Updated:** Complete rewrite reflecting current production-ready state
+**Version:** 2.1  
+**Date:** January 8, 2025  
+**Last Updated:** NestJS backend migration completed
 
 ## 1. Overview
 
 This document provides comprehensive context, conventions, and workflow for the **IKA TEUAS UPI alumni platform**. The project is a **sophisticated frontend with disconnected backend** - beautiful UI exists but needs integration work.
 
-**Current Status:** ⚠️ **FRONTEND COMPLETE, BACKEND DISCONNECTED** - UI is polished but no API integration yet.
+**Current Status:** ⚠️ **FRONTEND COMPLETE, NESTJS BACKEND READY** - UI is polished, NestJS backend migrated, but no API integration yet.
 
 For detailed features and requirements, refer to **[PRD.md](PRD.md)**.  
 For implementation phases, see **[plans/](plans/)** directory.
@@ -42,11 +42,12 @@ As an AI assistant, you must adhere to these principles:
 
 ### Backend (`@teuas/backend`)
 - **Language:** TypeScript (100% coverage)
-- **Framework:** Express.js with structured middleware
-- **Database:** MariaDB with connection pooling
-- **Authentication:** JWT with bcrypt password hashing
-- **Email:** Nodemailer integration
-- **File Upload:** Multer for profile photos
+- **Framework:** NestJS (modern Node.js framework)
+- **Port:** 4000 (to avoid conflict with frontend on 3000)
+- **Database:** MariaDB (to be integrated)
+- **Authentication:** To be implemented with JWT
+- **File Upload:** To be implemented
+- **Email:** To be implemented
 
 ### Frontend (`@teuas/frontend`)
 - **Framework:** Next.js 15 with App Router
@@ -66,15 +67,15 @@ As an AI assistant, you must adhere to these principles:
 
 ```
 teuas-website/                    # Turbo monorepo root
-├── backend/                      # @teuas/backend
+├── backend/                      # @teuas/backend (NestJS)
 │   ├── src/
-│   │   ├── controllers/          # API route handlers
-│   │   ├── models/               # Database models
-│   │   ├── middlewares/          # Auth, validation, error handling
-│   │   ├── routes/               # Express routes
-│   │   ├── config/               # Database configuration
-│   │   └── types/                # Backend type definitions
+│   │   ├── app.module.ts         # Main app module
+│   │   ├── app.controller.ts     # App controller
+│   │   ├── app.service.ts        # App service
+│   │   └── main.ts               # Application entry point
+│   ├── test/                     # E2E tests
 │   ├── dist/                     # Compiled JavaScript
+│   ├── nest-cli.json             # NestJS CLI configuration
 │   └── package.json
 ├── frontend/                     # @teuas/frontend
 │   ├── src/
@@ -140,9 +141,10 @@ npm run shared        # turbo dev --filter=@teuas/shared
 ```bash
 # Backend (@teuas/backend)
 cd backend
-npm run dev           # nodemon with TypeScript
-npm run build         # tsc compilation
+npm run dev           # NestJS development mode with watch
+npm run build         # NestJS build compilation
 npm run start         # Run compiled JavaScript
+npm run start:prod    # Production mode
 
 # Frontend (@teuas/frontend)
 cd frontend
@@ -241,18 +243,19 @@ Users (
 
 ### ✅ Completed
 - **Frontend UI** - Complete, beautiful, responsive
-- **Backend API structure** - Routes exist, TypeScript, database models
+- **NestJS Backend Migration** - Fresh NestJS setup with TypeScript
+- **Turborepo Integration** - Backend fully integrated with monorepo
 - **Component library** - 40+ shadcn/ui components
 - **Type safety** - Strict TypeScript across all packages
-- **Database setup** - MariaDB with user model
+- **Port Configuration** - Backend on port 4000, Frontend on port 3000
 
 ### 🚨 **CRITICAL WORK NEEDED**
-1. **Fix endpoint mismatches** - Align frontend calls with backend routes
-2. **Connect authentication** - Make login/register actually work
-3. **Replace mock data** - Connect frontend to real API calls
-4. **API integration** - Frontend forms → Backend endpoints
-5. **Environment setup** - Production configuration
-6. **Testing integration** - Ensure API calls work
+1. **Build NestJS API** - Create controllers, services, and modules
+2. **Database Integration** - Connect MariaDB with TypeORM or Prisma
+3. **Authentication System** - JWT auth with NestJS Guards
+4. **API Endpoints** - Create REST endpoints for all frontend features
+5. **Replace mock data** - Connect frontend to real NestJS API calls
+6. **Environment setup** - Production configuration
 
 ### 🔄 Future Enhancements (After Integration)
 - Admin dashboard for content management
@@ -268,19 +271,20 @@ Users (
 - Beautiful responsive UI ✅
 
 **Backend** needs work:
-- No deployment configuration ❌
-- No environment setup ❌ 
+- Fresh NestJS setup ✅ 
+- No database connection ❌
+- No API endpoints ❌
 - Not connected to frontend ❌
 
 ## 10. Important Notes
 
 ### For AI Assistants
-1. **This is a DISCONNECTED project** - beautiful frontend exists but no backend integration
-2. **PRIMARY GOAL: Connect frontend to backend** - not building from scratch, connecting existing pieces
-3. **Focus on Integration work:** Fix endpoint mismatches, connect APIs, replace mock data
-4. **TypeScript is non-negotiable** - maintain strict typing during integration
+1. **This is a DISCONNECTED project** - beautiful frontend exists, fresh NestJS backend, but no integration
+2. **PRIMARY GOAL: Build NestJS API and connect to frontend** - frontend ready, backend needs development
+3. **Focus on NestJS Development:** Create modules, controllers, services, database integration
+4. **TypeScript is non-negotiable** - maintain strict typing during development
 5. **Test your changes** - always run `npm run lint` and `npm run type-check`
-6. **UI improvements welcome** - frontend may need rework alongside integration
+6. **Backend runs on port 4000** - frontend uses port 3000
 
 ### Development Guidelines
 - **Read existing code** before making changes
@@ -291,4 +295,4 @@ Users (
 
 ---
 
-**Remember:** This is a sophisticated but **disconnected** application. The frontend is polished, the backend exists, but they don't talk to each other yet. Focus on **integration work** to make them communicate properly.
+**Remember:** This is a sophisticated but **disconnected** application. The frontend is polished, NestJS backend is fresh and ready, but they don't communicate yet. Focus on **NestJS API development** and **integration work** to make them communicate properly.
