@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+    id        Int      @id @default(autoincrement())
+    email     String   @unique
+    password  String
+    role      String   @default("USER")
+    isVerified Boolean  @default(false)
+    resetToken String?
+    resetTokenExpiry DateTime?
+    isActive  Boolean  @default(false)
+    lastLogin DateTime?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    deletedAt DateTime?
+  profile   Profile?
+}
+
+model Profile {
+    id        Int      @id @default(autoincrement())
+    userId    Int      @unique
+    studentId String?  @unique
+    avatarUrl String?
+    fullname  String?
+    bio       String?
+    gender    String?
+    birthdate DateTime?
+    phone     String?
+    address   String?
+    city      String?
+    country   String?
+    province  String?
+    postalCode String?
+    degree    String?  // e.g., "Bachelor", "Master", "PhD"
+    major     String?
+    status    String?  // e.g., "active", "graduated", "dropped out"
+    enrollmentYear Int?
+    graduationYear Int?
+    semester   Int?
+    gpa        Float?
+    thesisTitle String?
+    company    String?
+    position   String?
+    industry   String?
+    workType   String?  // e.g., "full-time", "part-time", "internship"
+    workStartDate DateTime?
+    workEndDate   DateTime?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    deletedAt DateTime?
+    user      User     @relation(fields: [userId], references: [id])
+}
