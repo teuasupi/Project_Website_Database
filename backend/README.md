@@ -96,3 +96,32 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Additional setup (Prisma + MySQL + JWT)
+
+1. Copy `.env.example` to `.env` and set `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_PORT`, and `JWT_SECRET` variables.
+
+2. Install dependencies and generate Prisma client:
+
+```bash
+cd backend
+npm install
+npx prisma generate
+```
+
+3. Create initial migration and apply (dev):
+
+```bash
+npx prisma migrate dev --name init
+```
+
+4. Run server:
+
+```bash
+npm run dev
+```
+
+Endpoints added:
+
+- POST /users/register
+- POST /auth/login

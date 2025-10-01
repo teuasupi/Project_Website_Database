@@ -73,7 +73,8 @@ To create an integrated and accessible digital home for the TEUAS community, fac
 - **Runtime**: Node.js
 - **Framework**: Express.js
 - **Language**: TypeScript (migrated from JavaScript)
-- **Database**: MariaDB
+- **Database**: MySQL
+- **ORM**: Prisma
 - **Authentication**: JWT with bcryptjs
 - **File Upload**: Multer
 - **Email**: Nodemailer
