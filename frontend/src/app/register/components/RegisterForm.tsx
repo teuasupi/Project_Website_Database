@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Mail,
   Lock,
@@ -18,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { FormAlert } from '@/components/ui/alert';
+import { useAuth } from '@/lib/auth/supabase-auth-provider';
 
 interface RegisterFormData {
   firstName: string;
@@ -53,6 +55,9 @@ function RegisterFormComponent({
   });
   const [internalLoading, setInternalLoading] = useState(false);
   const [internalError, setInternalError] = useState<string>('');
+
+  const { signUp } = useAuth();
+  const router = useRouter();
 
   const isLoading = externalLoading || internalLoading;
   const error = externalError || internalError;
@@ -139,10 +144,25 @@ function RegisterFormComponent({
         await onSubmit(formData);
       } else {
         setInternalLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Register attempt:', formData);
+
+        const { error } = await signUp(formData.email, formData.password, {
+          data: {
+            full_name: `${formData.firstName} ${formData.lastName}`,
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            nim: formData.nim,
+          },
+        });
+
+        if (error) {
+          setInternalError(error.message);
+        } else {
+          // Redirect to login page with success message
+          router.push(
+            '/login?message=Registration successful! Please check your email to verify your account.'
+          );
         }
+
         setInternalLoading(false);
       }
     } catch (error) {

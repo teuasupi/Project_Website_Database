@@ -1,20 +1,14 @@
 // Authentication and authorization types
 
-import { User } from './index';
-
-export interface JWTPayload {
-  userId: number;
-  email: string;
-  role: string;
-  iat?: number;
-  exp?: number;
-}
+import {
+  User as SupabaseUser,
+  Session as SupabaseSession,
+} from '@supabase/supabase-js';
 
 export interface AuthState {
-  user: User | null;
-  token: string | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
+  user: SupabaseUser | null;
+  session: SupabaseSession | null;
+  loading: boolean;
 }
 
 export interface LoginCredentials {
@@ -49,43 +43,4 @@ export interface ChangePasswordData {
   currentPassword: string;
   newPassword: string;
   confirmPassword: string;
-}
-
-export interface SessionData {
-  id: string;
-  userId: number;
-  deviceInfo: string;
-  ipAddress: string;
-  userAgent: string;
-  createdAt: string;
-  lastActivityAt: string;
-  isActive: boolean;
-}
-
-// NextAuth types extension
-declare module 'next-auth' {
-  interface Session {
-    accessToken?: string;
-    user: {
-      id: string;
-      email: string;
-      name: string;
-      role: string;
-    };
-  }
-
-  interface User {
-    id: string;
-    email: string;
-    name: string;
-    role: string;
-    accessToken?: string;
-  }
-}
-
-declare module 'next-auth/jwt' {
-  interface JWT {
-    accessToken?: string;
-    role?: string;
-  }
 }

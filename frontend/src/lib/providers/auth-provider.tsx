@@ -2,17 +2,13 @@
 
 // Authentication provider component
 
-import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
+import { AuthProvider as SupabaseAuthProvider } from '@/lib/auth/supabase-auth-provider';
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  return (
-    <SessionProvider refetchInterval={0} refetchOnWindowFocus={false}>
-      {children}
-    </SessionProvider>
-  );
+  return <SupabaseAuthProvider>{children}</SupabaseAuthProvider>;
 }

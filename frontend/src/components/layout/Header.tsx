@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useSession, signOut } from 'next-auth/react';
+import { useAuth } from '@/lib/auth/supabase-auth-provider';
 import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
@@ -29,11 +29,11 @@ import { ROUTES, APP_CONFIG } from '@/lib/constants';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { data: session, status } = useSession();
+  const { user, loading, signOut } = useAuth();
   const pathname = usePathname();
 
   const handleSignOut = async () => {
-    await signOut({ redirect: false });
+    await signOut();
   };
 
   const getUserInitials = (name: string) => {
@@ -43,6 +43,10 @@ export function Header() {
       .join('')
       .toUpperCase()
       .slice(0, 2);
+  };
+
+  const getUserName = () => {
+    return user?.user_metadata?.full_name || user?.email || 'User';
   };
 
   const isActiveRoute = (href: string) => {
@@ -138,9 +142,9 @@ export function Header() {
         {/* Right Side - Auth and Mobile Menu */}
         <div className="flex items-center space-x-4">
           {/* User Menu or Login Button */}
-          {status === 'loading' ? (
+          {loading ? (
             <div className="bg-muted h-8 w-8 animate-pulse rounded-full" />
-          ) : session?.user ? (
+          ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -148,11 +152,9 @@ export function Header() {
                   className="relative h-8 w-8 rounded-full"
                 >
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src="" alt={session.user.name || ''} />
+                    <AvatarImage src="" alt={getUserName()} />
                     <AvatarFallback>
-                      {getUserInitials(
-                        session.user.name || session.user.email || 'U'
-                      )}
+                      {getUserInitials(getUserName())}
                     </AvatarFallback>
                   </Avatar>
                 </Button>
@@ -160,15 +162,17 @@ export function Header() {
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <div className="flex items-center justify-start gap-2 p-2">
                   <div className="flex flex-col space-y-1 leading-none">
-                    {session.user.name && (
-                      <p className="font-medium">{session.user.name}</p>
-                    )}
-                    {session.user.email && (
-                      <p className="text-muted-foreground w-[200px] truncate text-sm">
-                        {session.user.email}
+                    {user?.user_metadata?.full_name && (
+                      <p className="font-medium">
+                        {user.user_metadata.full_name}
                       </p>
                     )}
-                    {session.user.role === 'admin' && (
+                    {user?.email && (
+                      <p className="text-muted-foreground w-[200px] truncate text-sm">
+                        {user.email}
+                      </p>
+                    )}
+                    {user?.user_metadata?.role === 'admin' && (
                       <Badge variant="secondary" className="w-fit text-xs">
                         Admin
                       </Badge>
@@ -184,7 +188,7 @@ export function Header() {
                     </Link>
                   </DropdownMenuItem>
                 ))}
-                {session.user.role === 'admin' && (
+                {user?.user_metadata?.role === 'admin' && (
                   <>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
@@ -288,7 +292,7 @@ export function Header() {
               })}
 
               {/* Mobile Auth Buttons */}
-              {!session?.user && (
+              {!user && (
                 <div className="space-y-2 border-t pt-4 sm:hidden">
                   <Button
                     variant="ghost"

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,6 +11,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { ROUTES } from '@/lib/constants';
 import { FormAlert } from '@/components/ui/alert';
+import { useAuth } from '@/lib/auth/supabase-auth-provider';
 
 interface LoginFormData {
   email: string;
@@ -36,6 +38,9 @@ function LoginFormComponent({
   });
   const [internalLoading, setInternalLoading] = useState(false);
   const [internalError, setInternalError] = useState<string>('');
+
+  const { signIn } = useAuth();
+  const router = useRouter();
 
   const isLoading = externalLoading || internalLoading;
   const error = externalError || internalError;
@@ -87,10 +92,16 @@ function LoginFormComponent({
         await onSubmit(formData);
       } else {
         setInternalLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Login attempt:', formData);
+
+        const { error } = await signIn(formData.email, formData.password);
+
+        if (error) {
+          setInternalError(error.message);
+        } else {
+          // Redirect to home page on successful login
+          router.push('/');
         }
+
         setInternalLoading(false);
       }
     } catch (error) {
